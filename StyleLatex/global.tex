@@ -1,0 +1,63 @@
+%%%%%%%%%%%%%%
+%  COSTANTI  %
+%%%%%%%%%%%%%%
+%COMANDI DA UTILIZZARE PER TUTTI I DOCUMENTI
+% In questa prima parte vanno definite le 'costanti' utilizzate da due o più documenti.
+
+%COMANDI TABELLE
+\newcommand{\rowcolorhead}{\rowcolor[HTML]{00ACC1}} %intestazione 
+\newcommand{\rowcolorlight}{\rowcolor[HTML]{E0f7fa}} %righe chiare/dispari
+\newcommand{\rowcolordark}{\rowcolor[HTML]{80DEEA}} %righe scure/pari
+\newcommand{\colorhead}{\color[HTML]{FFFFFF}} %testo intestazione
+\newcommand{\colorbody}{\color[HTML]{000000}} %testo righe
+
+
+%%%%%%%%%%%%%%
+%  FUNZIONI  %
+%%%%%%%%%%%%%%
+
+% Serve a dare la giusta formattazione al codice inline
+\newcommand{\code}[1]{\flextt{\texttt{#1}}}
+
+% Genera automaticamente la pagina di copertina
+\newcommand{\makeFrontPage}{
+  % Declare new geometry for the title page only.
+  \newgeometry{top=4cm}
+  
+  \begin{titlepage}
+  \begin{center}
+
+\begin{center}
+  \centerline{\includegraphics[scale=0.24]{StyleLatex/logo_home.png}}
+\end{center}
+  
+  \vspace{1cm}
+
+  \begin{Huge}
+  \DocLGC{}	\\
+  \vspace{0.3cm}
+  \DocTitle{} \\
+  \vspace{0.3cm}
+  %\textbf{\DocSite{}} \\
+  \end{Huge}
+
+  \vspace{9pt}  
+  \vspace{1cm}
+  \begin{LARGE}
+  \DocRedazione{} \ - \DocMatr{} \ - \DocDate{}
+  \end{LARGE}	  
+  
+  \vspace{15pt}
+  \bgroup
+
+  \def\arraystretch{1.3}
+   \centering
+   
+  \egroup
+
+  \end{center}
+  \end{titlepage}
+  
+  % Ends the declared geometry for the titlepage
+  \restoregeometry
+}

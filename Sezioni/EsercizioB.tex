@@ -1,0 +1,245 @@
+\section{Esercizi}
+\subsection{Esercizio B} 
+Dimostrare che ogni processo CCS finito termina in un numero finito di passi.
+
+\subsubsection{Sintassi}
+
+\[
+	P, Q ::=
+	\alpha.P\mid
+	(P\mid Q)\mid
+	\sum_{i\in I} P_i\mid
+	P\setminus L\mid
+	P[f]\mid
+	\zero
+\] 
+
+\textbf{Note:} Nel CCS finito non sono previste le costanti $\mathcal{K}$. Il processo \(\zero\) ha un solo stato e non ha interazioni con altri processi.
+
+La dimostrazione viene divisa in due casi: nel primo caso si hanno somme finite, cioè l'insieme \(I\) contenente le scelte della somma non deterministica, è finito. Nel secondo caso l'insieme \(I\) sarà infinito.
+
+\subsubsection{Dimostrazione per somme finite}
+%\mbox{}
+
+La dimostrazione prevede i seguenti punti:
+\begin{enumerate}
+	\item Ogni processo del CCS finito termina con un numero finito di passi;
+	\item Ogni processo del CCS finito ha un numero finito di stati.
+\end{enumerate}
+
+\paragraph{Punto 1} \mbox{}
+
+Dato che non esistono costanti $\mathcal{K}$, non è possibile rigenerare passi eseguiti in precedenza, perciò dopo un certo numero finito di passi ogni processo P in CCS finito terminerà perché non avrà più passi da eseguire. Si deduce perciò che ogni processo ha un numero di passi limitato da un limite superiore è quindi tale numero è finito.
+
+Per dimostrare quanto scritto si procede attraverso una dimostrazione induttiva sull'altezza di derivazione di un processo P, con ipotesi induttiva: \(P \overset{\alpha}\rightarrow P'\) $\Rightarrow$ $Size_{p}(P')$ < $Size_{p}(P)$, dove $Size_{p}(P')$ si intende il numero di passi del processo P dopo aver fatto l'azione $\alpha$.
+
+Definiamo $Size_{p}$:
+
+\[
+Size_{p}(P)
+\begin{cases}
+P=\alpha.R,     & 1+Size_{p}{R}                \\
+P=\displaystyle\sum_{i\in I}^{}P_{i},          & max(Size_{p}{P_{i}}) \\
+P=R\mid Q,      & Size_{p}{R}+Size_{p}{Q}       \\
+P=R\setminus L, & Size_{p}{R}                  \\
+P=R[f],         & Size_{p}{R}
+\end{cases}
+\]
+
+\subparagraph{Dimostrazione} \mbox{}
+
+\begin{itemize}
+	\item[] \textbf{Caso Base:} \mbox{}
+	
+	
+	\Overline[1pt]{\alpha.P \overset{\alpha}\rightarrow P}$^{ACT}$ \hspace{1cm} $Size_{p}(\alpha.P)$ = 1 + $Size_{p}(P)$ > $Size_{p}(P)$
+	
+	Si ha che l'azione $\alpha$ concatenata al processo P aggiunge un passo in più, perciò risulta essere corretto il limite superiore $Size_{p}(\alpha.P)$ = 1 + $Size_{p}(P)$ passi.
+	\\
+	\item[] \textbf{Caso induttivo:} \mbox{}
+	\\
+	\begin{itemize}
+		
+		\item[*]
+			$\dfrac{P_{j} \overset{\alpha}\rightarrow P'}{\displaystyle\sum_{i\in I}^{}P_{i} \overset{\alpha}\rightarrow P'}$ \textit{SUM} $j\in I$                         
+		
+		Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: $Size_{p}(P_{j})$ > $Size_{p}(P')$. \\
+		\\
+		Perciò $Size_{p}(\displaystyle\sum_{i\in I}^{}P_{i}) > Size_{p}(P_{j}) > Size_{p}(P') $ allora $ max(Size_{p}{P_{i}}) > Size_{p}(P')$
+		Il limite superiore  $ Size_{p}(\displaystyle\sum_{i\in I}^{}P_{i}) = max(Size_{p}{P_{i}})$ passi, risulta essere corretto.
+		\\
+		\item[*]
+				$\dfrac{P \overset{\alpha}\rightarrow P'}{P|Q \overset{\alpha}\rightarrow P'|Q}$ \textit{PAR-L}  
+				
+				Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: $Size_{p}(P)$ > $Size_{p}(P')$. \\
+				\\
+				E quindi dato che $Size_{p}(P|Q) = Size_{p}(P) + Size_{p}(Q)$ mentre $  Size_{p}(P'|Q) = Size_{p}(P') + Size_{p}(Q)$, per ipotesi induttiva $Size_{p}(P|Q) > Size_{p}(P'|Q) $
+				\\
+		\item[*]
+			$\dfrac{Q \overset{\alpha}\rightarrow Q'}{P|Q \overset{\alpha}\rightarrow P|Q'}$ \textit{PAR-R}  
+			
+			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{Q} > \sip{Q'} \\
+			\\
+			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P|Q'} = \sip{P} + \sip{Q'}, per ipotesi induttiva \\ \sip{P|Q} > \sip{P|Q'}
+			\\
+		\item[*]
+			$\dfrac{P \overset{\alpha}\rightarrow P' \hspace{1cm} Q \overset{\alpha}\rightarrow Q'}{P|Q \overset{\tau}\rightarrow P'|Q'}$ \textit{PAR-$\tau$}  
+			
+			Si osserva che nell'esecuzione di un passo di sincronizzazione, per ipotesi induttiva vale che: \sip{P} > \sip{P'} e \sip{Q} > \sip{Q'} \\
+			\\
+			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P'|Q'} = \sip{P'} + \sip{Q'}, per ipotesi induttiva \\ \sip{P|Q} > \sip{P'|Q'}
+			\\
+			
+		Perciò si è dimostrato che il limite superiore  \sip{P|Q} =\sip{P} + \sip{Q} passi, risulta essere corretto in tutti i 3 casi PAR-L, PAR-R e PAR-$\tau$.
+		\\
+		\item[*]
+			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \textbackslash L \overset{\alpha}\rightarrow P' \textbackslash L}$ \textit{RES} se $\alpha, \Overline[1pt]{\alpha} \in$ L
+			
+			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{P} > \sip{P'}  \\
+			\\
+			Dato che applicare una restrizione ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma avere una possibile variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \textbackslash L} = \sip{P} mentre \sip{P'\textbackslash L} = \sip{P'}, per ipotesi induttiva \sip{P \textbackslash L} > \sip{P' \textbackslash L}\\
+			\\
+		Perciò si è dimostrato che il limite superiore \sip{P \textbackslash L} = \sip{P} passi, risulta essere corretto.
+		\\
+		\item[*]
+			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \textbackslash L \overset{\not\alpha}\rightarrow }$ \textit{RES} se $\alpha, \Overline[1pt]{\alpha} \in$ L
+			
+			Nel caso in cui viene eseguito un passo $\alpha \in L$ perciò non è possibile eseguirlo, il processo P va in deadlock in un passo e quindi ha un numero finito di passi. 
+		\\
+		\item[*]
+			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \mathbf{[f]} \overset{f(\alpha)}\rightarrow P'\mathbf{[f]}}$ \textit{REL} 
+			
+			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{P} > \sip{P}  \\
+			\\
+			Dato che applicare un relabelling ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma avere una possibile variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \mathbf{[f]}} = \sip{P} mentre \sip{P'\mathbf{[f]}} = \sip{P'}, per ipotesi induttiva \sip{P \mathbf{[f]}} > \sip{P' \mathbf{[f]}}\\
+			\\
+		Perciò si è dimostrato che il limite superiore \sip{P \mathbf{[f]}} = \sip{P} passi, risulta essere corretto.	
+				
+	\end{itemize}
+
+	
+\end{itemize}
+
+\paragraph{Punto 2} \mbox{}
+
+Si vuole dimostrare che ogni processo CCS ha un numero finito di stati, cioè esiste un limite superiore del numero di stati di esecuzione per un processo P.
+
+Definiamo \sis{P}:
+
+\[
+Size_{s}(P)
+\begin{cases}
+P=\zero, 			& 1							\\
+P=\alpha.R,     & 1+Size_{s}{R}                \\
+P=\displaystyle\sum_{i\in I}^{}P_{i},          & \displaystyle\sum_{i\in I}^{}Size_{s}{P_{i}} \\
+P=R\mid Q,      & Size_{s}{R}*Size_{s}{Q}       \\
+P=R\setminus L, & Size_{s}{R}                  \\
+P=R[f],         & Size_{s}{R}
+\end{cases}
+\]
+
+Si dimostrerà di seguito che \sis(P) calcola il limite superiore del numero di stati dell'esecuzione del processo P.
+
+\subparagraph{Dimostrazione} \mbox{}
+
+Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra che i limiti di \sis{P} sono corretti.
+
+\begin{itemize}
+	\item[] \textbf{Caso Base:} \mbox{}
+	
+	 $\zero$
+	\\
+	Il processo $\zero$ ha un solo stato, quello di partenza, per definizione quindi\\ \sis{\zero} = 1 
+		\\
+	\item[] \textbf{Caso induttivo:} \mbox{}
+	
+	In un passo si raggiunge uno sotto processo dal quale poi in n passi finiti si raggiungerà un stato terminante. Si utilizza la seguente ipotesi induttiva: \\
+	Un processo composto da sotto processi con un limite superiore ai stati di esecuzione ha anch'esso un limite superiore di stati di esecuzione.\\
+	Tale ipotesi scritta verrà utilizzata per dimostrare che il sotto processo raggiunto, da lui allo stato terminante, ci saranno un numero finiti di stati perché limitati da un limiti superiore. Si ricorda inoltre che il numero di stati raggiunti è finito se gli n passi sono finiti. Grazie alla dimostrazione del punto 1 si sa che n è finito.
+	\\
+	\begin{itemize}
+		
+		\item[*] \textbf{ACT}
+		\\
+		Con l'azione $\alpha$ concatenata al processo P viene aggiunto a P uno stato in più, infatti $\alpha.P \overset{\alpha}\rightarrow P$. P per ipotesi induttiva ha al più \sis{P} stati, quindi $\alpha.P$ avrà al più \sis{\alpha.P} = 1 + \sis{P} stati.
+		\\
+		\item[*] \textbf{SUM}
+		\\
+		Si ha la seguente esecuzione: $\displaystyle\sum_{i\in I}^{}P_{i} \overset{\alpha}\rightarrow$ P', dove qualunque $P_{i}$ sia scelto per ipotesi induttiva ha un numero finito di stati d'esecuzione. Quindi tutti i processi che compongono la somma non deterministica hanno un numero finito di stati.
+		Perciò \sis{\displaystyle\sum_{i\in I}^{}P_{i}} = $\displaystyle\sum_{i\in I}^{}P_{i}$ stati, cioè il numero di stati del processo P sarà al più $\displaystyle\sum_{i\in I}^{}Size_{s}{P_{i}}$. Dato che il numero di processi $P_{i}$ è finito anche la somma dei stati lo sarà.
+		
+		È corretto il limite superiore presentato precedentemente perché potrebbero esserci stati non condivisi tra i vari processi $P_{i}$, quindi tutti i \sis{P_{i}}.
+		\\
+		\item[*] \textbf{PAR-L}
+		\\
+		Si ha la seguente esecuzione: $P|Q \overset{\alpha}\rightarrow P'|Q$, dove P|Q raggiunge lo stato P'|Q.
+		
+		Per ipotesi induttiva P'|Q ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P'|Q} = \sis{P'} * \sis{Q} stati, quindi per P|Q al più il numero di stati sarà \sis{P|Q} = (\sis{P'} + 1) * \sis{Q} stati. Dato che è possibile che non ci sia alcun stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al totale delle combinazioni possibili tra gli stati dei due singoli processi.	
+		\\
+		\item[*] \textbf{PAR-R}
+		\\
+		Si ha la seguente esecuzione: $P|Q \overset{\alpha}\rightarrow P|Q'$, dove P|Q raggiunge lo stato P|Q'.
+		
+		Per ipotesi induttiva P|Q' ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P|Q'} = \sis{P} * \sis{Q'} stati, quindi per P|Q al più il numero di stati sarà \sis{P|Q} = \sis{P} * (\sis{Q'} + 1) stati. Dato che è possibile che non ci sia alcun stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al totale delle combinazioni possibili tra gli stati dei due singoli processi.
+		\\
+		\item[*] \textbf{PAR-$\tau$}
+		\\
+		Si ha la seguente esecuzione: $P|Q \overset{\tau}\rightarrow P'|Q'$, dove P|Q raggiunge lo stato P'|Q'.
+		
+		Per ipotesi induttiva P'|Q' ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P'|Q'} = \sis{P'} * \sis{Q'} stati, quindi per P|Q al più il numero di stati sarà \sis{P|Q} = \sis{P'} * \sis{Q'} + 1 stati. Dato che è possibile che non ci sia alcun stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al totale delle combinazioni possibili tra gli stati dei due singoli processi.
+		
+		Dunque \sis{P|Q} = \sis{P} * \sis{Q} stati, risulta essere corretto.
+		\\
+		\item[*] \textbf{RES}
+		\\
+		Si ha la seguente esecuzione: $P \textbackslash L \overset{\alpha}\rightarrow P' \textbackslash L$. 
+		
+		Per ipotesi induttiva  P' \textbackslash L ha al più \sis{P' \textbackslash L} = \sis{P'} stati. \\
+		Dato che \sis{P' \textbackslash L} è finito, allora P \textbackslash L avrà al più: \\
+		\sis{P \textbackslash L} = 1 + \sis{P' \textbackslash L} = 1 + \sis{P'} = \sis{P} stati, perché applicando una funzione di restrizione non si aumentano il numero massimo di stati d'esecuzione, vale quindi il limite superiore \sis{P \textbackslash L}.
+			\\
+		\item[*] \textbf{REL}
+		\\
+		Si ha la seguente esecuzione: $P \mathbf{[f]} \overset{f(\alpha)}\rightarrow P'\mathbf{[f]}$. 
+		
+		Per ipotesi induttiva  $P'\mathbf{[f]}$ ha al più \sis{P'\mathbf{[f]}} = \sis{P'} stati. \\
+		Dato che \sis{P'\mathbf{[f]}} è finito, allora $P'\mathbf{[f]}$ avrà al più: \\
+		\sis{P\mathbf{[f]}} = 1 + \sis{P'\mathbf{[f]}} = 1 + \sis{P'} = \sis{P} stati, perché applicando una funzione di relabelling non si aumentano il numero massimo di stati d'esecuzione ma si cambiano solo le possibili interazioni con altri processi in parallelo, vale quindi il limite superiore \sis{P \mathbf{[f]}}.
+		
+	\end{itemize}
+\end{itemize}
+
+\subparagraph{Conclusione prima parte} \mbox{}
+
+Si è dimostrato nei punti precedenti che i processi definiti attraverso il CCS finito hanno sempre un limite superiore sia per il numero di passi e sia per il numero di stati d'esecuzione, di conseguenza il numero di passi e stati sono entrambi finiti.
+
+\subsubsection{Dimostrazione per somme finite}
+Ora per quanto riguarda la somma non deterministica $\displaystyle\sum_{i\in I}^{}P_{i}$, l'insieme \textit{I} sarà infinito.
+
+La dimostrazione sarà simile a quella precedente per tutti i vari punti, tranne per il punto riguardante la somma non deterministica, infatti per dimostrare la finitezza dell'esecuzione si utilizzerà un'astrazione basata sulle generazioni della grammatica di CCS.
+
+Si nota che i processi CCS che fanno parte della somma non deterministica, saranno infiniti e quindi avere un numero infinito di stati ma hanno tutti un lunghezza di derivazione finita.
+
+Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni processo CCS della somma non deterministica, termina in numero finito di passi.
+
+\begin{itemize}
+	\item[] \textbf{Caso Base:} \mbox{}
+	
+	$\zero$
+	
+	Il processo $\zero$ termina in 0 passi per definizione.
+	\\
+	\item[] \textbf{Caso induttivo:} \mbox{}
+	\\
+	\begin{itemize}
+		
+		\item[*] \textbf{ACT, RES e REL}
+		\\
+		
+		\item[*] \textbf{PAR-L, PAR-R, PAR-$\tau$}
+		\\
+		
+		\item[*] \textbf{SUM}
+		\\
+	\end{itemize}
+\end{itemize}
