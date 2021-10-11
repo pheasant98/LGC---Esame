@@ -36,7 +36,6 @@ Nel caso del contesto non deterministico tra i processi P e R le \tr{P + R} = \t
 Perciò si deve dimostrare che il contesto non deterministico tra i processi P e R è uguale alla unione delle traccie dei due processi. Dimostrato questo ne consegue la veridicità di P + R $\sim_{t}$ Q + R.
 
 $(\subseteq)$ \\
-
 Sia t $\in$\tr{P + R}  $\Rightarrow$  t $\in$(\tr{P} $\bigcup$ \tr{R})
 Per induzione su |t|:
 \\
@@ -56,24 +55,23 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P + R $ \overset
 	 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P + R \overset{\alpha_{1}}\rightarrow P'\overset{t'}\rightarrow}$ \textit{SUM-L} \\
 	 	
 	 	t = $\alpha_{1}.t'$, per ipotesi induttiva t' $\in \tr{P'}$, quindi 
-	 	$\alpha_{1}.t' \in \tr{P}$ allora $\alpha_{1}.t' \in \tr{P} \bigcup \tr{R}$
+	 	$\alpha_{1}.t' \in \alpha_{1}.\tr{P'}\subseteq \tr{P} $ allora $t \in \tr{P} \bigcup \tr{R}$
 	 	\\
 	 	
 	 \item P+R ha effettuato una transizione usando la regola SUM-R:\\
 	 
 	 $\dfrac{R \overset{\alpha_{1}}\rightarrow R'}{P + R \overset{\alpha_{1}}\rightarrow R'\overset{t'}\rightarrow}$ \textit{SUM-R} \\
 	 
-	 t = $\alpha_{1}.t'$, per ipotesi induttiva t' $\in \tr{R'}$, quindi 
-	 $\alpha_{1}.t' \in \tr{R}$ allora $\alpha_{1}.t' \in \tr{R} \bigcup \tr{P}$.
-	 	\\
+		t = $\alpha_{1}.t'$, per ipotesi induttiva t' $\in \tr{R'}$, quindi 
+	$\alpha_{1}.t' \in \alpha_{1}.\tr{R'}\subseteq \tr{R} $ allora $t \in \tr{R} \bigcup \tr{P}$
+	\\
 	 	
 \end{itemize}
 
 $(\supseteq)$\\
 
-Sia t $\in$(\tr{P} $\bigcup$ \tr{R}) $\Rightarrow $  t $\in$\tr{P + R}
-Perciò t è una traccia sia di P e di R oppure solo uno dei due, quindi:
-\\
+Sia t $\in$(\tr{P} $\bigcup$ \tr{R}) $\Rightarrow $  t $\in$\tr{P + R}\\
+Perciò t può essere traccia sia di P e sia di R oppure solo uno dei due, quindi:
 
 Se t $\in$ \tr{P}, P + R può scegliere di fare una transizione attraverso la regola SUM-L, e allora vale che t $\in$ \tr{P + R}.
 
