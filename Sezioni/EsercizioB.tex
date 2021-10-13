@@ -91,7 +91,7 @@ Si dimostrerà che \sip{P} indica il limite superiore del numero di passi esegui
 			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P|Q'} = \sip{P} + \sip{Q'}, per ipotesi induttiva \\ \sip{P|Q} > \sip{P|Q'}
 			\\
 		\item[*]
-			$\dfrac{P \overset{\alpha}\rightarrow P' \hspace{1cm} Q \overset{\alpha}\rightarrow Q'}{P|Q \overset{\tau}\rightarrow P'|Q'}$ \textit{PAR-$\tau$}  
+			$\dfrac{P \overset{\alpha}\rightarrow P' \hspace{1cm} Q \overset{\Overline[0.01pt]{\alpha}}\rightarrow Q'}{P|Q \overset{\tau}\rightarrow P'|Q'}$ \textit{PAR-$\tau$}  
 			
 			Si osserva che nell'esecuzione di un passo di sincronizzazione, per ipotesi induttiva vale che: \sip{P} > \sip{P'} e \sip{Q} > \sip{Q'} \\
 			\\
@@ -101,7 +101,7 @@ Si dimostrerà che \sip{P} indica il limite superiore del numero di passi esegui
 		Perciò si è dimostrato che il limite superiore  \sip{P|Q} =\sip{P} + \sip{Q} passi, risulta essere corretto in tutti i tre casi PAR-L, PAR-R e PAR-$\tau$.
 		\\
 		\item[*]
-			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \textbackslash L \overset{\alpha}\rightarrow P' \textbackslash L}$ \textit{RES} se $\alpha, \Overline[1pt]{\alpha} \in$ L
+			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \textbackslash L \overset{\alpha}\rightarrow P' \textbackslash L}$ \textit{RES} se $\alpha, \Overline[1pt]{\alpha} \not\in$ L
 			
 			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{P} > \sip{P'}  \\
 			\\
