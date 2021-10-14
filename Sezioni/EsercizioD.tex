@@ -196,9 +196,10 @@ Quindi con \tr{P} = \tr{Q}, P|R $\sim_{t}$ Q|R come si voleva dimostrare.
 Il caso del contesto restrizione L sul processo P ha la seguente uguaglianza: \tr{P\textbackslash L} = \tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} cioè le traccie che stanno in \tr{P} non ci sono nell'insieme di restrizione definito precedentemente. Se questo è vero, dato che per ipotesi induttiva \tr{P} = \tr{Q} e quindi \tr{Q\textbackslash L} = \tr{Q}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}, allora \tr{P\textbackslash L} = \tr{Q\textbackslash L}. 
 
 Perciò si deve dimostrare che il contesto restrizione L sul processo P è uguale a \\
-\tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}. Dimostrato questo ne consegue la veridicità di P\textbackslash L $\sim_{t}$ Q\textbackslash L.
+\tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}. Dimostrato questo ne consegue la veridicità di P\textbackslash L $\sim_{t}$ Q\textbackslash L.\\
 
 $(\subseteq)$ \\
+
 Sia t $\in$\tr{P\textbackslash L}  $\Rightarrow$  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}
 Per induzione su |t|:
 \\
@@ -215,13 +216,14 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P\textbackslash 
 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P\textbackslash L \overset{\alpha_{1}}\rightarrow P'\textbackslash L\overset{t'}\rightarrow}$ \textit{RES} se $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ L\\
 	
 	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in$ \tr{P'\textbackslash L}, quindi 
-	$\alpha_{1}.t' \in \alpha_{1}$.\tr{P'\textbackslash L}$\subseteq$ \tr{P\textbackslash L} con t $\not \in$ \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}  allora t $\in$\tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}.
+	$\alpha_{1}.t' \in \alpha_{1}$.\tr{P'\textbackslash L}$\subseteq$ \tr{P\textbackslash L}. Dato che $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ L quindi t = $\alpha$.t' $\not \in$ \{ t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}  allora \\
+	t $\in$\tr{P}\textbackslash \{t =...$\alpha_{x}$...|$\alpha_{x}\in$L\}.
 	
 \pagebreak
 
 $(\supseteq)$\\
 
-Sia  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}   
+Sia  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}.   
 Per induzione su |t|:
 \\
 
@@ -232,15 +234,56 @@ Allora t = $\varepsilon \in$\tr{P\textbackslash L}
 
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t', quindi P\textbackslash L $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola della restrizione arrivando in un certo processo X'; quindi:
+t ha una prima interazione seguita poi dalla traccia t', cioè t = $\alpha_{1}$.t'. Si ha quindi una transizione P $\overset{\alpha_{1}}\rightarrow$ P', ciò è permesso dalla regola della restrizione, quindi:
 
 $\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P\textbackslash L \overset{\alpha_{1}}\rightarrow P'\textbackslash L\overset{t'}\rightarrow}$ \textit{RES} se $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}\\
 
-t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in$ \tr{P'}$\textbackslash$ \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}, quindi 
-$\alpha_{1}.t' \in \alpha_{1}$.\tr{P'}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} $\subseteq$ \tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} con t $\not \in$ \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}  allora t $\in$\tr{P\textbackslash L}.
+Questo dimostra che P$\textbackslash$L sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P'$\textbackslash$L allora $\alpha_{1}$.t' $\in$\tr{P$\textbackslash$L}.
 \\
 
 Quindi dato che \tr{P\textbackslash L} = \tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} con \tr{P} = \tr{Q}  allora si è dimostrato che  P\textbackslash L $\sim_{t}$ Q\textbackslash L.
 
 \paragraph{Contesto Relabelling  C[ ] = $\mathbf{[f]}$ } \mbox{}
 
+Nel caso del contesto relabelling sul processo P si ha che:	\\	
+Data la funzione $f: Act \rightarrow Act$, le traccie di P$\mathbf{[f]}$ sono:\\
+f($\epsilon$) = $\epsilon$\\
+f($\alpha.t$) =  f($\alpha$).f(t)\\
+Quindi voglio dimostrare che \tr{P$\mathbf{[f]}$} = \{f(t)| t $\in$ \tr{P}\}. Se questo è vero, dato che \tr{P} = \tr{Q}  si può sostituire \tr{P} con \tr{Q} scrivendo \{f(t)| t $\in$ \tr{Q}\} e grazie alla uguaglianza scritta precedentemente, allora \tr{P$\mathbf{[f]}$} = \tr{Q$\mathbf{[f]}$}. \\
+
+$(\subseteq)$ \\
+
+Sia t$\in$ \tr{P$\mathbf{[f]}$} $\Rightarrow$ t $\in$ \{f(t)| t $\in$ \tr{P}\}. Per induzione su |t|:
+\\
+
+\textbf{Caso Base |t| = 0}
+\\
+Allora t = $\varepsilon \in$ \{f($\varepsilon$)| $\varepsilon$ $\in$ \tr{P}\}
+\\
+
+\textbf{Caso Induttivo |t| = n + 1}
+
+t ha una prima interazione seguita poi dalla traccia t', quindi P$\mathbf{[f]}  \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola del relabelling arrivando in un certo processo X', quindi:
+
+$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P \mathbf{[f]} \overset{f(\alpha_{1})}\rightarrow P'\mathbf{[f]}\overset{f(t')}\rightarrow}$ \textit{REL} 
+
+t = $f(\alpha_{1}).f(t)'$ con |t'| = n, per ipotesi induttiva si ha che f(t') $\in$ \{f(t')| t' $\in$ \tr{P'}\}, allora f($\alpha$).f(t') $\in$ \{f(t)| t $\in$ \tr{P}\}.\\
+
+$(\supseteq)$ \\
+
+Sia t$\in$\{f(t)| t $\in$ \tr{P}\}  $\Rightarrow$ t$\in$\tr{P$\mathbf{[f]}$}. Per induzione su |t|:
+
+\textbf{Caso Base |t| = 0}
+\\
+Allora t = $\varepsilon \in$\tr{P$\mathbf{[f]}$}
+\\
+
+\textbf{Caso Induttivo |t| = n + 1}
+
+t ha una prima interazione seguita poi dalla traccia t', cioè t = $\alpha_{1}$.t'. Si ha quindi una transizione P $\overset{\alpha_{1}}\rightarrow$ P', ciò è permesso dalla regola del relabelling, quindi:
+
+$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P \mathbf{[f]} \overset{f(\alpha_{1})}\rightarrow P'\mathbf{[f]}\overset{f(t')}\rightarrow}$ \textit{REL} 
+
+Questo dimostra che P$\mathbf{[f]}$ sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P'$\mathbf{[f]}$ allora $\alpha_{1}$.t' $\in$\tr{P$\mathbf{[f]}$}.
+
+Quindi dato che \tr{P$\mathbf{[f]}$} = \{f(t)| t $\in$ \tr{P}\} con \tr{P} = \tr{Q} allora si è dimostrato che  P$\mathbf{[f]}\sim_{t}$ Q$\mathbf{[f]}$.
