@@ -18,3 +18,4 @@
 \contentsline {paragraph}{\numberline {1.2.1.3}Contesto parallelo C[ ] = (\hspace {0.3cm} | R)}{10}{paragraph.1.2.1.3}%
 \contentsline {paragraph}{\numberline {1.2.1.4}Contesto restrizione C[ ] = \textbackslash L}{13}{paragraph.1.2.1.4}%
 \contentsline {paragraph}{\numberline {1.2.1.5}Contesto Relabelling C[ ] = $\mathbf {[f]}$ }{14}{paragraph.1.2.1.5}%
+\contentsline {subsubsection}{\numberline {1.2.2}Conclusione}{15}{subsubsection.1.2.2}%

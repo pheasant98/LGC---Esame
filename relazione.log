@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  14 OCT 2021 16:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  14 OCT 2021 17:58
 entering extended mode
 **./relazione.tex
 (relazione.tex
@@ -1406,7 +1406,7 @@ LaTeX Info: Redefining \selectfont on input line 10.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<StyleLatex/logo_home.png, id=78, 943.525pt x 949.5475pt>
+<StyleLatex/logo_home.png, id=82, 943.525pt x 949.5475pt>
 File: StyleLatex/logo_home.png Graphic file (type png)
 <use StyleLatex/logo_home.png>
 Package pdftex.def Info: StyleLatex/logo_home.png  used on input line 14.
@@ -1699,24 +1699,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--266
  []
 
 [7]) (Sezioni/EsercizioD.tex [8]
-Underfull \hbox (badness 10000) in paragraph at lines 7--9
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 25.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\alpha' on input line 25.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 25.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
 
  []
 
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 26.
+Underfull \hbox (badness 10000) in paragraph at lines 37--38
+
+ []
 
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\alpha' on input line 26.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 26.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--42
+Underfull \hbox (badness 10000) in paragraph at lines 39--42
 
  []
 
@@ -1771,211 +1777,221 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--99
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--104
+Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--109
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+Underfull \hbox (badness 10000) in paragraph at lines 106--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--116
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 128--129
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--133
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
+Underfull \hbox (badness 10000) in paragraph at lines 130--136
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 142--144
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 146--150
+Underfull \hbox (badness 10000) in paragraph at lines 145--147
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--155
+Underfull \hbox (badness 10000) in paragraph at lines 149--151
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 152--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
+Underfull \hbox (badness 10000) in paragraph at lines 155--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--179
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 179--185
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 198--200
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
+Underfull \hbox (badness 10000) in paragraph at lines 204--206
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--206
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--211
+Underfull \hbox (badness 10000) in paragraph at lines 209--212
 
  []
 
 
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 216.
+Underfull \hbox (badness 10000) in paragraph at lines 213--217
+
+ []
 
 
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 216.
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 222.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 222.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--223
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \hbox (badness 10000) in paragraph at lines 224--227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--229
+Underfull \hbox (badness 10000) in paragraph at lines 228--229
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 230--234
+Underfull \hbox (badness 10000) in paragraph at lines 230--233
 
  []
 
 
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 239.
-
-
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 239.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 239--240
+Underfull \hbox (badness 10000) in paragraph at lines 234--238
 
  []
 
 
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 241.
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 243.
 
 
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 241.
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 243.
 
 
-LaTeX Warning: Command \textbackslash invalid in math mode on input line 241.
+Underfull \hbox (badness 10000) in paragraph at lines 243--244
+
+ []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--243
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 245.
+
+
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 245.
+
+
+LaTeX Warning: Command \textbackslash invalid in math mode on input line 245.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 245--247
 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 246.
+(hyperref)                removing `math shift' on input line 250.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 246.
+(hyperref)                removing `math shift' on input line 250.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--253
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 254--255
+Underfull \hbox (badness 10000) in paragraph at lines 252--257
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 256--258
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--263
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 270--271
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--273
+Underfull \hbox (badness 10000) in paragraph at lines 260--262
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 276--280
+Underfull \hbox (badness 10000) in paragraph at lines 274--275
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--284
 
  []
 
@@ -1987,13 +2003,13 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 20.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 20.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 20.
 Package rerunfilecheck Info: File `relazione.out' has not changed.
-(rerunfilecheck)             Checksum: 8C3F9014CA5A1CFC83A998EDD195BD3E;1420.
+(rerunfilecheck)             Checksum: E1ABAA4184FB6A9110E75004C5E42491;1491.
  ) 
 Here is how much of TeX's memory you used:
- 22951 strings out of 492484
- 417876 string characters out of 3121601
+ 22953 strings out of 492484
+ 417916 string characters out of 3121601
  502893 words of memory out of 3000000
- 26700 multiletter control sequences out of 15000+200000
+ 26701 multiletter control sequences out of 15000+200000
  54430 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,12n,98p,1200b,673s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2018,9 +2034,9 @@ ograms/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/feder/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/feder/AppData/
 Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/feder/AppDa
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on relazione.pdf (16 pages, 391201 bytes).
+Output written on relazione.pdf (16 pages, 391570 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 41 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 273 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
+ 170 words of extra memory for PDF output out of 10000 (max. 10000000)
 
