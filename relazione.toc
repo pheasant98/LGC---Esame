@@ -8,7 +8,7 @@
 \contentsline {subparagraph}{\numberline {1.1.2.1.1}Dimostrazione}{3}{subparagraph.1.1.2.1.1}%
 \contentsline {paragraph}{\numberline {1.1.2.2}Punto 2}{4}{paragraph.1.1.2.2}%
 \contentsline {subparagraph}{\numberline {1.1.2.2.1}Dimostrazione}{5}{subparagraph.1.1.2.2.1}%
-\contentsline {subparagraph}{\numberline {1.1.2.2.2}Conclusione prima parte}{6}{subparagraph.1.1.2.2.2}%
+\contentsline {paragraph}{\numberline {1.1.2.3}Conclusione prima parte}{6}{paragraph.1.1.2.3}%
 \contentsline {subsubsection}{\numberline {1.1.3}Dimostrazione per somme infinite}{6}{subsubsection.1.1.3}%
 \contentsline {subsubsection}{\numberline {1.1.4}Conclusione}{8}{subsubsection.1.1.4}%
 \contentsline {subsection}{\numberline {1.2}Esercizio D}{9}{subsection.1.2}%
