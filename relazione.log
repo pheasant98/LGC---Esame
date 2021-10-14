@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  14 OCT 2021 17:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  14 OCT 2021 18:12
 entering extended mode
 **./relazione.tex
 (relazione.tex
@@ -1406,7 +1406,7 @@ LaTeX Info: Redefining \selectfont on input line 10.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<StyleLatex/logo_home.png, id=82, 943.525pt x 949.5475pt>
+<StyleLatex/logo_home.png, id=86, 943.525pt x 949.5475pt>
 File: StyleLatex/logo_home.png Graphic file (type png)
 <use StyleLatex/logo_home.png>
 Package pdftex.def Info: StyleLatex/logo_home.png  used on input line 14.
@@ -1995,7 +1995,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 280--284
 
  []
 
-)) [15] 
+) (Sezione/Barbershop.tex [15])) [16] 
 AED: lastpage setting LastPage
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 20.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 20.
@@ -2003,13 +2003,13 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 20.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 20.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 20.
 Package rerunfilecheck Info: File `relazione.out' has not changed.
-(rerunfilecheck)             Checksum: E1ABAA4184FB6A9110E75004C5E42491;1491.
+(rerunfilecheck)             Checksum: 28C125C92FDD6A04D3CCF07828D19C6C;1540.
  ) 
 Here is how much of TeX's memory you used:
- 22953 strings out of 492484
- 417916 string characters out of 3121601
+ 22962 strings out of 492484
+ 418105 string characters out of 3121601
  502893 words of memory out of 3000000
- 26701 multiletter control sequences out of 15000+200000
+ 26703 multiletter control sequences out of 15000+200000
  54430 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,12n,98p,1200b,673s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2034,9 +2034,9 @@ ograms/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/feder/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/feder/AppData/
 Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/feder/AppDa
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on relazione.pdf (16 pages, 391570 bytes).
+Output written on relazione.pdf (17 pages, 394379 bytes).
 PDF statistics:
- 273 PDF objects out of 1000 (max. 8388607)
- 42 named destinations out of 1000 (max. 500000)
- 170 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 284 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 178 words of extra memory for PDF output out of 10000 (max. 10000000)
 
