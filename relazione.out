@@ -17,4 +17,19 @@
 \BOOKMARK [4][-]{paragraph.1.2.1.4}{Contesto restrizione C[ ] = \134L}{subsubsection.1.2.1}% 17
 \BOOKMARK [4][-]{paragraph.1.2.1.5}{Contesto relabelling C[ ] = [f] }{subsubsection.1.2.1}% 18
 \BOOKMARK [3][-]{subsubsection.1.2.2}{Conclusione}{subsection.1.2}% 19
-\BOOKMARK [1][-]{section.2}{Mini-progetto}{}% 20
+\BOOKMARK [1][-]{section.2}{Barbershop}{}% 20
+\BOOKMARK [2][-]{subsection.2.1}{Una possibile soluzione}{section.2}% 21
+\BOOKMARK [2][-]{subsection.2.2}{Modellazione in CCS}{section.2}% 22
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Codifica Mutex e contattore clienti}{subsection.2.2}% 23
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Codifica Customer}{subsection.2.2}% 24
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Codifica Barber}{subsection.2.2}% 25
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Codifica del sistema}{subsection.2.2}% 26
+\BOOKMARK [2][-]{subsection.2.3}{Verifica della correttezza attraverso CWB }{section.2}% 27
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Weak Bisimulation and Trace Equivalence}{subsection.2.3}% 28
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Assenza di deadlock}{subsection.2.3}% 29
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Mutua esclusione contattore}{subsection.2.3}% 30
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Mutua esclusione nell'esecuzione del taglio}{subsection.2.3}% 31
+\BOOKMARK [3][-]{subsubsection.2.3.5}{Verifica comportamento del cliente che entra quando il negozio pieno}{subsection.2.3}% 32
+\BOOKMARK [3][-]{subsubsection.2.3.6}{Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{subsection.2.3}% 33
+\BOOKMARK [3][-]{subsubsection.2.3.7}{Verifica comportamento del cliente nell'attesa di essere servito }{subsection.2.3}% 34
+\BOOKMARK [3][-]{subsubsection.2.3.8}{Fairness}{subsection.2.3}% 35
