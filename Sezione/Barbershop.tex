@@ -55,16 +55,16 @@ Count1 = enter.incExit.Count2;\\
 Count2 = enter.(incExit.CountB + decExit.Count1);\\
 CountB = enter.(balk.CountB + decExit.Count2);\\
 
-Customer1 ='enter.('incExit.C1 + 'balk.Customer1);\\
-C1 = semCustomer.'semBarber.semCustomerDone.'semBarberDone.'enter.'decExit.Customer1;\\
+Customer1 ='enter.enter1.exit1.('incExit.C1 + 'balk.Customer1);\\
+C1 = semCustomer.'semBarber.semCustomerDone.getHairCut1.'semBarberDone.\\'enter.enter1.exit1.'decExit.Customer1;\\
 
-Customer2 = 'enter.('incExit.C2 + 'balk.Customer2);\\
-C2 = semCustomer.'semBarber.semCustomerDone.'semBarberDone.'enter.'decExit.Customer2;\\
+Customer2 = 'enter.enter2.exit2.('incExit.C2 + 'balk.Customer2);\\
+C2 = semCustomer.'semBarber.semCustomerDone.getHairCut2.'semBarberDone.\\'enter.enter2.exit2.'decExit.Customer2;\\
 
-Customer3 = 'enter.('incExit.C3 + 'balk.Customer3);\\
-C3 = semCustomer.'semBarber.semCustomerDone.'semBarberDone.'enter.'decExit.Customer3;\\
+Customer3 = 'enter.enter3.exit3.('incExit.C3 + 'balk.Customer3);\\
+C3 = semCustomer.'semBarber.semCustomerDone.getHairCut3.'semBarberDone.\\'enter.enter3.exit3.'decExit.Customer3;\\
 
-Barber = 'semCustomer.semBarber.'semCustomerDone.cutDone.semBarberDone.Barber;
+Barber = 'semCustomer.semBarber.cutHair.'semCustomerDone.semBarberDone.Barber;
 
 set L = \{ enter, incExit, decExit, balk, semCustomer, semCustomerDone, semBarber, semBarberDone\};
 
@@ -90,8 +90,9 @@ Codifica il contatore che non può essere più incrementato perché uguale a n, 
 
 La codifica dei clienti avviene nel seguente modo:
 
-\emph{Customer1 ='enter.('incExit.C1 + 'balk.Customer1);}\\
-\emph{C1 = semCustomer.'semBarber.semCustomerDone.'semBarberDone.'enter.'decExit.Customer1;}
+\emph{Customer1 ='enter.enter1.exit1.('incExit.C1 + 'balk.Customer1);}\\
+\emph{C1 = semCustomer.'semBarber.semCustomerDone.getHairCut1.'semBarberDone.}\\
+\emph{'enter.enter1.exit1.'decExit.Customer1;}
 
 Il cliente per poter controllare se può entrare si sincronizza sul canale enter rimando in attesa della possibilità di entrare nella sezione critica. Una volta entrato controlla se può incrementare oppure no il contattore, quindi sceglie se eseguire incExit o back, tale scelta dipende da cosa offre il processo count. Nel caso sia CountB, l'unica azione possibile per il cliente è eseguire balk che lo fa uscire dalla sezione critica e non lo fa entrare nel negozio. Nel caso invece sia Count1 o Count2 il cliente esegue incExit cosi che incrementi il contattore e esca dalla sezione critica. Successivamente si sincronizza con il barbiere, che nel caso in cui il barbiere sia libero passa a ricevere il taglio. Finito il taglio si sincronizza subito con il barbiere per poi entrare nella sezione critica in mutua esclusione e decrementare il contattore per simulare la sua uscita dal negozio.
 
@@ -99,7 +100,7 @@ Il cliente per poter controllare se può entrare si sincronizza sul canale enter
 
 La codifica del Barbiere avviene nel seguente modo:
 
-\emph{Barber = 'semCustomer.semBarber.'semCustomerDone.cutDone.semBarberDone.Barber;}
+\emph{Barber = 'semCustomer.semBarber.cutHair'semCustomerDone.semBarberDone.Barber;}
 
 Il barbiere rimane in attesa di un nuovo cliente da servire su semCustomer se non ci sono cliente in attesa. Una volta arrivato un cliente si sincronizza con esso ed esegue il taglio, successivamente si sincronizza con il cliente appena servito per garantire che sia avvenuto il taglio per poi tornare all'inizio della sua esecuzione per poter eseguire un nuovo cliente se c'é, altrimenti attende un nuovo cliente.
 
@@ -116,9 +117,26 @@ Il sistema viene rappresentato attraverso una composizione parallela dei process
 
 Di seguito si verificano se il programma definito rispetta tutte le caratteristiche stabilite dalla definizione del problema, attraverso l'uso della Edinburgh Concurrency Workbench (CWB).
 
-\subsubsection{Weak Bisimulation and Trace Equivalence} 
+\subsubsection{Trace Equivalence} 
 
-Spec = cutDone.Spec;
+Dato che il sistema con 3 clienti e n = 2 risulta avere 752 stati, è troppo complesso scrivere una specifica che catturi il comportamento dell'intero sistema. Quindi trovare un specifica che sia bisimile a Sys non è molto interesse quello che ci interessa è perciò catturare alcune caratteristiche intessenti utili per la verifica. Si procede quindi nello scrivere due specifiche generali che catturino, una la mutua esclusione nella modifica del contattore e l'altra che ogni cliente viene servito uno alla volta. Si hanno le seguenti:
+
+\emph{SpecM = enter1.exit1.SpecM + enter2.exit2.SpecM + enter3.exit3SpecM;}
+
+\emph{SpecC = cutHair.getHairCut1.SpecC + cutHair.getHairCut2.SpecC +\\ cutHair.getHairCut3.SpecC;}
+
+Si nota che  unendo nel modo corretto queste due specifiche si può costruire la specifica bisimile a Sys, ma come detto risulta essere troppo complesso e quello che ci interessa è la cattura delle caratteristiche chiave del sistema, le quali garantiscono il corretto funzionamento.
+
+Quindi si prendono due versioni di Sys, Sys1 versione senza i canali \emph{cutHair} e \emph{getHairCut$_{i}$} e Sys2 versione senza i canali \emph{enter$_{i}$} e \emph{exit$_{i}$}.
+
+Per dimostrare che Sys1 e Sys2 hanno le caratteristiche descritte dalle specifiche SpecM e SpecC si ricorre all'uso della Trace Equivalence. Si vuole che le traccie di Sys1 siano Tr(Sys1) = Tr(SpecM), mentre le traccie di Sys2 siano Tr(Sys2) = Tr(SpecC). \\
+Vogliamo perciò che le traccie di Sys1 siano sequenze di \emph{enter$_{i}$} e \emph{exit$_{i}$} ben accoppiate mentre per le traccie di Sys2 siano sequenze di \emph{cutHair} e \emph{getHairCut$_{i}$} anch'essi ben accoppiate.
+
+Attraverso la CWB con il commando mayeq(Sys1,SpecM) otteniamo la conferma che Tr(Sys1) = Tr(SpecM). Analogamente con mayeq(Sys2,SpecC) si dimostra che Tr(Sys2) = Tr(SpecC).
+
+
+
+
 
 \subsubsection{Assenza di deadlock}
 

@@ -27,11 +27,11 @@
 \contentsline {subsubsection}{\numberline {2.2.3}Codifica Barber}{19}{subsubsection.2.2.3}%
 \contentsline {subsubsection}{\numberline {2.2.4}Codifica del sistema}{19}{subsubsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.3}Verifica della correttezza attraverso CWB }{19}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Weak Bisimulation and Trace Equivalence}{19}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Assenza di deadlock}{19}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Mutua esclusione contattore}{19}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}Mutua esclusione nell'esecuzione del taglio}{19}{subsubsection.2.3.4}%
-\contentsline {subsubsection}{\numberline {2.3.5}Verifica comportamento del cliente che entra quando il negozio pieno}{19}{subsubsection.2.3.5}%
-\contentsline {subsubsection}{\numberline {2.3.6}Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{19}{subsubsection.2.3.6}%
-\contentsline {subsubsection}{\numberline {2.3.7}Verifica comportamento del cliente nell'attesa di essere servito }{19}{subsubsection.2.3.7}%
-\contentsline {subsubsection}{\numberline {2.3.8}Fairness}{19}{subsubsection.2.3.8}%
+\contentsline {subsubsection}{\numberline {2.3.1}Trace Equivalence}{19}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Assenza di deadlock}{20}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Mutua esclusione contattore}{20}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Mutua esclusione nell'esecuzione del taglio}{20}{subsubsection.2.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.5}Verifica comportamento del cliente che entra quando il negozio pieno}{20}{subsubsection.2.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.6}Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{20}{subsubsection.2.3.6}%
+\contentsline {subsubsection}{\numberline {2.3.7}Verifica comportamento del cliente nell'attesa di essere servito }{20}{subsubsection.2.3.7}%
+\contentsline {subsubsection}{\numberline {2.3.8}Fairness}{20}{subsubsection.2.3.8}%

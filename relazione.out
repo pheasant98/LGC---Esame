@@ -25,7 +25,7 @@
 \BOOKMARK [3][-]{subsubsection.2.2.3}{Codifica Barber}{subsection.2.2}% 25
 \BOOKMARK [3][-]{subsubsection.2.2.4}{Codifica del sistema}{subsection.2.2}% 26
 \BOOKMARK [2][-]{subsection.2.3}{Verifica della correttezza attraverso CWB }{section.2}% 27
-\BOOKMARK [3][-]{subsubsection.2.3.1}{Weak Bisimulation and Trace Equivalence}{subsection.2.3}% 28
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Trace Equivalence}{subsection.2.3}% 28
 \BOOKMARK [3][-]{subsubsection.2.3.2}{Assenza di deadlock}{subsection.2.3}% 29
 \BOOKMARK [3][-]{subsubsection.2.3.3}{Mutua esclusione contattore}{subsection.2.3}% 30
 \BOOKMARK [3][-]{subsubsection.2.3.4}{Mutua esclusione nell'esecuzione del taglio}{subsection.2.3}% 31
