@@ -26,10 +26,11 @@
 \BOOKMARK [3][-]{subsubsection.2.2.4}{Codifica del sistema}{subsection.2.2}% 26
 \BOOKMARK [2][-]{subsection.2.3}{Verifica della correttezza attraverso CWB }{section.2}% 27
 \BOOKMARK [3][-]{subsubsection.2.3.1}{Trace Equivalence}{subsection.2.3}% 28
-\BOOKMARK [3][-]{subsubsection.2.3.2}{Assenza di deadlock}{subsection.2.3}% 29
-\BOOKMARK [3][-]{subsubsection.2.3.3}{Mutua esclusione contattore}{subsection.2.3}% 30
-\BOOKMARK [3][-]{subsubsection.2.3.4}{Mutua esclusione nell'esecuzione del taglio}{subsection.2.3}% 31
-\BOOKMARK [3][-]{subsubsection.2.3.5}{Verifica comportamento del cliente che entra quando il negozio pieno}{subsection.2.3}% 32
-\BOOKMARK [3][-]{subsubsection.2.3.6}{Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{subsection.2.3}% 33
-\BOOKMARK [3][-]{subsubsection.2.3.7}{Verifica comportamento del cliente nell'attesa di essere servito }{subsection.2.3}% 34
-\BOOKMARK [3][-]{subsubsection.2.3.8}{Fairness}{subsection.2.3}% 35
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Verifica tramite HML}{subsection.2.3}% 29
+\BOOKMARK [4][-]{paragraph.2.3.2.1}{Assenza di deadlock}{subsubsection.2.3.2}% 30
+\BOOKMARK [4][-]{paragraph.2.3.2.2}{Presenza di Livelock}{subsubsection.2.3.2}% 31
+\BOOKMARK [4][-]{paragraph.2.3.2.3}{Mutua esclusione contattore}{subsubsection.2.3.2}% 32
+\BOOKMARK [4][-]{paragraph.2.3.2.4}{Mutua esclusione nell'esecuzione del taglio}{subsubsection.2.3.2}% 33
+\BOOKMARK [4][-]{paragraph.2.3.2.5}{Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{subsubsection.2.3.2}% 34
+\BOOKMARK [4][-]{paragraph.2.3.2.6}{Verifica comportamento del cliente nell'attesa di essere servito }{subsubsection.2.3.2}% 35
+\BOOKMARK [4][-]{paragraph.2.3.2.7}{Fairness}{subsubsection.2.3.2}% 36
