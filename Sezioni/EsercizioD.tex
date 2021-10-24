@@ -4,7 +4,7 @@ Dimostrare che la trace equivalence è una congruenza per il CCS.
 
 Prima di illustrare la dimostrazione si definisce che cosa si intende con i concetti di trace equivalence e congruenza.
 
-Innanzitutto per traces di un processo P che di seguito verrà indicata con \tr{P} si intende, le sequenze di interazioni $\alpha_{1}.....\alpha_{n} \in Act$ con n>= 0 tale che esiste una sequenza di transizioni $P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$, e quindi rappresentata tutte le possibili interazioni con un processo. Più formalmente \tr{P} = \{ $\alpha_{1}.....\alpha_{n} | P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$ \}. Quindi due processi P e Q si dicono trace equivalence P$\sim_{t}$Q se \tr{P} = \tr{Q}.
+Innanzitutto per tracce di un processo P che di seguito verrà indicata con \tr{P}, si intendono tutte le possibili sequenze di interazioni $\alpha_{1}.....\alpha_{n} \in Act$ con n>= 0 tale che esiste una sequenza di transizioni $P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$, e quindi rappresentata tutte le possibili interazioni con un processo. Più formalmente \tr{P} = \{ $\alpha_{1}.....\alpha_{n} | P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$ \}. Quindi due processi P e Q si dicono trace equivalence P$\sim_{t}$Q se \tr{P} = \tr{Q}.
 
 Per congruenza si intende, dati due processi P e Q in relazione tra loro (P \textit{R} Q), allora per ogni contesto C[ ], C[P] \textit{R} C[Q]. 
 
@@ -22,11 +22,58 @@ Siano P,Q e R processi CCS con P $\sim_{t}$ Q, allora
 	\item P$\mathbf{[f]}\sim_{t}$ Q$\mathbf{[f]}$
 \end{enumerate}
 
+Si definiscono di seguito alcune terminologie che verranno usate durante la dimostrazione.
+
+Si indica con $\epsilon$ la sequenza vuota di interazioni. Essendo vuoto tutti i processi CCS sono in grado di eseguirla.
+
+Sia R un processo CCS, indichiamo con $\alpha$.\tr{R} l'insieme {$\alpha$t $\in$ \tr{R}}
+
 \paragraph{Prefisso C[ ] = $\alpha$.} \mbox{}
 
-Si ha che \tr{C[P]} = \tr{$\alpha$.P} = $\alpha$.\tr{P}, dato che con il contesto C[ ] si è aggiunto l'interazione $\alpha$ alle \tr{P}. Per ipotesi \tr{P} = \tr{Q}, inoltre aggiungendo l'interazione $\alpha$ sia a \tr{P} e sia a \tr{Q}, si ha che $\alpha$.\tr{P} = $\alpha$.\tr{Q} = \tr{$\alpha$.Q}.
+Nel caso del contesto prefisso si ha che \tr{$\alpha.P$} = $\alpha$.\tr{P}.
+Se questo è vero allora, grazie all'ipotesi \tr{P} = \tr{Q} si ha che  $\alpha$.\tr{P} =  $\alpha$.\tr{Q} = \tr{$\alpha.Q$} e quindi vale che $\alpha$.P $\sim_{t}$ $\alpha$.Q\\
 
-Perciò vale $\alpha$.P $\sim_{t}$ $\alpha$.Q.
+$(\subseteq)$ \\
+
+Sia  t $\in$ \tr{$\alpha.P$} $\Rightarrow$  t $\in$ $\alpha$.\tr{P}
+
+Per induzione su |t|:
+\\
+
+\textbf{Caso Base |t| = 0}
+
+Allora t = $\varepsilon \in$ $ \alpha$.\tr{P}
+\\
+
+\textbf{Caso Induttivo |t| = n + 1}
+
+t ha una prima interazione seguita poi dalla traccia t'. Sappiamo che $\alpha.P\overset{\alpha_{1}}\rightarrow $ P $\overset{t'}\rightarrow$, ovvero viene applicata una transizione secondo la regola del prefisso.
+
+	$\dfrac{}{\alpha.P \overset{\alpha_{1}}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
+	
+t = $\alpha$.t' dove t' sarà una certa sequenza di interazioni dove per ipotesi induttiva t'$\in$ \tr{P}. E quindi vale che t = $\alpha$.t'$\in$ $\alpha$.\tr{P}.\\
+
+$(\supseteq)$ \\
+
+Sia  t $\in$ $\alpha$.\tr{P} $\Rightarrow$  t $\in$ \tr{$\alpha.P$}
+
+Per induzione su |t|:
+\\
+
+\textbf{Caso Base |t| = 0}
+
+Allora t = $\varepsilon \in $ \tr{$\alpha.P$}
+\\
+ 
+\textbf{Caso Induttivo |t| = n + 1}
+
+t ha una prima interazione seguita poi dalla traccia t', cioè t = $\alpha_{1}$.t'.
+Si ha quindi una transizione $\alpha.P \overset{\alpha_{1}}\rightarrow P$ dove per ipotesi induttiva t' $\in$ \tr{P}. Si sa che la sequenza di transizioni è permessa dalla regola del prefisso, quindi:
+
+$\dfrac{}{\alpha.P \overset{\alpha_{1}}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
+
+Questo dimostra che $\alpha.P$ sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P allora $\alpha_{1}$.t' $\in$\tr{$\alpha$.P}.
+\\
 
 \paragraph{Contesto non deterministico  C[ ] = (\hspace{0.3cm} + R)} \mbox{}
 
@@ -36,18 +83,18 @@ Perciò si deve dimostrare che il contesto non deterministico tra i processi P e
 
 $(\subseteq)$ \\
 
-Sia t $\in$\tr{P + R}  $\Rightarrow$  t $\in$(\tr{P} $\bigcup$ \tr{R})
+Sia t $\in$\tr{P + R}  $\Rightarrow$  t $\in$(\tr{P} $\bigcup$ \tr{R})\\
 Per induzione su |t|:
 \\
 
 \textbf{Caso Base |t| = 0}
-\\
+
 Allora t = $\varepsilon \in$(\tr{P} $\bigcup$ \tr{R})
 \\
 
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t', quindi P + R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola della somma non deterministica arrivando in certo processo6 X', ci sono perciò due possibilità:
+t ha una prima interazione seguita poi dalla traccia t', quindi P + R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola della somma non deterministica arrivando in certo processo X', ci sono perciò due possibilità:
 
 \begin{itemize}
 	\item P+R ha effettuato una transizione usando la regola SUM-L:\\
@@ -100,11 +147,11 @@ Si procede con la dimostrazione \tr{P|R} = \tr{Q|R}:\\
 $(\subseteq)$ 
 \\
 
-Sia t $\in$\tr{P|R}  $\Rightarrow$  t $\in$(Q|R)
+Sia t $\in$\tr{P|R}  $\Rightarrow$  t $\in$(Q|R)\\
 Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
-\\
+
 Allora t = $\varepsilon \in$\tr{P|R} $\Rightarrow$ $\varepsilon \in$\tr{Q|R}
 \\
 
@@ -149,15 +196,14 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P|R $ \overset{\
 $(\supseteq)$ 
 \\
 
-Sia t $\in$\tr{Q|R}  $\Rightarrow$  t $\in$(P|R)
+Sia t $\in$\tr{Q|R}  $\Rightarrow$  t $\in$(P|R)\\
 Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
-\\
-Allora t = $\varepsilon \in$\tr{Q|R} $\Rightarrow$ $\varepsilon \in$\tr{P|R}
-\\
 
-\textbf{Caso Induttivo |t| = n + 1}\\
+Allora t = $\varepsilon \in$\tr{Q|R} $\Rightarrow$ $\varepsilon \in$\tr{P|R}\\
+
+\textbf{Caso Induttivo |t| = n + 1}
 
 t ha una prima interazione seguita poi dalla traccia t', quindi Q|R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola del parallelo arrivando in un processo stato X'; ci sono perciò tre possibilità:
 
@@ -206,12 +252,12 @@ Perciò si deve dimostrare che il contesto restrizione L sul processo P è ugual
 
 $(\subseteq)$ \\
 
-Sia t $\in$\tr{P\textbackslash L}  $\Rightarrow$  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}
+Sia t $\in$\tr{P\textbackslash L}  $\Rightarrow$  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}\\
 Per induzione su |t|:
 \\
 
 \textbf{Caso Base |t| = 0}
-\\
+
 Allora t = $\varepsilon \in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}
 \\
 
@@ -227,12 +273,12 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P\textbackslash 
 
 $(\supseteq)$\\
 
-Sia  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}.   
+Sia  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}.   \\
 Per induzione su |t|:
 \\
 
 \textbf{Caso Base |t| = 0}
-\\
+
 Allora t = $\varepsilon \in$\tr{P\textbackslash L}
 \\
 
@@ -257,14 +303,15 @@ Quindi voglio dimostrare che \tr{P$\mathbf{[f]}$} = \{f(t)| t $\in$ \tr{P}\}. Se
 
 $(\subseteq)$ \\
 
-Sia t$\in$ \tr{P$\mathbf{[f]}$} $\Rightarrow$ t $\in$ \{f(t)| t $\in$ \tr{P}\}. Per induzione su |t|:
+Sia t$\in$ \tr{P$\mathbf{[f]}$} $\Rightarrow$ t $\in$ \{f(t)| t $\in$ \tr{P}\}. \\
+Per induzione su |t|:
 \\
 
 \textbf{Caso Base |t| = 0}
-\\
-Allora t = $\varepsilon \in$ \{f($\varepsilon$)| $\varepsilon$ $\in$ \tr{P}\}
 
-\pagebreak
+Allora t = $\varepsilon \in$ \{f($\varepsilon$)| $\varepsilon$ $\in$ \tr{P}\}\\
+
+
 \textbf{Caso Induttivo |t| = n + 1}
 
 t ha una prima interazione seguita poi dalla traccia t', quindi P$\mathbf{[f]}  \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola del relabelling arrivando in un certo processo X', quindi:
@@ -275,12 +322,12 @@ t = $f(\alpha_{1}).f(t)'$ con |t'| = n, per ipotesi induttiva si ha che f(t') $\
 
 $(\supseteq)$ \\
 
-Sia t$\in$\{f(t)| t $\in$ \tr{P}\}  $\Rightarrow$ t$\in$\tr{P$\mathbf{[f]}$}. Per induzione su |t|:\\
+Sia t$\in$\{f(t)| t $\in$ \tr{P}\}  $\Rightarrow$ t$\in$\tr{P$\mathbf{[f]}$}. \\
+Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
-\\
-Allora t = $\varepsilon \in$\tr{P$\mathbf{[f]}$}
-\\
+
+Allora t = $\varepsilon \in$\tr{P$\mathbf{[f]}$}\\
 
 \textbf{Caso Induttivo |t| = n + 1}
 
@@ -290,7 +337,7 @@ $\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P \mathbf{[f]} \overset{f(\alpha_{
 
 Questo dimostra che P$\mathbf{[f]}$ sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P'$\mathbf{[f]}$ allora $\alpha_{1}$.t' $\in$\tr{P$\mathbf{[f]}$}.
 
-Quindi dato che \tr{P$\mathbf{[f]}$} = \{f(t)| t $\in$ \tr{P}\} con \tr{P} = \tr{Q} allora si è dimostrato che  P$\mathbf{[f]}\sim_{t}$ Q$\mathbf{[f]}$.
+Quindi dato che \tr{P$\mathbf{[f]}$} = \{f(t)| t $\in$ \tr{P}\} con \tr{P} = \tr{Q} allora si è dimostrato che  P$\mathbf{[f]}\sim_{t}$ Q$\mathbf{[f]}$.\\
 
 \subsubsection{Conclusione}
 Si è dimostrato con i vari casi della dimostrazione precedente, che per ogni possibile contesto che può essere usato, la trace equivalence risulta essere è una congruenza per il CCS. 
