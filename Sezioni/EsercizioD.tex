@@ -24,9 +24,9 @@ Siano P,Q e R processi CCS con P $\sim_{t}$ Q, allora
 
 Si definiscono di seguito alcune terminologie che verranno usate durante la dimostrazione.
 
-Si indica con $\epsilon$ la sequenza vuota di interazioni. Essendo vuoto tutti i processi CCS sono in grado di eseguirla.
+Si indica con $\varepsilon$ la sequenza vuota di interazioni. Essendo vuoto tutti i processi CCS sono in grado di eseguirla.
 
-Sia R un processo CCS, indichiamo con $\alpha$.\tr{R} l'insieme {$\alpha$t $\in$ \tr{R}}
+Sia R un processo CCS, indichiamo con $\alpha$.\tr{R} l'insieme \{$\alpha$t | t $\in$ \tr{R}\}
 
 \paragraph{Prefisso C[ ] = $\alpha$.} \mbox{}
 
@@ -47,9 +47,9 @@ Allora t = $\varepsilon \in$ $ \alpha$.\tr{P}
 
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t'. Sappiamo che $\alpha.P\overset{\alpha_{1}}\rightarrow $ P $\overset{t'}\rightarrow$, ovvero viene applicata una transizione secondo la regola del prefisso.
+t ha una prima interazione seguita poi dalla traccia t'. Sappiamo che $\alpha.P\overset{\alpha}\rightarrow $ P $\overset{t'}\rightarrow$, ovvero $\alpha$.P sa fare $\alpha$ grazie alla regola del prefisso che ne permette la transizione.
 
-	$\dfrac{}{\alpha.P \overset{\alpha_{1}}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
+	$\dfrac{}{\alpha.P \overset{\alpha}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
 	
 t = $\alpha$.t' dove t' sarà una certa sequenza di interazioni dove per ipotesi induttiva t'$\in$ \tr{P}. E quindi vale che t = $\alpha$.t'$\in$ $\alpha$.\tr{P}.\\
 
@@ -57,22 +57,19 @@ $(\supseteq)$ \\
 
 Sia  t $\in$ $\alpha$.\tr{P} $\Rightarrow$  t $\in$ \tr{$\alpha.P$}
 
-Per induzione su |t|:
+Suddividiamo il problema in due casi:
 \\
 
-\textbf{Caso Base |t| = 0}
+\textbf{Caso t = $\varepsilon$}
 
-Allora t = $\varepsilon \in $ \tr{$\alpha.P$}
+Per definizione t = $\varepsilon \in $ \tr{$\alpha.P$}.
 \\
  
-\textbf{Caso Induttivo |t| = n + 1}
+\textbf{Caso t $\not=$ $\varepsilon$}
 
-t ha una prima interazione seguita poi dalla traccia t', cioè t = $\alpha_{1}$.t'.
-Si ha quindi una transizione $\alpha.P \overset{\alpha_{1}}\rightarrow P$ dove per ipotesi induttiva t' $\in$ \tr{P}. Si sa che la sequenza di transizioni è permessa dalla regola del prefisso, quindi:
+Per definizione di $\alpha$.\tr{P}, t = $\alpha$.t' con t'$\in$\tr{P}. È quindi è possibili effettuare la seguente sequenza di transizioni $\alpha.P \overset{\alpha}\rightarrow P\overset{t'}\rightarrow $. Questo dimostra che $\alpha.P$ sa fare l'interazione t, allora t = $\alpha$.t' $\in$\tr{$\alpha$.P}.
 
-$\dfrac{}{\alpha.P \overset{\alpha_{1}}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
-
-Questo dimostra che $\alpha.P$ sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P allora $\alpha_{1}$.t' $\in$\tr{$\alpha$.P}.
+Perciò si è dimostrato che \tr{$\alpha.P$} = $\alpha$.\tr{P} e quindi con \tr{P} = \tr{Q}, $\alpha$.P $\sim_{t}$ $\alpha$.Q come si voleva dimostrare.
 \\
 
 \paragraph{Contesto non deterministico  C[ ] = (\hspace{0.3cm} + R)} \mbox{}
@@ -83,7 +80,7 @@ Perciò si deve dimostrare che il contesto non deterministico tra i processi P e
 
 $(\subseteq)$ \\
 
-Sia t $\in$\tr{P + R}  $\Rightarrow$  t $\in$(\tr{P} $\bigcup$ \tr{R})\\
+Sia t $\in$ \tr{P + R}  $\Rightarrow$  t $\in$ (\tr{P} $\bigcup$ \tr{R})\\
 Per induzione su |t|:
 \\
 
@@ -94,23 +91,23 @@ Allora t = $\varepsilon \in$(\tr{P} $\bigcup$ \tr{R})
 
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t', quindi P + R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola della somma non deterministica arrivando in certo processo X', ci sono perciò due possibilità:
+t ha una prima interazione seguita poi dalla traccia t', quindi P + R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola della somma non deterministica arrivando in certo processo X'. Ci sono perciò due possibilità:
 
 \begin{itemize}
 	\item P+R ha effettuato una transizione usando la regola SUM-L:\\
 	
 	 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P + R \overset{\alpha_{1}}\rightarrow P'\overset{t'}\rightarrow}$ \textit{SUM-L} \\
 	 	
-	 	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in \tr{P'}$, quindi 
-	 	$\alpha_{1}.t' \in \alpha_{1}.\tr{P'}\subseteq \tr{P} $ allora $t \in \tr{P} \bigcup \tr{R}$
+	 	t = $\alpha_{1}.$t' dove t' è una certa sequenza di interazioni con |t'| = n. Per ipotesi induttiva t' $\in$ \tr{P'}, quindi 
+	 	$\alpha_{1}.$t' $\in \alpha_{1}.$\tr{P'} che ne consegue che t $\in$ $\alpha_{1}.$\tr{P'}. Alla luce di ciò e grazie alla regola SUM-L che permette la transizione P $\overset{\alpha_{1}}\rightarrow $P', si può concludere che  t $\in$ \tr{P} .
 	 	\\
 	 	
 	 \item P+R ha effettuato una transizione usando la regola SUM-R:\\
 	 
 	 $\dfrac{R \overset{\alpha_{1}}\rightarrow R'}{P + R \overset{\alpha_{1}}\rightarrow R'\overset{t'}\rightarrow}$ \textit{SUM-R} \\
 	 
-		t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in \tr{R'}$, quindi 
-	$\alpha_{1}.t' \in \alpha_{1}.\tr{R'}\subseteq \tr{R} $ allora $t \in \tr{R} \bigcup \tr{P}$
+		t = $\alpha_{1}.$t' dove t' è una certa sequenza di interazioni con |t'| = n. Per ipotesi induttiva t' $\in$ \tr{R'}, quindi 
+	$\alpha_{1}.$t' $\in \alpha_{1}.$\tr{R'} che ne consegue che t $\in$ $\alpha_{1}.$\tr{R'}. Alla luce di ciò e grazie alla regola SUM-R che permette la transizione R $\overset{\alpha_{1}}\rightarrow $R', si può concludere che  t $\in$ \tr{R} .
 	\\
 	 	
 \end{itemize}
@@ -118,13 +115,25 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P + R $ \overset
 $(\supseteq)$\\
 
 Sia t $\in$(\tr{P} $\bigcup$ \tr{R}) $\Rightarrow $  t $\in$\tr{P + R}\\
-Perciò t può essere una traccia sia di P e sia di R oppure solo uno dei due, quindi:
+t può essere una traccia sia di P e sia di R oppure solo uno dei due.
 
-Se t $\in$ \tr{P}, P + R può scegliere di fare una transizione attraverso la regola SUM-L, e allora vale che t $\in$ \tr{P + R}.
+Suddividiamo il problema in due casi:
+\\
 
-Se t $\in$ \tr{R}, P + R può scegliere di fare una transizione attraverso la regola SUM-R, e allora vale che t $\in$ \tr{P + R}.
+\textbf{Caso t = $\varepsilon$}
 
-Se t appartiene sia a P che R, qualsiasi regola venga applicata per fare la transizione vale sempre t $\in$ \tr{P + R}.
+Per definizione t = $\varepsilon \in $ \tr{P + R}.
+\\
+
+\textbf{Caso t $\not=$ $\varepsilon$}
+
+t è una sequenza non vuota di interazioni di P.
+
+Se t $\in$ \tr{P}, si sa che esiste la sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{t'}\rightarrow$. Quindi t = $\alpha_{1}$.t' con t' $\in$ \tr{P'}.Fatta questa premessa, applicando la regola SUM-L si ottiene che $P + R \overset{\alpha_{1}}\rightarrow P'\overset{t'}\rightarrow$, allora t $\in$ \tr{P + R}.
+
+Se t $\in$ \tr{R}, si sa che esiste la sequenza di transizione R $\overset{\alpha_{1}}\rightarrow$ R' $\overset{t'}\rightarrow$. Quindi t = $\alpha_{1}$.t' con t' $\in$ \tr{R'}. Fatta questa premessa, applicando la regola SUM-R si ottiene che $P + R \overset{\alpha_{1}}\rightarrow R'\overset{t'}\rightarrow$, allora t $\in$ \tr{P + R}
+
+Se t appartiene sia a P che R, qualsiasi regola venga applicata per fare la transizione vale sempre t $\in$ \tr{P + R}.\\
 
 Perciò si è dimostrato che \tr{P + R} = \tr{P} $\bigcup$ \tr{R} e quindi con \tr{P} = \tr{Q},\\ P + R $\sim_{t}$ Q + R come si voleva dimostrare.
 
