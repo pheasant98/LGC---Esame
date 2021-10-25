@@ -129,7 +129,7 @@ Per definizione t = $\varepsilon \in $ \tr{P + R}.
 
 t è una sequenza non vuota di interazioni di P.
 
-Se t $\in$ \tr{P}, si sa che esiste la sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{t'}\rightarrow$. Quindi t = $\alpha_{1}$.t' con t' $\in$ \tr{P'}.Fatta questa premessa, applicando la regola SUM-L si ottiene che $P + R \overset{\alpha_{1}}\rightarrow P'\overset{t'}\rightarrow$, questo dimostra che P + R sa fare t, allora t $\in$ \tr{P + R}.
+Se t $\in$ \tr{P}, si sa che esiste la sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{t'}\rightarrow$. Quindi t = $\alpha_{1}$.t' con t' $\in$ \tr{P'}. Fatta questa premessa, applicando la regola SUM-L si ottiene che $P + R \overset{\alpha_{1}}\rightarrow P'\overset{t'}\rightarrow$, questo dimostra che P + R sa fare t, allora t $\in$ \tr{P + R}.
 
 Se t $\in$ \tr{R}, si sa che esiste la sequenza di transizione R $\overset{\alpha_{1}}\rightarrow$ R' $\overset{t'}\rightarrow$. Quindi t = $\alpha_{1}$.t' con t' $\in$ \tr{R'}. Fatta questa premessa, applicando la regola SUM-R si ottiene che $P + R \overset{\alpha_{1}}\rightarrow R'\overset{t'}\rightarrow$, questo dimostra che P + R sa fare t, allora t $\in$ \tr{P + R}.
 
@@ -139,135 +139,139 @@ Perciò si è dimostrato che \tr{P + R} = \tr{P} $\bigcup$ \tr{R} e quindi con \
 
 \paragraph{Contesto parallelo  C[ ] = (\hspace{0.3cm} | R)} \mbox{}
 
-Intuitivamente le traccie \tr{P|R} sono tutte le possibili combinazione tra \tr{P} e \tr{R}, cioè quindi tutte le loro interazioni e sincronizzazioni. Se tale intuizione è vera allora dato che \tr{P} = \tr{Q}, si potrebbe sostituire P con Q nelle \tr{P|R} ed ottenere le stesse combinazioni della versione precedente, quindi varrebbe che \tr{P|R} = \tr{Q|R} e di conseguenza P|R $\sim_{t}$ Q|R.
+Intuitivamente le traccie \tr{P|R} sono tutte le possibili combinazione tra \tr{P} e \tr{R}, cioè quindi tutte le loro interazioni e sincronizzazioni. Se tale intuizione è vera allora dato che \tr{P} = \tr{Q}, si potrebbe sostituire P con Q nelle \tr{P|R} ed ottenere le stesse combinazioni della versione precedente, varrebbe perciò \tr{P|R} = \tr{Q|R} e di conseguenza P|R $\sim_{t}$ Q|R.
 
-Per dimostrare ciò, si deve prima dimostrare il seguente lemma che sarà utilizzato nella dimostrazione:\\
-Siano A e B due processi CSS, se \tr{A} = \tr{B} $\Rightarrow \forall\alpha$ \tr{A'}$\subseteq$\tr{$\displaystyle\sum_{}^{} \{B'|B \overset{\alpha}\rightarrow B'\}$} \\con A $ \overset{\alpha}\rightarrow $ A'\\
-Cioè se i processi A e B hanno le stesse traccie allora le traccie del sotto processo di A, A' sono incluse nell'insieme delle traccie relative ai sotto processi B', raggiunti con una transizione $\alpha$ dal processo B.\\
+Per dimostrare ciò, si definisce un insieme Tr(P,R) che contiene tutte e sole le sequenze di interazioni che si possono ottenere combinando le \tr{P} e le \tr{R} seguendo le regole del parallelo, PAR-L, PAR-R e PAR-$\tau$.
 
-Si dimostra di seguito tale lemma:
+Quindi si definisce la seguente funzione $C$ che date due traccie ne esegue la loro combinazione:
+\[
+	C(a,b) = 
+	\begin{cases}
+	max(x,y) &  $ se $ a = \varepsilon $ OR $ b = \varepsilon\\
+	\alpha_{1}C(a', \alpha_{2}b')\bigcup\alpha_{2}C(\alpha_{1}a', b') & $ se $ a = \alpha_{1}a' $ AND $ b = \alpha_{2}b'\\
+	\tau C(x',y') & $ se $ a = \alpha a' $ AND $ b = \Overline[1pt]{\alpha} b'\\
+	\end{cases}
+\]
 
-\tr{$\displaystyle\sum_{}^{} \{B'|B \overset{\alpha}\rightarrow B'\}$} = \{t'|t = $\alpha$.t'$\in$\tr{B}\}, dato che \tr{A} = \tr{B} \\
-allora posso sostituire le \tr{B} con \tr{A} quindi, \{t'|t = $\alpha$.t'$\in$\tr{A}\}.\\
-Perciò \tr{A'}$\subseteq$\{t'|t = $\alpha$.t'$\in$\tr{A}\} = \tr{$\displaystyle\sum_{}^{} \{B'|B \overset{\alpha}\rightarrow B'\}$} in accordo con quanto scritto precedentemente.
+dove Tr(P,R) = \{ $C$(a,b) | a $in$ \tr{P}, b $in$ \tr{R}\}.
 
-Si procede con la dimostrazione \tr{P|R} = \tr{Q|R}:\\
+Si procede con la dimostrazione \tr{P|R} = \tr{P,R}:\\
 
 $(\subseteq)$ 
 \\
 
-Sia t $\in$\tr{P|R}  $\Rightarrow$  t $\in$(Q|R)\\
+Sia t $\in$\tr{P|R}  $\Rightarrow$  t $\in$(P,R).\\
+Ovvero la funzione $C$ sa eseguire la traccia t.
 Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$\tr{P|R} $\Rightarrow$ $\varepsilon \in$\tr{Q|R}
-\\
+Allora t = $\varepsilon$, quindi $\varepsilon \in$ \tr{P} e $\varepsilon \in$ {R} per definizione. Perciò applicando \tr{P,R}, si ha che $C(\varepsilon, \varepsilon)$ \{ max( $\varepsilon, \varepsilon$)  \} = \{$\varepsilon$\} dove t $\in$ \{$\varepsilon$\}.\\
 
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t', quindi P|R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola del parallelo arrivando in un certo processo X'; ci sono perciò tre possibilità:
+Si ha che t = $\alpha_{1}.t'$ con |t'| = n ovvero, t ha una prima interazione seguita poi dalla traccia t', quindi si ha P|R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ con t'$\in$ \tr{X'}. Viene perciò applicata una transizione secondo la regola del parallelo arrivando in un certo processo X'. Vi sono perciò tre possibilità:
 
 \begin{itemize}
 	\item P|R ha effettuato una transizione usando la regola PAR-L:\\
 	
 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P|R \overset{\alpha_{1}}\rightarrow P'|R\overset{t'}\rightarrow}$ \textit{PAR-L} \\
 	
-	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t'$\in$\tr{P'|R}, \\
-	si applica il lemma:\\
-	\tr{P'} $\subseteq$ \tr{$\displaystyle\sum_{}^{} \{Q'|Q \overset{\alpha_{1}}\rightarrow Q'\}$} e quindi t' $\in$ \tr{P'|R} $\Rightarrow$ t'$\in$\tr{$\displaystyle\sum_{Q \overset{\alpha_{1}}\rightarrow Q'}^{} (Q'|R) $}
+	t' $\in$ \tr{P'|R}, per ipotesi induttiva t' $\in$ \tr{P',R} allora esistono a' $\in$ \tr{P'}, b' $\in$ \tr{R}, tale che t' $\in$ $C$(a',b'). Voglio pero dimostrare che a $\in$ \tr{P}, b $\in$ \tr{R}, tale che t $\in$ $C$(a,b). Come mostrato precedentemente con l'applicazione della regola PAR-L esiste un interazione $\alpha_{1}$ tale che P $\overset{\alpha_{1}}\rightarrow$ P' con $\alpha_{1}$a' $\in$ \tr{P}. \\
+	Perciò mostriamo che t $\in$ $C$(a = $\alpha_{1}$a', b = b') = \tr{P, R}. Quindi:
+	\begin{itemize}
+		\item Se b' = $\varepsilon$\\
+		Si sa che $C$(a', $\varepsilon$) = \{a'\}, inoltre per ipotesi induttiva \\
+		t' $\in$ \tr{P',R} = \{ $C$(a', $\varepsilon$) | a' $\in$ \tr{P'}, $\varepsilon$ $\in$ \tr{R}\} quindi risulta che t' = a', ma allora dato che  $\alpha_{1}$a' $\in$ \tr{P} posso concludere che t = $\alpha_{1}$t' $\in$ $C$($\alpha_{1}$a', b') e quindi t $\in$ \tr{P, R}.
+		\item Se b' $\not$= $\varepsilon$\\
+		Per ipotesi induttiva t' $\in$ $C$(a', b'). Si sa che dalla definizione di $C$, $C$($\alpha_{1}$a', b') può assumere il valore $\alpha_{1}C$(a', b'), ma allora t = $\alpha_{1}$.t $\in\alpha_{1}C$(a', b') e quindi t $\in$ \tr{P, R}.\\
 	
-	Di conseguenza t$\in\alpha_{1}$.\tr{$\displaystyle\sum_{Q\overset{\alpha_{1}}\rightarrow Q'}^{} (Q'|R) $} = $\bigcup_{Q \overset{\alpha_{1}}\rightarrow Q'}\tr{\alpha_{1}.(Q'|R) $} e quindi, dato che il processo Q|R attraverso una transizione $\alpha_{1}$ può arrivare al processo Q'|R, si dimostra che se t$\in$(P|R) $\Rightarrow t\in$(Q|R).
+		
+	\end{itemize}
+	
 	
 	\item P|R ha effettuato una transizione usando la regola PAR-R:\\
 	
 	$\dfrac{R \overset{\alpha_{1}}\rightarrow R'}{P|R \overset{\alpha_{1}}\rightarrow P|R'\overset{t'}\rightarrow}$ \textit{PAR-R} \\
 	
-		t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t'$\in$\tr{P|R'},\\
-		si applica il lemma:\\
-		t'$\in$\tr{P|R'} $\Rightarrow$ t'$\in$\tr{Q|R'} e quindi t$\in$\tr{$\alpha_{1}$.(P|R')}$\Rightarrow$ t$\in$\tr{$\alpha_{1}$.(Q|R')}.
-	 \\
-		Dato che il processo Q|R attraverso una transizione $\alpha_{1}$ può arrivare al processo Q|R', si dimostra che se t$\in$(P|R) $\Rightarrow t\in$(Q|R).
-	\\
+		t' $\in$ \tr{P|R'}, per ipotesi induttiva t' $\in$ \tr{P,R'} allora esistono a' $\in$ \tr{P}, b' $\in$ \tr{R'}, tale che t' $\in$ $C$(a',b'). Voglio pero dimostrare che a $\in$ \tr{P}, b $\in$ \tr{R}, tale che t $\in$ $C$(a,b). Come mostrato precedentemente con l'applicazione della regola PAR-R esiste un interazione $\alpha_{1}$ tale che R $\overset{\alpha_{1}}\rightarrow$ R' con $\alpha_{1}$b' $\in$ \tr{R}. \\
+		Perciò mostriamo che t $\in$ $C$(a = a', b = $\alpha_{1}$b') = \tr{P, R}. Quindi:
+		\begin{itemize}
+			\item Se a' = $\varepsilon$\\
+			Si sa che $C$($\varepsilon$, b') = \{b'\}, inoltre per ipotesi induttiva \\
+			t' $\in$ \tr{P,R'} = \{ $C$($\varepsilon$, b') |  $\varepsilon$ $\in$ \tr{P'}, b' $\in$ \tr{R}\} quindi risulta che t' = b', ma allora dato che  $\alpha_{1}$b' $\in$ \tr{R} posso concludere che t = $\alpha_{1}$t' $\in$ $C$(a', $\alpha_{1}$b') e quindi t $\in$ \tr{P, R}.
+			\item  Se a' $\not$= $\varepsilon$\\
+			Per ipotesi induttiva t' $\in$ $C$(a', b'). Si sa che dalla definizione di $C$, $C$(a', $\alpha_{1}$b') può assumere il valore $\alpha_{1}C$(a', b'), ma allora t = $\alpha_{1}$.t $\in\alpha_{1}C$(a', b') e quindi t $\in$ \tr{P, R}.\\
+			
+			
+		\end{itemize}
 	\item P|R ha effettuato una transizione usando la regola PAR-$\tau$:\\
 	
 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P' \hspace{1cm} R \overset{\Overline[0.1pt]{\alpha_{1}}}\rightarrow R'}{P|R \overset{\tau_{1}}\rightarrow P'|R'\overset{t'}\rightarrow}$ \textit{PAR-$\tau$}
 	
+	t' $\in$ \tr{P'|R'}, per ipotesi induttiva t' $\in$ \tr{P', R'} allora esistono a' $\in$ \tr{P'}, b' $\in$ \tr{R'}, tale che t' $\in$ $C$(a',b'). Voglio pero dimostrare che a $\in$ \tr{P}, b $\in$ \tr{R}, tale che t $\in$ $C$(a,b). Come mostrato precedentemente con l'applicazione della regola PAR-$\tau$ esistono le interazioni $\alpha_{1}$ e $\Overline[0.1pt]{\alpha_{1}}$ tale che P $\overset{\alpha_{1}}\rightarrow$ P'  e R $\overset{\Overline[0.1pt]\alpha_{1}}\rightarrow$ R' con $\alpha_{1}$a' $\in$ \tr{P} e $\Overline[0.1pt]\alpha_{1}$b' $\in$ \tr{R}. \\
+	Perciò mostriamo che t $\in$ $C$(a = $\alpha_{1}$a', b = $\Overline[0.1pt]\alpha_{1}$b') = \tr{P, R}. \\
+	Quindi dato che si sincronizzano nessuna delle due traccie possono essere vuote, e per ipotesi induttiva t' $\in$ $C$(a', b'), sapendo che dalla definizione di $C$, $C$($\alpha_{1}$a', $\Overline[0.1pt]\alpha_{1}$b') può assumere il valore $\tau C$(a', b'), allora t = $\tau$t' $\in$ $\tau C$(a', b') e quindi t $\in$ \tr{P, R}. \\
 	
-	t = $\tau_{1}.t'$ con |t'| = n, per ipotesi induttiva t'$\in$\tr{P'|R'}, \\
-	si applica il lemma:\\
-	\tr{P'} $\subseteq$ \tr{$\displaystyle\sum_{}^{} \{Q'|Q\overset{\alpha_{1}}\rightarrow Q'\}$} e quindi t'$\in$\tr{P'|R'} $\Rightarrow$ t'$\in$\tr{$\displaystyle\sum_{Q \overset{\alpha_{1}}\rightarrow Q'}^{} (Q'|R') $}
-	
-	Di conseguenza t$\in\tau_{1}$.\tr{$\displaystyle\sum_{Q \overset{\alpha_{1}}\rightarrow Q'}^{} (Q'|R') $} = $\bigcup_{Q \overset{\alpha_{1}}\rightarrow Q'}\tr{\tau_{1}.(Q'|R') $} e quindi, dato che il processo Q|R attraverso una transizione $\tau_{1}$ effettua la sincronizzazione tra Q e R per arrivare al processo Q'|R', si dimostra che se t$\in$(P|R) $\Rightarrow t\in$(Q|R).
-	\\
+
 \end{itemize}
 
 $(\supseteq)$ 
 \\
 
-Sia t $\in$\tr{Q|R}  $\Rightarrow$  t $\in$(P|R)\\
+Sia t $\in$\tr{P,R}  $\Rightarrow$  t $\in$(P|R)\\
 Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$\tr{Q|R} $\Rightarrow$ $\varepsilon \in$\tr{P|R}\\
+t = $\varepsilon$, allora $\varepsilon \in$ \tr{P | R} per definizione.\\
+
 
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t', quindi Q|R $ \overset{\alpha_{1}}\rightarrow $ X' $\overset{t'}\rightarrow$ ovvero viene applicata una transizione secondo la regola del parallelo arrivando in un processo stato X'; ci sono perciò tre possibilità:
+
+t ha una prima interazione $\alpha_{1}$ seguita poi dalla traccia t', ovvero t = $\alpha_{1}$t'. Si ricorda inoltre che esiste una a $\in$ \tr{P}, b $\in$ \tr{R}, tale che t $\in$ $C$(a,b). Ci sono perciò tre possibili $\alpha_{1}$:
 
 \begin{itemize}
-	\item Q|R ha effettuato una transizione usando la regola PAR-L:\\
+	\item $\alpha_{1}$ $\in$ \tr{P}, si ha quindi una sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{a'}\rightarrow$ con a = $\alpha_{1}.a'$ con a'$\in$ \tr{P}. Posso perciò applicare PAR-L:\\
 	
-	$\dfrac{Q \overset{\alpha_{1}}\rightarrow Q'}{Q|R \overset{\alpha_{1}}\rightarrow Q'|R\overset{t'}\rightarrow}$ \textit{PAR-L} \\
+	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P|R \overset{\alpha_{1}}\rightarrow P'|R\overset{a'}\rightarrow}$ \textit{PAR-L} \\
 	
-	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t'$\in$\tr{Q'|R}, \\
-	si applica il lemma:\\
-	\tr{Q'} $\subseteq$ \tr{$\displaystyle\sum_{}^{} \{P'|P \overset{\alpha_{1}}\rightarrow P'\}$} e quindi t' $\in$ \tr{Q'|R} $\Rightarrow$ t' $\in$ \tr{$\displaystyle\sum_{P \overset{\alpha_{1}}\rightarrow P'}^{} (P'|R) $}
+	Dall'applicazione della regola PAR-L posso dedurre che $\alpha_{1}$ $\in$ \tr{P|R}, |t'| = n  per ipotesi induttiva t' $\in$ \tr{P'|R}, allora t = $\alpha_{1}$t' $\in$ \tr{P|R}.  \\
 	
-	Di conseguenza t $\in$ $\alpha_{1}$.\tr{$\displaystyle\sum_{P \overset{\alpha_{1}}\rightarrow P'}^{} (P'|R) $} = $\bigcup_{P \overset{\alpha_{1}}\rightarrow Q'}\tr{\alpha_{1}.(P'|R) $} e quindi, dato che il processo P|R attraverso una transizione $\alpha_{1}$ può arrivare al processo P'|R, si dimostra che se t$\in$(Q|R) $\Rightarrow t \in$(P|R).
+	\item $\alpha_{1}$ $\in$ \tr{R}, si ha quindi una sequenza di transizione R $\overset{\alpha_{1}}\rightarrow$ R' $\overset{b'}\rightarrow$ con b = $\alpha_{1}.b'$ con b'$\in$ \tr{R}. Posso perciò applicare PAR-R:\\
 	
-	\item P|R ha effettuato una transizione usando la regola PAR-R:\\
+	$\dfrac{R \overset{\alpha_{1}}\rightarrow R'}{P|R \overset{\alpha_{1}}\rightarrow P|R'\overset{b'}\rightarrow}$ \textit{PAR-R} \\
 	
-	$\dfrac{R \overset{\alpha_{1}}\rightarrow R'}{Q|R \overset{\alpha_{1}}\rightarrow Q|R'\overset{t'}\rightarrow}$ \textit{PAR-R} \\
+	Dall'applicazione della regola PAR-R posso dedurre che $\alpha_{1}$ $\in$ \tr{P|R}, |t'| = n per ipotesi induttiva t' $\in$ \tr{P|R'}, allora t = $\alpha_{1}$t' $\in$ \tr{P|R}.\\
 	
-	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in \tr{Q|R'}$,\\
-	si applica il lemma:\\
-	t'$\in$\tr{Q|R'} $\Rightarrow$ t'$\in$\tr{P|R'} e quindi t$\in$\tr{$\alpha_{1}$.(Q|R')}$\Rightarrow$ t$\in$\tr{$\alpha_{1}$.(P|R')}.
-	\\
-	Dato che il processo P|R attraverso una transizione $\alpha_{1}$ può arrivare al processo P|R', si dimostra che se t$\in$(Q|R) $\Rightarrow t \in$(P|R).
-	\\
-	\item P|R ha effettuato una transizione usando la regola PAR-$\tau$:\\
+	\item $\alpha_{1}$ $\in$ \tr{P} AND $\alpha_{1}$ $\in$ \tr{R}, si ha quindi una sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{a'}\rightarrow$ con a = $\alpha_{1}$.a' con a'$\in$ \tr{P}, e un altra sequenza di transizioni R $\overset{\Overline[0.1pt]\alpha_{1}}\rightarrow$ R' $\overset{b'}\rightarrow$ con b = $ \Overline[0.1pt]\alpha_{1}.b'$ con b'$\in$ \tr{R}. Posso perciò applicare PAR-$\tau$:\\
 	
-	$\dfrac{Q \overset{\alpha_{1}}\rightarrow Q' \hspace{1cm} R \overset{\Overline[0.1pt]{\alpha_{1}}}\rightarrow R'}{Q|R \overset{\tau_{1}}\rightarrow Q'|R'\overset{t'}\rightarrow}$ \textit{PAR-$\tau$}
+	$\dfrac{P \overset{\alpha_{1}}\rightarrow P' \hspace{1cm} R \overset{\Overline[0.1pt]{\alpha_{1}}}\rightarrow R'}{P|R \overset{\tau_{1}}\rightarrow P'|R'\overset{t'}\rightarrow}$ \textit{PAR-$\tau$}\\
 	
-	
-	t = $\tau_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in \tr{Q'|R'} \Rightarrow t' \in \tr{P'|R'} $, \\
-	si applica il lemma:\\
-	\tr{Q'} $\subseteq$ \tr{$\displaystyle\sum_{}^{} \{P'|P \overset{\alpha_{1}}\rightarrow P'\}$} e quindi t' $\in$ \tr{Q'|R'} $\Rightarrow$ t' $\in$ \tr{$\displaystyle\sum_{P \overset{\alpha_{1}}\rightarrow P'}^{} (P'|R') $}
-	
-	Di conseguenza t $\in$ $\tau_{1}$.\tr{$\displaystyle\sum_{P \overset{\alpha_{1}}\rightarrow P'}^{} (P'|R') $} = $\bigcup_{P \overset{\alpha_{1}}\rightarrow P'}\tr{\tau_{1}.(P'|R') $} e quindi, dato che il processo P|R attraverso una transizione $\tau_{1}$ effettua la sincronizzazione tra P e R per arrivare al processo P'|R', si dimostra che se t$\in$(Q|R) $\Rightarrow t \in$(P|R).
+	Dall'applicazione della regola PAR-$\tau$ posso dedurre che $\tau_{1}$ $\in$ \tr{P|R}, |t'| = n per ipotesi induttiva t' $\in$ \tr{P'|R'}, allora t = $\tau_{1}$t' $\in$ \tr{P|R}.\\
+
 	
 \end{itemize}
 
-Quindi con \tr{P} = \tr{Q}, P|R $\sim_{t}$ Q|R come si voleva dimostrare.
+Quindi sia \tr{P} = \tr{Q} e \tr{P,R} = \{ $C$(a,b) | a $in$ \tr{P}, b $in$ \tr{R}\} = \tr{P | R}, allora posso sostituire le traccie di P con quelle di Q per ottenere \{ $C$(a,b) | a $in$ \tr{Q}, b $in$ \tr{R}\} = \tr{P,R} = \tr{Q | R}, dimostrando che P|R $\sim_{t}$ Q|R.
 
 \paragraph{Contesto restrizione  C[ ] = \textbackslash L} \mbox{}
 
-Il caso del contesto restrizione L sul processo P ha la seguente uguaglianza:\\ \tr{P\textbackslash L} = \tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} cioè le traccie che stanno in \tr{P} non ci sono nell'insieme di restrizione definito precedentemente. Se questo è vero, dato che per ipotesi \tr{P} = \tr{Q} e quindi \tr{Q\textbackslash L} = \tr{Q}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}, allora \tr{P\textbackslash L} = \tr{Q\textbackslash L}. 
+Il caso del contesto restrizione L sul processo P ha la seguente uguaglianza:\\ \tr{P\textbackslash L} = \tr{P}\textbackslash\{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} cioè le traccie che stanno in \tr{P} non ci sono nell'insieme di restrizione L. Se questo è vero, dato che per ipotesi \tr{P} = \tr{Q} e quindi \tr{Q\textbackslash L} = \tr{Q}\textbackslash \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\}, allora \tr{P\textbackslash L} = \tr{Q\textbackslash L}. 
 
 Perciò si deve dimostrare che il contesto restrizione L sul processo P è uguale a \\
-\tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}. Dimostrato questo ne consegue la veridicità di P\textbackslash L $\sim_{t}$ Q\textbackslash L.\\
+\tr{P}\textbackslash \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\}. Dimostrato questo ne consegue la veridicità di P\textbackslash L $\sim_{t}$ Q\textbackslash L.\\
 
 $(\subseteq)$ \\
 
-Sia t $\in$\tr{P\textbackslash L}  $\Rightarrow$  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}\\
+Sia t $\in$\tr{P\textbackslash L}  $\Rightarrow$  t $\in$\tr{P}\textbackslash\{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\}\\
 Per induzione su |t|:
 \\
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}
+Allora t = $\varepsilon \in$ \tr{P}\textbackslash\{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} per definizione.
 \\
 
 \textbf{Caso Induttivo |t| = n + 1}
@@ -276,31 +280,31 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P\textbackslash 
 	
 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P\textbackslash L \overset{\alpha_{1}}\rightarrow P'\textbackslash L\overset{t'}\rightarrow}$ \textit{RES} se $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ L\\
 	
-	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in$ \tr{P'\textbackslash L}, quindi 
-	$\alpha_{1}.t' \in \alpha_{1}$.\tr{P'\textbackslash L}$\subseteq$ \tr{P\textbackslash L}. Dato che $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ L quindi t = $\alpha$.t' $\not \in$ \{ t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}  allora \\
-	t $\in$\tr{P}\textbackslash \{t =...$\alpha_{x}$...|$\alpha_{x}\in$L\}.\\
+	t = $\alpha_{1}.t'$ con |t'| = n, per ipotesi induttiva t' $\in$ \tr{P'}\textbackslash \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\}. \\
+	Dato che $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ L quindi t = $\alpha$.t' $\not \in$ \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} allora vale che t = $\alpha_{1}.t'$ $\in$ \tr{P}\textbackslash \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\}.\\
+
 
 $(\supseteq)$\\
 
-Sia  t $\in$\tr{P}\textbackslash\{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}.   \\
+Sia  t $\in$\tr{P}\textbackslash\{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}.   \\
 Per induzione su |t|:
 \\
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$\tr{P\textbackslash L}
+Allora t = $\varepsilon \in$ \tr{P\textbackslash L} per definizione.
 \\
 
 \textbf{Caso Induttivo |t| = n + 1}
 
 t ha una prima interazione seguita poi dalla traccia t', cioè t = $\alpha_{1}$.t'. Si ha quindi una transizione P $\overset{\alpha_{1}}\rightarrow$ P', ciò è permesso dalla regola della restrizione, quindi:
 
-$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P\textbackslash L \overset{\alpha_{1}}\rightarrow P'\textbackslash L\overset{t'}\rightarrow}$ \textit{RES} se $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\}\\
+$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P\textbackslash L \overset{\alpha_{1}}\rightarrow P'\textbackslash L\overset{t'}\rightarrow}$ \textit{RES} se $\alpha_{1}, \Overline[1pt]{\alpha_{1}} \not\in$ \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\}\\
 
-Questo dimostra che P$\textbackslash$L sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P'$\textbackslash$L allora $\alpha_{1}$.t' $\in$\tr{P$\textbackslash$L}.
+Questo dimostra che P$\textbackslash$L sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P'$\textbackslash$L allora $\alpha_{1}$.t' $\in$ \tr{P$\textbackslash$L}.
 \\
 
-Quindi dato che \tr{P\textbackslash L} = \tr{P}\textbackslash \{t=...$\alpha_{x}$...|$\alpha_{x}\in$L\} con \tr{P} = \tr{Q}  allora si è dimostrato che  P\textbackslash L $\sim_{t}$ Q\textbackslash L.
+Quindi dato che \tr{P\textbackslash L} = \tr{P}\textbackslash \{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} con \tr{P} = \tr{Q}  allora si è dimostrato che  P\textbackslash L $\sim_{t}$ Q\textbackslash L.
 
 \paragraph{Contesto relabelling  C[ ] = $\mathbf{[f]}$ } \mbox{}
 
@@ -336,7 +340,7 @@ Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$\tr{P$\mathbf{[f]}$}\\
+Allora t = $\varepsilon \in$ \tr{P$\mathbf{[f]}$}\\
 
 \textbf{Caso Induttivo |t| = n + 1}
 
@@ -344,7 +348,7 @@ t ha una prima interazione seguita poi dalla traccia t', cioè t = $\alpha_{1}$.
 
 $\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P \mathbf{[f]} \overset{f(\alpha_{1})}\rightarrow P'\mathbf{[f]}\overset{f(t')}\rightarrow}$ \textit{REL} 
 
-Questo dimostra che P$\mathbf{[f]}$ sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$P'$\mathbf{[f]}$ allora $\alpha_{1}$.t' $\in$\tr{P$\mathbf{[f]}$}.
+Questo dimostra che P$\mathbf{[f]}$ sa fare l'interazione $\alpha_{1}$, perciò per ipotesi induttiva t'$\in$ P'$\mathbf{[f]}$ allora $\alpha_{1}$.t' $\in$ \tr{P$\mathbf{[f]}$}.
 
 Quindi dato che \tr{P$\mathbf{[f]}$} = \{f(t)| t $\in$ \tr{P}\} con \tr{P} = \tr{Q} allora si è dimostrato che  P$\mathbf{[f]}\sim_{t}$ Q$\mathbf{[f]}$.\\
 
