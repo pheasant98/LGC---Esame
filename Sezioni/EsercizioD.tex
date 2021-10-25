@@ -4,7 +4,7 @@ Dimostrare che la trace equivalence è una congruenza per il CCS.
 
 Prima di illustrare la dimostrazione si definisce che cosa si intende con i concetti di trace equivalence e congruenza.
 
-Innanzitutto per tracce di un processo P che di seguito verrà indicata con \tr{P}, si intendono tutte le possibili sequenze di interazioni $\alpha_{1}.....\alpha_{n} \in Act$ con n>= 0 tale che esiste una sequenza di transizioni $P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$, e quindi rappresentata tutte le possibili interazioni con un processo. Più formalmente \tr{P} = \{ $\alpha_{1}.....\alpha_{n} | P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$ \}. Quindi due processi P e Q si dicono trace equivalence P$\sim_{t}$Q se \tr{P} = \tr{Q}.
+Innanzitutto per tracce di un processo P che di seguito verrà indicata con \tr{P}, si intendono tutte le possibili sequenze di interazioni $\alpha_{1}.....\alpha_{n} \in Act$ con n >= 0 tale che esiste una sequenza di transizioni $P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$, e quindi rappresentata tutte le possibili interazioni con un processo. Più formalmente \tr{P} = \{ $\alpha_{1}.....\alpha_{n} | P \overset{\alpha_{1}}\rightarrow P_{1} \overset{\alpha_{2}}\rightarrow...\overset{\alpha_{n}}\rightarrow P_{n}$ \}. Quindi due processi P e Q si dicono trace equivalence P$\sim_{t}$Q se \tr{P} = \tr{Q}.
 
 Per congruenza si intende, dati due processi P e Q in relazione tra loro (P \textit{R} Q), allora per ogni contesto C[ ], C[P] \textit{R} C[Q]. 
 
@@ -51,7 +51,7 @@ t ha una prima interazione seguita poi dalla traccia t'. Sappiamo che $\alpha.P\
 
 	$\dfrac{}{\alpha.P \overset{\alpha}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
 	
-t = $\alpha$.t' dove t' sarà una certa sequenza di interazioni dove per ipotesi induttiva t'$\in$ \tr{P}. E quindi vale che t = $\alpha$.t'$\in$ $\alpha$.\tr{P}.\\
+t = $\alpha$.t' dove t' sarà una certa sequenza di interazioni con |t'| = n e per ipotesi induttiva t'$\in$ \tr{P}. E quindi vale che t = $\alpha$.t'$\in$ $\alpha$.\tr{P}.\\
 
 $(\supseteq)$ \\
 
@@ -322,7 +322,7 @@ Per induzione su |t|:
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$ \{f($\varepsilon$)| $\varepsilon$ $\in$ \tr{P}\}\\
+Allora t = $\varepsilon \in$ \{f($\varepsilon$)| $\varepsilon$ $\in$ \tr{P}\} per definizione.\\
 
 
 \textbf{Caso Induttivo |t| = n + 1}
@@ -340,7 +340,7 @@ Per induzione su |t|:\\
 
 \textbf{Caso Base |t| = 0}
 
-Allora t = $\varepsilon \in$ \tr{P$\mathbf{[f]}$}\\
+Allora t = $\varepsilon \in$ \tr{P$\mathbf{[f]}$} per definizione.\\
 
 \textbf{Caso Induttivo |t| = n + 1}
 
