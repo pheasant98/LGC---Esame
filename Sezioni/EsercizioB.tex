@@ -22,7 +22,7 @@ Il processo \(\zero\) ha un solo stato e non ha interazioni con altri processi.
 
 La dimostrazione viene divisa in due casi: 
 \begin{itemize}
-	\item Nel primo caso si hanno somme finite, cioè l'insieme \textit{I} contenente le scelte della somma non deterministica, è finito;
+	\item Nel primo caso si hanno somme finite, cioè l'insieme \textit{I} contenente le scelte della somma non deterministica è finito;
 	\item Nel secondo caso l'insieme \(I\) sarà infinito.
 \end{itemize} 
 \subsubsection{Dimostrazione per somme finite}
@@ -71,31 +71,30 @@ Si dimostrerà che \sip{P} indica il limite superiore del numero di passi esegui
 		\item[*]
 			$\dfrac{P_{j} \overset{\alpha}\rightarrow P'}{\displaystyle\sum_{i\in I}^{}P_{i} \overset{\alpha}\rightarrow P'}$ \textit{SUM} $j\in I$                         
 		
-		Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: $Size_{p}(P_{j})$ > $Size_{p}(P')$. \\
+		Dato che $\displaystyle\sum_{i\in I}^{}$P$_{i} \overset{\alpha}\rightarrow$ P' ha un livello in più rispetto a P$_{j} \overset{\alpha}\rightarrow$ P', allora per ipotesi induttiva vale che su P$_{j} \overset{\alpha}\rightarrow$ P', $Size_{p}(P_{j})$ > $Size_{p}(P')$. \\
 		\\
-		Perciò $Size_{p}(\displaystyle\sum_{i\in I}^{}P_{i}) > Size_{p}(P_{j}) > Size_{p}(P') $ allora $ max(Size_{p}(P_{i})) > Size_{p}(P')$
-		Il limite superiore  $ Size_{p}(\displaystyle\sum_{i\in I}^{}P_{i}) = max(Size_{p}(P_{i}))$ passi, risulta essere corretto.
+		Si deduce che $Size_{p}(\displaystyle\sum_{i\in I}^{}P_{i}) > Size_{p}(P_{j}) > Size_{p}(P') $ ma allora sicuramente $ max(Size_{p}(P_{i})) > Size_{p}(P')$.\\
+		Il limite superiore $ Size_{p}(\displaystyle\sum_{i\in I}^{}P_{i}) = max(Size_{p}(P_{i}))$ passi, risulta essere corretto.
 		\\
 		\item[*]
 				$\dfrac{P \overset{\alpha}\rightarrow P'}{P|Q \overset{\alpha}\rightarrow P'|Q}$ \textit{PAR-L}  
 				
-				Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: $Size_{p}(P)$ > $Size_{p}(P')$. \\
+				Dato che P|Q $\overset{\alpha}\rightarrow$ P'|Q ha un livello in più rispetto a P $\overset{\alpha}\rightarrow$ P', allora nell'esecuzione di un passo $\alpha$, P $\overset{\alpha}\rightarrow$ P', per ipotesi induttiva vale che $Size_{p}(P)$ > $Size_{p}(P')$. \\
 				\\
-				E quindi dato che $Size_{p}(P|Q) = Size_{p}(P) + Size_{p}(Q)$ mentre $  Size_{p}(P'|Q) = Size_{p}(P') + Size_{p}(Q)$, per ipotesi induttiva $Size_{p}(P|Q) > Size_{p}(P'|Q) $
+				E quindi dato che $Size_{p}(P|Q) = Size_{p}(P) + Size_{p}(Q)$ mentre $  Size_{p}(P'|Q) = Size_{p}(P') + Size_{p}(Q)$, allora si può dedurre che $Size_{p}(P|Q) > Size_{p}(P'|Q) $
 				\\
 		\item[*]
 			$\dfrac{Q \overset{\alpha}\rightarrow Q'}{P|Q \overset{\alpha}\rightarrow P|Q'}$ \textit{PAR-R}  
 			
-			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{Q} > \sip{Q'} \\
-			\\
-			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P|Q'} = \sip{P} + \sip{Q'}, per ipotesi induttiva \\ \sip{P|Q} > \sip{P|Q'}
+			Dato che P|Q $\overset{\alpha}\rightarrow$ P|Q' ha un livello in più rispetto a Q $\overset{\alpha}\rightarrow$ Q', allora nell'esecuzione di un passo $\alpha$, Q $\overset{\alpha}\rightarrow$ Q', per ipotesi induttiva vale che $Size_{p}(Q)$ > $Size_{p}(Q')$.\\ \\
+			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P|Q'} = \sip{P} + \sip{Q'}, allora si può dedurre che \\ \sip{P|Q} > \sip{P|Q'}
 			\\
 		\item[*]
 			$\dfrac{P \overset{\alpha}\rightarrow P' \hspace{1cm} Q \overset{\Overline[0.01pt]{\alpha}}\rightarrow Q'}{P|Q \overset{\tau}\rightarrow P'|Q'}$ \textit{PAR-$\tau$}  
-			
-			Si osserva che nell'esecuzione di un passo di sincronizzazione, per ipotesi induttiva vale che: \sip{P} > \sip{P'} e \sip{Q} > \sip{Q'} \\
+		
+			Dato che P|Q $\overset{\tau}\rightarrow$ P'|Q' ha un livello in più rispetto sia a P $\overset{\alpha}\rightarrow$ P' e sia a Q $\overset{\Overline[0.01pt]{\alpha}}\rightarrow$ Q', allora nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che \sip{P} > \sip{P'} e \sip{Q} > \sip{Q'} \\
 			\\
-			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P'|Q'} = \sip{P'} + \sip{Q'}, per ipotesi induttiva \\ \sip{P|Q} > \sip{P'|Q'}
+			E quindi dato che \sip{P|Q} = \sip{P} + \sip{Q} mentre\\ \sip{P'|Q'} = \sip{P'} + \sip{Q'}, allora si può dedurre che \\ \sip{P|Q} > \sip{P'|Q'}
 			\\
 			
 		Perciò si è dimostrato che il limite superiore  \sip{P|Q} =\sip{P} + \sip{Q} passi, risulta essere corretto in tutti i tre casi PAR-L, PAR-R e PAR-$\tau$.
@@ -103,9 +102,9 @@ Si dimostrerà che \sip{P} indica il limite superiore del numero di passi esegui
 		\item[*]
 			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \textbackslash L \overset{\alpha}\rightarrow P' \textbackslash L}$ \textit{RES} se $\alpha, \Overline[1pt]{\alpha} \not\in$ L
 			
-			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{P} > \sip{P'}  \\
+			Dato che P $\textbackslash L \overset{\alpha}\rightarrow $ P' \textbackslash L ha un livello in più rispetto a P $\overset{\alpha}\rightarrow$ P', allora nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che \sip{P} > \sip{P'}  \\
 			\\
-			Applicare una restrizione ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma avere una possibile variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \textbackslash L} = \sip{P} mentre \sip{P'\textbackslash L} = \sip{P'}, per ipotesi induttiva \sip{P \textbackslash L} > \sip{P' \textbackslash L}\\
+			Applicare una restrizione ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma invece si potrebbe ottenere una variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \textbackslash L} = \sip{P} mentre \sip{P'\textbackslash L} = \sip{P'}, si deduce che \sip{P \textbackslash L} > \sip{P' \textbackslash L}\\
 			\\
 		Perciò si è dimostrato che il limite superiore \sip{P \textbackslash L} = \sip{P} passi, risulta essere corretto.
 		\\
@@ -117,9 +116,9 @@ Si dimostrerà che \sip{P} indica il limite superiore del numero di passi esegui
 		\item[*]
 			$\dfrac{P \overset{\alpha}\rightarrow P'}{P \mathbf{[f]} \overset{f(\alpha)}\rightarrow P'\mathbf{[f]}}$ \textit{REL} 
 			
-			Si osserva che nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che: \sip{P} > \sip{P'}  \\
+			Dato che P $\mathbf{[f]} \overset{f(\alpha)}\rightarrow$ P'$\mathbf{[f]}$ ha un livello in più rispetto a P $\overset{\alpha}\rightarrow$ P', allora nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che \sip{P} > \sip{P'}  \\
 			\\
-			Applicare un relabelling ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma avere una possibile variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \mathbf{[f]}} = \sip{P} mentre \sip{P'\mathbf{[f]}} = \sip{P'}, per ipotesi induttiva \sip{P \mathbf{[f]}} > \sip{P' \mathbf{[f]}}\\
+			Applicare un relabelling ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma invece si potrebbe ottenere variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \mathbf{[f]}} = \sip{P} mentre \sip{P'\mathbf{[f]}} = \sip{P'},\\ si deduce che \sip{P \mathbf{[f]}} > \sip{P' \mathbf{[f]}}\\
 			\\
 		Perciò si è dimostrato che il limite superiore \sip{P \mathbf{[f]}} = \sip{P} passi, risulta essere corretto.	
 				
@@ -146,7 +145,7 @@ P=R[f],         & Size_{s}{R}
 \end{cases}
 \]
 
-Si dimostrerà di seguito che \sis(P) calcola il limite superiore del numero di stati dell'esecuzione del processo P.
+Si dimostrerà di seguito che \sis{P} calcola il limite superiore del numero di stati dell'esecuzione del processo P.
 
 \subparagraph{Dimostrazione} \mbox{}
 
@@ -161,22 +160,22 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		\\
 	\item[] \textbf{Caso Induttivo:} \mbox{}
 	
-	In un passo si raggiunge uno sotto processo dal quale poi in \textit{n} passi finiti si raggiungerà un stato terminante. Si utilizza la seguente ipotesi induttiva: \\
+	In un passo si raggiunge uno sotto processo dal quale poi in \textit{n} passi finiti si raggiungerà un stato terminante. Si puo quindi utilizzare la seguente ipotesi induttiva: \\
 	Un processo composto da sotto processi con un limite superiore ai stati di esecuzione ha anch'esso un limite superiore di stati di esecuzione.\\
-	Tale ipotesi scritta verrà utilizzata per dimostrare che il sotto processo raggiunto, da lui allo stato terminante, ci saranno un numero finiti di stati perché limitati da un limiti superiore. Si ricorda inoltre che il numero di stati raggiunti è finito se gli \textit{n} passi sono finiti. Grazie alla dimostrazione del punto 1 si sa che \textit{n} è finito.
+	Tale ipotesi scritta verrà utilizzata per dimostrare che il sotto processo raggiunto, da lui allo stato terminante, ci saranno un numero finito di stati perché limitati da un limite superiore. Si ricorda inoltre che il numero di stati raggiunti è finito se gli \textit{n} passi sono finiti. Grazie alla dimostrazione del punto 1 si sa che \textit{n} è finito. 
 	\\
 	\begin{itemize}
 		
 		\item[*] \textbf{ACT}
 		\\
-		Con l'azione $\alpha$ concatenata al processo P viene aggiunto a P uno stato in più, infatti $\alpha.P \overset{\alpha}\rightarrow P$. P per ipotesi induttiva ha al più \sis{P} stati, quindi $\alpha.P$ avrà al più \sis{\alpha.P} = 1 + \sis{P} stati.
+		Con l'azione $\alpha$ concatenata al processo P viene aggiunto a P uno stato in più, infatti $\alpha.P \overset{\alpha}\rightarrow P$. P per ipotesi induttiva ha al più \sis{P} stati, quindi $\alpha.P$ avrà al più \sis{\alpha.P} = 1 + \sis{P} stati. Risulta perciò corretto il limite scelto.
 		\\
 		\item[*] \textbf{SUM}
 		\\
 		Si ha la seguente esecuzione: $\displaystyle\sum_{i\in I}^{}P_{i} \overset{\alpha}\rightarrow$ P', dove qualunque $P_{i}$ sia scelto per ipotesi induttiva ha un numero finito di stati d'esecuzione. Quindi tutti i processi che compongono la somma non deterministica hanno un numero finito di stati.
 		Perciò $\displaystyle\sum_{i\in I}^{}P_{i}$ ha al più \sis{\displaystyle\sum_{i\in I}^{}P_{i}} = $\displaystyle\sum_{i\in I}^{}Size_{s}{P_{i}}$ stati inoltre, dato che il numero di processi $P_{i}$ è finito, anche la somma dei stati lo sarà.
 		
-		È corretto il limite superiore presentato precedentemente perché potrebbero esserci stati non condivisi tra i vari processi $P_{i}$, quindi tutti i \sis{P_{i}}.
+		È corretto il limite superiore presentato precedentemente perché potrebbero esserci stati non condivisi tra i vari processi $P_{i}$. Quindi può esserci il caso in cui tutti i stati raggiunti sono diversi tra loro.
 		\\
 		\item[*] \textbf{PAR-L}
 		\\
@@ -240,7 +239,7 @@ Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni proces
 	La generazione della sequenza di interazioni avanza attraverso uno dei termini della grammatica e come ipotesi induttiva si ha che tale sequenza ha derivazione finita.
 	\begin{itemize}
 		
-		\item[*] \textbf{ACT, RES e REL}
+		\item[*] \textbf{ACT}
 		\\
 		Con l'azione $\alpha$ concatenata al processo P si ha che, la derivazione produrrà un processo del tipo, \(\alpha^{n+1}.P\) con \(n \geq 0\), dove esiste un nuovo passo e uno nuovo stato nell'esecuzione di P. Perciò il numero di stati e di passi d'esecuzione rimangono finiti.
 		\\

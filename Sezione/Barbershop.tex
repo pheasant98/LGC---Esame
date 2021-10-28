@@ -209,23 +209,23 @@ Per dimostrare tale proprietà si inseriscono nel sistema \textsf{Sys}, i canali
 \textsf{C1 = semCustomer.entered.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.}\\
 \textsf{'enter.enter1.exit1.'decExit.Customer1;}
 
-Mentre nel processo \textsf{Barber} si inserisce \textsf{waked}, quindi:
+Mentre nel processo \textsf{Barber} si inserisce  \textsf{sleep} e \textsf{waked}, quindi:
 
-\textsf{Barber = 'semCustomer.waked.semBarber.cutHair'semCustomerDone.semBarberDone.Barber;}
-
-\begin{center}
-	\textsf{UntilB = Inv(WUntil([[waked]]F, <<entered>>T));}
-\end{center}
-
-È sempre vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché un processo \textsf{Customer$_{i}$} può fare \textsf{entered}. La possibilità di poter fare \textsf{entered} la si ha solo se c'è stata una sincronizzazione, cioè il barbiere si è svegliato e il cliente è entrato e successivamente può segnalarlo. Quindi eseguendo \textbf{checkprop(Sys, UntilB)} si ottiene \textbf{true}, vale perciò la proprietà.
-
-Non sarebbe andata bene la versione con lo strong until perché non è sempre vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché un processo \textsf{Customer$_{i}$} esegue \textsf{entered}, infatti: 
+\textsf{Barber = sleep.'semCustomer.waked.semBarber.cutHair.'semCustomerDone.semBarberDone.Barber;}
 
 \begin{center}
-	 \textsf{UntilB = Inv(SUntil([[waked]]F, <<entered>>T));}
+	\textsf{UntilB = Inv([[sleep]]WUntil([[waked]]F, <<entered>>T));}
 \end{center}
 
-Allora \textbf{checkprop(Sys, UntilB)} ritorna \textbf{false}.
+È sempre vero che in qualunque modo venga eseguito [[sleep]] è vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché non diventa vero che un processo \textsf{Customer$_{i}$} può fare \textsf{entered}. La possibilità di poter fare \textsf{entered} la si ha solo se c'è stata una sincronizzazione, cioè il barbiere si è svegliato e il cliente è entrato e successivamente può segnalarlo. Quindi eseguendo \textbf{checkprop(Sys, UntilB)} si ottiene \textbf{true}, vale perciò la proprietà.
+
+Non sarebbe andata bene la versione con lo strong until perché non è sempre vero in qualunque modo venga eseguito [[sleep]] è vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché non diventa vero che un processo \textsf{Customer$_{i}$} esegue \textsf{entered}, infatti: 
+
+\begin{center}
+	 \textsf{UntilB = Inv([[sleep]]SUntil([[waked]]F, <<entered>>T));}
+\end{center}
+
+Allora \textbf{checkprop(Sys', UntilB)} ritorna \textbf{false}.
 \pagebreak
 \paragraph{Verifica comportamento del cliente nell'attesa di essere servito }\mbox{}
 
@@ -234,28 +234,29 @@ Il cliente aspetta, finché il barbiere non gli da il segnale di sedersi per il 
 	\textsf{UntilC = Inv(WUntil([[getHairCut1]]F, <<cutHair>>T) \\| WUntil([[getHairCut2]]F, <<cutHair>>T) \\| WUntil([[getHairCut3]]F, <<cutHair>>T));}
 \end{center}
 
-È sempre vero che il processo \textsf{Customer$_{i}$} non sa fare \textsf{getHairCut$_{i}$} finché un processo \textsf{Barber} può fare \textsf{cutHair}. La possibilità di poter fare \textsf{cutHair} la si ha solo se c'è stata una sincronizzazione. Si è aggiunta la clausola OR perché può accadere che nonostante si abbia la possibilità di poter fare \textsf{cutHair} non è detto che il processo \textsf{Customer$_{i}$} sa fare \textsf{getHairCut$_{i}$} perché a causa della mutua esclusione dopo la sincronizzazione al più solo uno sa fare l'azione. Quindi eseguendo \textbf{checkprop(Sys, UntilC)} si ottiene \textbf{true}, vale perciò la proprietà.
+È sempre vero che il processo \textsf{Customer$_{i}$} non sa fare \textsf{getHairCut$_{i}$} finché non divneta vero che il processo \textsf{Barber} può fare \textsf{cutHair}. La possibilità di poter fare \textsf{cutHair} la si ha solo se c'è stata una sincronizzazione. Si è aggiunta la clausola OR perché può accadere che nonostante si abbia la possibilità di poter fare \textsf{cutHair} non è detto che il processo \textsf{Customer$_{i}$} sa fare \textsf{getHairCut$_{i}$} perché a causa della mutua esclusione dopo la sincronizzazione, al più solo uno sa fare l'azione. Quindi eseguendo \textbf{checkprop(Sys, UntilC)} si ottiene \textbf{true}, vale perciò la proprietà.
 
 \paragraph{Fairness}\mbox{}
 
 Purtroppo la soluzione data al problema non garantisce una piena fairness, cioè può accadere che un processo \textsf{Customer$_{j}$} prenda per molte volte possesso del \textsf{Barber} lasciando gli altri processi \textsf{Customer$_{k\not=j}$} in attesa di un taglio. Vi è quindi solo garantita la possibilità che si possa ricevere il taglio.
-Per dimostrare ciò si aggiunge ad ogni processo \textsf{Customer$_{i}$} si aggiunge il canale \textsf{will$_{i}$}per esprimere la volontà di effettuare un taglio, quindi:
+Per dimostrare ciò si aggiunge ad ogni processo \textsf{Customer$_{i}$} il canale \textsf{will$_{i}$} per esprimere la volontà di effettuare un taglio dopo essersi seduto e per semplicità si tolgono i canali \textsf{enter$_{i}$} e \textsf{exit$_{i}$} (La mutua esclusione rimane garantita),quindi:
 
-\textsf{Customer1 = will.'enter.enter1.exit1.('incExit.C1 + 'balk.Customer1);}\\
+\textsf{C1 = will.semCustomer.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.}\\
+\textsf{'enter.'decExit.Customer1;}
 
 Sia la seguente formula:
 
 \begin{center}
-	\textsf{FairC = Inv(([will1] Pos(<<getHairCut1>>T)) \\\& ([will2] Pos(<<getHairCut2>>T)) \\\& ([will3] Pos(<<getHairCut3>>T))); }
+	\textsf{FairC = Inv([[will1]] Pos(<<getHairCut1>>T) \\\& [[[will2]] Pos(<<getHairCut2>>T) \\\& [[will3]] Pos(<<getHairCut3>>T)); }
 \end{center}
 
 Una volta espressa la volontà di eseguire un taglio esiste uno stato in cui è possibile effettuarlo. Quindi eseguendo \textbf{checkprop(Sys, FairC)} si ottiene \textbf{true}, esiste perciò uno stato in cui è possibile eseguire il taglio. Non è detto pero che venga eseguito questo, infatti:
 
 \begin{center}
-	\textsf{FairC2 = Inv(([will1] WeakEven(<<getHairCut1>>T)) \\\& ([will2] WeakEven(<<getHairCut2>>T)) \\\& ([will3] WeakEven(<<getHairCut3>>T)));}
+	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
 \end{center}
 
-È sempre vero che dopo aver espresso la volonta di eseguire un taglio attraverso \textsf{will$_{j}$} prima o poi il processo \textsf{Customer$_{j}$} lo riceverà. Ma per checkprop(Sys, FairC2) risulta essere \textbf{false}, e quindi vale ciò che si è detto precedentemente, non vale la fairness.
+È sempre vero che dopo aver espresso la volontà di eseguire un taglio attraverso \textsf{will$_{j}$} prima o poi il processo \textsf{Customer$_{j}$} lo riceverà. Ma per\textbf{ checkprop(Sys', FairC2)} risulta essere \textbf{false}, e quindi vale ciò che si è detto precedentemente, non vale la fairness.
 
 Vi è garantita pero che non ci sia la possibilità di attesa infinita per ogni processo \textsf{Customer$_{i}$}, infatti siano:
 \begin{center}
@@ -271,9 +272,43 @@ Attraverso \textbf{checkprop(Sys, WaitForeverWill)} si ottiene \textbf{false}, q
 
 Si può ragionare sul fatto che è possibile modificare il sistema in modo che sia garantita la fairness.
 
-Un modo soluzione diciamo "semplice" può essere quella di far terminare i processi\textsf{Customer$_{i}$} una volta effettuato un taglio, e quando sono terminati tutti ci sia un processo preposto a riattivarli tutti. Questo modifica garantisce che prima o poi tutti i processi \textsf{Customer$_{i}$} eseguano un taglio.
+Un modo soluzione diciamo "semplice" può essere quella di far terminare i processi\textsf{Customer$_{i}$} una volta effettuato un taglio, e quando sono terminati tutti, vi sia un processo preposto a riattivarli tutti. Questo modifica garantisce che prima o poi tutti i processi \textsf{Customer$_{i}$} eseguano un taglio.
 
-Una soluzione più raffinata può essere quella di impostare un ordine d'esecuzione tale da garantire che tutti eseguano un taglio, quindi si potrebbe realizzare una sorta di coda FIFO in modo tale da stabilire un ordine d'esecuzione dando a tutti i clienti un turno in cui verrà eseguito il taglio.
+Una soluzione migliore può essere quella di fermare i processi senza terminarli. Nello specifico si intende che quando un \textsf{Customer$_{j}$} riceve un taglio, per ricevere un nuovo taglio aspetta che tutti gli altri \textsf{Customer$_{k\in=j}$} ne ricevano almeno uno. Per fare ciò serve un gruppo di processi in grado di capire come procede l'esecuzione e eseguire le giuste azione per garantire la fairness.
 
+Quindi si aggiunge una nuova serie di processi che sono i seguenti:
+
+\textsf{Sreset = 'sleep1.Sreset1 + 'sleep2.Sreset2 + 'sleep3.Sreset3;}\\
+ \textsf{Sreset1 = 'sleep2.Sreset12-21 + 'sleep3.Sreset13-31;}\\
+ \textsf{Sreset12-21 = 'sleep3.Wreset;} \\
+ \textsf{Sreset13-31 = 'sleep2.Wreset; }\\
+ \textsf{Sreset2 = 'sleep1.Sreset12-21 + 'sleep3.Sreset23-32;}\\
+ \textsf{Sreset23-32 = 'sleep1.Wreset;} \\
+ \textsf{Sreset3 = 'sleep1.Sreset13-31 + 'sleep2.Sreset23-32;}\\
+
+
+ \textsf{Wreset = wakeUp1.Wreset23 + wakeUp2.Wreset13 + wakeUp3.Wreset12;}\\
+ \textsf{Wreset23 = wakeUp2.Wreset3 + wakeUp3.Wreset2;}\\
+ \textsf{Wreset13 = wakeUp1.Wreset3 + wakeUp3.Wreset1;}\\
+ \textsf{Wreset12 = wakeUp1.Wreset2 + wakeUp2.Wreset1;}\\
+ \textsf{Wreset1 =  wakeUp1.Sreset;}\\
+ \textsf{Wreset2 =  wakeUp2.Sreset;}\\
+ \textsf{Wreset3 =  wakeUp3.Sreset;}\\
+
+Mentre vengono aggiunti i canali ristretti \textsf{sleep$_{i}$} e \textsf{wakeUp$_{i}$} ai processi \textsf{Customer$_{i}$}, quindi:
+
+\textsf{C1 = will1.semCustomer.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep1.'wakeUp1.Customer1;}
+
+Quindi il funzionamento e il seguente:
+Il processo \textsf{Customer$_{j}$} una volta terminato il taglio di sincronizza con \textsf{Sreset} attraverso \textsf{sleep$_{j}$} e per continuare poi deve sincronizzarsi anche con il processo \textsf{Wreset} attraverso \textsf{wakeUp$_{j}$}, ma questo è possibile solo se tutti gli altri \textsf{Customer$_{k\in=j}$} hanno si sono sincronizzati con \textsf{Sreset} e quindi hanno ricevuto tutti lo stesso numero di tagli, allora a quel punto tutti i processi potranno ricevere un nuovo tagli sincronizzando si prima con \textsf{Wreset} e ricominciando l'esecuzione.
+Si sottolinea perciò che il processo \textsf{Sreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione che i processi \textsf{Customer$_{i}$} fanno dopo aver ricevuto il taglio cosi che una volta completa una sequenza di sincronizzazione si ha la garanzia che tutti hanno ricevuto un taglio ciascuno. Analogamente il processo \textsf{Wreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione per ricominciare l'esecuzione dei processi \textsf{Customer$_{i}$}.
+
+Si può dimostrare che la fairness vale infatti ora,
+
+\begin{center}
+	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
+\end{center}
+
+Con \textbf{checkprop(Sys', FairC2)} risulta essere vera.
 
 
