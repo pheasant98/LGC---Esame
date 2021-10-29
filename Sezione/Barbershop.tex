@@ -1,5 +1,5 @@
 \section{Barbershop}
-Il problema del Barbiere è formato da due tipi di processi, un processo barbiere che effettua tagli di barba/capelli a dei processi clienti, e un insieme di processi clienti che vogliono ricevere un taglio. Il negozio del barbiere prevede l'esistenza di una sala d'attesa con n-1 sedie, e la stanza del barbiere con una sedia dove viene effettuato il taglio, quindi in totale n sedie. Se non ci sono clienti che aspettano di essere serviti, il barbiere dorme. Se arriva un cliente nel negozio vi sono tre casi possibili; tutte le sedie sono occupate da altri clienti, e quindi il cliente se ne va dal negozio, oppure il barbiere è occupato e c'è almeno una sedia libera nella sala d'attesa, il cliente può sedersi ed aspettare che il barbiere si liberi ed effettui il taglio, infine se il barbiere sta dormendo, il barbiere si sveglierà e effettuerà il taglio al cliente.
+Il problema del Barbiere è formato da due tipi di processi, un processo barbiere che effettua tagli di barba/capelli a dei processi clienti, e un insieme di processi clienti che vogliono ricevere un taglio. Il negozio del barbiere prevede l'esistenza di una sala d'attesa con n-1 sedie, e la stanza del barbiere con una sedia dove viene effettuato il taglio, quindi in totale n sedie. Se non ci sono clienti che aspettano di essere serviti, il barbiere dorme. Se arriva un cliente nel negozio vi sono tre casi possibili; tutte le sedie sono occupate da altri clienti, e quindi il cliente se ne va dal negozio, oppure il barbiere è occupato e c'è almeno una sedia libera nella sala d'attesa, il cliente può sedersi ed aspettare che il barbiere si liberi ed effettui il taglio, infine se il barbiere sta dormendo, si sveglierà e effettuerà il taglio al cliente.
 
 É importante rispettare i seguenti vincoli:
 
@@ -18,7 +18,7 @@ Sia n = 2, quindi una sedia per la sala d'attesa e una per la barberia.
 
 Si vuole utilizzare un \textsf{mutex} per proteggere la sezione critica al cui interno vi è un contattore di clienti presenti nel negozio. Quindi il contattore per essere modificato si dovrà garantire la mutua esclusione. Quando un cliente entra nel negozio dovrà entrare nella sezione critica per controllare che il contattore sia uguale a n, se lo è allora esce dal negozio, se invece non lo è incrementa il contattore ed esce dalla sezione critica. Una volta incrementato il cliente segnala attraverso un semaforo \textsf{Customer} la sua presenza al barbiere e si mette in attesa nel semaforo \textsf{Barber} per attendere il servizio del barbiere.
 
-Una volta che il barbiere segnala la presa in carico del cliente sul semaforo \textsf{Barber}, viene effettuato il taglio e il cliente si sincronizza con il barbiere sui semafori \textsf{CustomerDone} e \textsf{BarberDone} per garantire che il taglio sia stato fatto, il barbiere poi può effettuare un taglio ad un altro cliente in attesa se c'è, altrimenti torna a dormire. Il cliente dopo il taglio entra di nuovo nella sezione critica per decrementare il contattore in modo tale da uscire dal negozio.
+Una volta che il barbiere segnala la presa in carico del cliente sul semaforo \textsf{Barber}, viene effettuato il taglio e il cliente si sincronizza con il barbiere sui semafori \textsf{CustomerDone} e \textsf{BarberDone} per garantire che il taglio sia stato fatto. Il barbiere successivamente può effettuare un taglio ad un altro cliente in attesa se c'è, altrimenti torna a dormire. Il cliente dopo il taglio entra di nuovo nella sezione critica per decrementare il contattore in modo tale da uscire dal negozio.
 
 Il barbiere nello specifico all'inizio rimane in attesa sul semaforo \textsf{Customer} aspettando l'arrivo di un cliente ( simula il fatto che stia dormendo), una volta svegliato, segnala sul semaforo \textsf{Barber} di essere pronto con il taglio e prendere in carico un cliente(il primo che si sincronizza con il segnale), effettua il taglio e infine si sincronizza con il cliente che ha ricevuto il servizio. Se ci sono altri clienti in attesa passa direttamente al nuovo taglio senza mettersi a dormire, invece se non c'è nessuno torna a dormire e si ferma sul semaforo \textsf{Customer}.
 
@@ -72,7 +72,7 @@ Di seguito si mostra un esempio del sistema con n = 2 e tre clienti.
 
 \subsubsection{Codifica Mutex e contattore clienti}
 
-Per codificare il contattore e il \textsl{mutex} si è deciso di utilizzare un unico processo, o meglio un insieme di processi che codificano il \textsf{mutex} e il contattore, perciò abbiamo: 
+Per codificare il contattore e il \textsf{mutex} si è deciso di utilizzare un unico processo, o meglio un insieme di processi che codificano il \textsf{mutex} e il contattore, perciò abbiamo: 
 
 \textsf{Count1 = enter.incExit.Count2;}
 
@@ -90,9 +90,9 @@ Codifica il contattore che non può essere più incrementato perché uguale a n 
 
 La codifica dei clienti avviene nel seguente modo:
 
-\textsf{Customer1 ='enter.enter1.exit1.('incExit.C1 + 'balk.Customer1);}\\
-\textsf{C1 = semCustomer.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.}\\
-\textsf{'enter.enter1.exit1.'decExit.Customer1;}
+\textsf{Customer$_{i}$ ='enter.enter$_{i}$.exit$_{i}$.('incExit.C$_{i}$ + 'balk.Customer$_{i}$);}\\
+\textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.}\\
+\textsf{'enter.enter$_{i}$.exit$_{i}$.'decExit.Customer$_{i}$;}
 
 Il cliente per poter controllare se può entrare si sincronizza sul canale \textsf{enter} rimando in attesa della possibilità di entrare nella sezione critica. Una volta entrato controlla se può incrementare oppure no il contattore, quindi sceglie se eseguire \textsf{incExit} o \textsf{back}, tale scelta dipende da cosa offre il processo \textsf{count}. Nel caso sia \textsf{CountB}, l'unica azione possibile per il cliente è eseguire \textsf{balk} che lo fa uscire dalla sezione critica e non lo fa entrare nel negozio. Nel caso invece sia \textsf{Count1} o \textsf{Count2} il cliente esegue \textsf{incExit} cosi che incrementi il contattore e esca dalla sezione critica. Successivamente si sincronizza con il barbiere, che nel caso in cui il barbiere sia libero passa a ricevere il taglio. Finito il taglio si sincronizza subito con il barbiere per poi entrare nella sezione critica in mutua esclusione e decrementare il contattore per simulare la sua uscita dal negozio.
 
@@ -100,7 +100,7 @@ Il cliente per poter controllare se può entrare si sincronizza sul canale \text
 
 La codifica del Barbiere avviene nel seguente modo:
 
-\textsf{Barber = 'semCustomer.semBarber.cutHair'semCustomerDone.semBarberDone.Barber;}
+\textsf{Barber = 'semCustomer.semBarber.cutHair.'semCustomerDone.semBarberDone.Barber;}
 
 Il barbiere rimane in attesa di un nuovo cliente da servire su \textsf{semCustomer} se non ci sono cliente in attesa. Una volta arrivato un cliente si sincronizza con esso ed esegue il taglio, successivamente si sincronizza con il cliente appena servito per garantire che sia avvenuto il taglio per poi tornare all'inizio della sua esecuzione per poter eseguire un nuovo cliente se c'é, altrimenti attende un nuovo cliente.
 
@@ -147,9 +147,9 @@ Nelle verifiche verranno usate le seguenti formule:
 	\item \textbf{Pos(P)} = \textsf{min(X. (P | <-> X));}\\
 	Esiste un stato in cui vale la proprietà P.
 	\item \textbf{WeakEven(P)} = \textsf{min(X. (P | <<eps>><-tau><<eps>>T \& [[eps]][-tau][[eps]] X )));}\\
-	Prima o poi l'esecuzione eseguirà un stato in cui vale P attraverso passi interni e esterni.
+	Prima o poi l'esecuzione eseguirà un stato in cui vale P oppure P vale subito.
 	\item \textbf{WUntil(P,Q)} = \textsf{max(X. Q | (P \& [-]X));}\\
-	Until in versione weak. Vale la proprietà P finché non diventa vera Q cioè l'esecuzione arriva un stato dove può vale Q.
+	Until in versione weak. Vale la proprietà P finché non diventa vera Q cioè l'esecuzione arriva un stato dove è possibile eseguire ciò che indica Q.
 	\item \textbf{SUntil(P,Q)} = \textsf{min(X. Q | (P \& <->T \& [-]X));}\\
 	Until in versione strong. Vale la proprietà P finché non diventa vera Q.
 \end{itemize}
@@ -170,7 +170,7 @@ Siano:
 
 \begin{center}
 	\textsf{TauLoop = max (X. <tau> X);}\\
-	\textsf{prop Livelock = Pos( TauLoop );}
+	\textsf{Livelock = Pos( TauLoop );}
 \end{center}
 
 Attreverso \textbf{checkprop(Sys, Livelock)} si ottiene \textbf{false}, quindi non vi è la presenza di Livelock.
@@ -186,17 +186,19 @@ L'accesso alla sezione critica che contiene il contattore avviene in mutua esclu
 ([[exit1]]F | [[exit3]]F));}
 \end{center}
 
-È sempre vero che al più solo uno dei tre processi è in grado di fare \textsf{exit$_{i}$}. Con il commando \textbf{checkprop(Sys, MutexC)} si ottiene \textbf{true}, quindi vale la mutua esclusione.
+È sempre vero che al più solo uno dei tre processi è in grado di fare \textsf{exit$_{i}$}.\\
+Con il commando \textbf{checkprop(Sys, MutexC)} si ottiene \textbf{true}, quindi vale la mutua esclusione.
 
 \paragraph{Mutua esclusione nell'esecuzione del taglio}\mbox{}
 
-Ogni cliente viene servito uno alla volta, quindi non e possibile che due clienti vengono serviti contemporaneamente dal barbiere ma al più solo uno. Si dimostra perciò la mutua esclusione nell'esecuzione del taglio.
+Ogni cliente viene servito uno alla volta, quindi non è possibile che due clienti vengono serviti contemporaneamente dal barbiere ma al più solo uno. Si dimostra perciò la mutua esclusione nell'esecuzione del taglio.
 
 \begin{center}
 	\textsf{MutexB = Inv(([[getHairCut1]]F | [[getHairCut2]]F) \& ([[getHairCut2]]F | [[getHairCut3]]F) \& ([[getHairCut1]]F | [[getHairCut3]]F));}
 \end{center}
 
-È sempre vero che al più solo uno dei tre processi è in grado di fare \textsf{getHairCut$_{i}$}. Con il commando \textbf{checkprop(Sys, MutexB)} si ottiene \textbf{true}, quindi vale la mutua esclusione.
+È sempre vero che al più solo uno dei tre processi è in grado di fare \textsf{getHairCut$_{i}$}.\\
+Con il commando \textbf{checkprop(Sys, MutexB)} si ottiene \textbf{true}, quindi vale la mutua esclusione.
 
 %\paragraph{Verifica comportamento del cliente che entra quando il negozio pieno}\mbox{}
 
@@ -206,8 +208,8 @@ Il barbiere aspetta, cioè dorme, finché non entra un cliente. Quindi a livello
 
 Per dimostrare tale proprietà si inseriscono nel sistema \textsf{Sys}, i canali \textsf{entered} in tutti i processi \textsf{C$_{i}$}, quindi:
 
-\textsf{C1 = semCustomer.entered.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.}\\
-\textsf{'enter.enter1.exit1.'decExit.Customer1;}
+\textsf{C$_{i}$ = semCustomer.entered.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.}\\
+\textsf{'enter.enter$_{i}$.exit$_{i}$.'decExit.Customer$_{i}$;}
 
 Mentre nel processo \textsf{Barber} si inserisce \textsf{sleep} e \textsf{waked}, quindi:
 
@@ -217,9 +219,9 @@ Mentre nel processo \textsf{Barber} si inserisce \textsf{sleep} e \textsf{waked}
 	\textsf{UntilB = Inv([[sleep]]WUntil([[waked]]F, <<entered>>T));}
 \end{center}
 
-È sempre vero che in qualunque modo venga eseguito [[sleep]] è vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché non diventa vero che un processo \textsf{Customer$_{i}$} può fare \textsf{entered}. La possibilità di poter fare \textsf{entered} la si ha solo se c'è stata una sincronizzazione, cioè il barbiere si è svegliato e il cliente è entrato e successivamente può segnalarlo. Quindi eseguendo \textbf{checkprop(Sys, UntilB)} si ottiene \textbf{true}, vale perciò la proprietà.
+È sempre vero che in qualunque modo venga eseguito \textsf{sleep} è vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché non diventa vero che un processo \textsf{Customer$_{i}$} può fare \textsf{entered}. La possibilità di poter fare \textsf{entered} la si ha solo se c'è stata una sincronizzazione, cioè il barbiere si è svegliato e il cliente è entrato e successivamente può segnalarlo. Quindi eseguendo \textbf{checkprop(Sys', UntilB)} si ottiene \textbf{true}, vale perciò la proprietà.
 
-Non sarebbe andata bene la versione con lo strong until perché non è sempre vero in qualunque modo venga eseguito [[sleep]] è vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché non diventa vero che un processo \textsf{Customer$_{i}$} esegue \textsf{entered}, infatti: 
+Non sarebbe andata bene la versione con lo strong until perché non è sempre vero in qualunque modo venga eseguito \textsf{sleep} è vero che il processo \textsf{Barber} non sa fare \textsf{waked} finché non diventa vero che un processo \textsf{Customer$_{i}$} esegue \textsf{entered}, infatti: 
 
 \begin{center}
 	 \textsf{UntilB = Inv([[sleep]]SUntil([[waked]]F, <<entered>>T));}
@@ -229,20 +231,20 @@ Allora \textbf{checkprop(Sys', UntilB)} ritorna \textbf{false}.
 \pagebreak
 \paragraph{Verifica comportamento del cliente nell'attesa di essere servito }\mbox{}
 
-Il cliente aspetta, finché il barbiere non gli da il segnale di sedersi per il taglio. Quindi a livello di codice CCS il processo \textsf{Customer$_{i}$} rimane fermo in \textsf{'semBarber} finché non si sincronizza con un processo \textsf{Barber} attraverso l'azione \textsf{semBarber}, dopo di che \textsf{Customer$_{i}$} può proseguire la sua esecuzione.
+Il cliente aspetta, finché il barbiere non invia il segnale di sedersi per il taglio. Quindi a livello di codice CCS il processo \textsf{Customer$_{i}$} rimane fermo in \textsf{'semBarber} finché non si sincronizza con un processo \textsf{Barber} attraverso l'azione \textsf{semBarber}, dopo di che \textsf{Customer$_{i}$} può proseguire la sua esecuzione.
 \begin{center}
 	\textsf{UntilC = Inv(WUntil([[getHairCut1]]F, <<cutHair>>T) \\| WUntil([[getHairCut2]]F, <<cutHair>>T) \\| WUntil([[getHairCut3]]F, <<cutHair>>T));}
 \end{center}
 
-È sempre vero che il processo \textsf{Customer$_{i}$} non sa fare \textsf{getHairCut$_{i}$} finché non diventa vero che il processo \textsf{Barber} può fare \textsf{cutHair}. La possibilità di poter fare \textsf{cutHair} la si ha solo se c'è stata una sincronizzazione. Si è aggiunta la clausola OR perché può accadere che nonostante si abbia la possibilità di poter fare \textsf{cutHair} non è detto che il processo \textsf{Customer$_{i}$} sa fare \textsf{getHairCut$_{i}$} perché a causa della mutua esclusione dopo la sincronizzazione, al più solo uno sa fare l'azione. Quindi eseguendo \textbf{checkprop(Sys, UntilC)} si ottiene \textbf{true}, vale perciò la proprietà.
+È sempre vero che il processo \textsf{Customer$_{i}$} non sa fare \textsf{getHairCut$_{i}$} finché non diventa vero che il processo \textsf{Barber} può fare \textsf{cutHair}. La possibilità di poter fare \textsf{cutHair} la si ha solo se c'è stata una sincronizzazione. Si è aggiunta la clausola OR perché può accadere che nonostante si abbia la possibilità di poter fare \textsf{cutHair} non è detto che il processo \textsf{Customer$_{i}$} sa fare \textsf{getHairCut$_{i}$} perché a causa della mutua esclusione dopo la sincronizzazione, al più solo uno sa fare l'azione. Quindi eseguendo \textbf{checkprop(Sys', UntilC)} si ottiene \textbf{true}, vale perciò la proprietà.
 
 \paragraph{Fairness}\mbox{}
 
 Purtroppo la soluzione data al problema non garantisce una piena fairness, cioè può accadere che un processo \textsf{Customer$_{j}$} prenda per molte volte possesso del \textsf{Barber} lasciando gli altri processi \textsf{Customer$_{k\not=j}$} in attesa di un taglio. Vi è quindi solo garantita la possibilità che si possa ricevere il taglio.
 Per dimostrare ciò si aggiunge ad ogni processo \textsf{Customer$_{i}$} il canale \textsf{will$_{i}$} per esprimere la volontà di effettuare un taglio dopo essersi seduto e per semplicità si tolgono i canali \textsf{enter$_{i}$} e \textsf{exit$_{i}$} (La mutua esclusione rimane garantita),quindi:
 
-\textsf{C1 = will1.semCustomer.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.}\\
-\textsf{'enter.'decExit.Customer1;}
+\textsf{C$_{i}$ = will$_{i}$.semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.}\\
+\textsf{'enter.'decExit.Customer$_{i}$;}
 
 Sia la seguente formula:
 
@@ -250,7 +252,7 @@ Sia la seguente formula:
 	\textsf{FairC = Inv([[will1]] Pos(<<getHairCut1>>T) \\\& [[[will2]] Pos(<<getHairCut2>>T) \\\& [[will3]] Pos(<<getHairCut3>>T)); }
 \end{center}
 
-Una volta espressa la volontà di eseguire un taglio esiste uno stato in cui è possibile effettuarlo. Quindi eseguendo \textbf{checkprop(Sys, FairC)} si ottiene \textbf{true}, esiste perciò uno stato in cui è possibile eseguire il taglio. Non è detto pero che venga eseguito questo, infatti:
+Una volta espressa la volontà di eseguire un taglio esiste uno stato in cui è possibile effettuarlo. Quindi eseguendo \textbf{checkprop(Sys', FairC)} si ottiene \textbf{true}, esiste perciò uno stato in cui è possibile eseguire il taglio. Non è detto pero che venga eseguito questo, infatti:
 
 \begin{center}
 	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
@@ -272,9 +274,9 @@ Attraverso \textbf{checkprop(Sys, WaitForeverWill)} si ottiene \textbf{false}, q
 
 Si può ragionare sul fatto che è possibile modificare il sistema in modo che sia garantita la fairness.
 
-Una soluzione diciamo "semplice" può essere quella di far terminare i processi\textsf{Customer$_{i}$} una volta effettuato un taglio e quando sono terminati tutti, vi sia un processo preposto a riattivarli tutti. Questo modifica garantisce che prima o poi tutti i processi \textsf{Customer$_{i}$} eseguano un taglio.
+Una soluzione diciamo "semplice" può essere quella di far terminare i processi \textsf{Customer$_{i}$} una volta effettuato un taglio e quando sono terminati tutti, vi sia un processo preposto a riattivarli tutti. Questo modifica garantisce che prima o poi tutti i processi \textsf{Customer$_{i}$} eseguano un taglio.
 
-Una soluzione migliore può essere quella di fermare i processi senza terminarli. Nello specifico si intende che quando un \textsf{Customer$_{j}$} riceve un taglio, per ricevere un nuovo taglio aspetta che tutti gli altri \textsf{Customer$_{k\in=j}$} ne ricevano almeno uno. Serve perciò un gruppo di processi in grado di capire come procede l'esecuzione e eseguire le giuste azione per garantire la fairness.
+Una soluzione migliore può essere quella di fermare i processi senza terminarli. Nello specifico si intende che quando un \textsf{Customer$_{j}$} riceve un taglio, per ricevere un nuovo taglio aspetta che tutti gli altri \textsf{Customer$_{k\not=j}$} ne ricevano almeno uno. Serve perciò un gruppo di processi in grado di capire come procede l'esecuzione e eseguire le giuste azione per garantire la fairness.
 
 Quindi si aggiunge una nuova serie di processi che sono i seguenti:
 
@@ -297,17 +299,17 @@ Quindi si aggiunge una nuova serie di processi che sono i seguenti:
 
 Mentre vengono aggiunti i canali ristretti \textsf{sleep$_{i}$} e \textsf{wakeUp$_{i}$} ai processi \textsf{Customer$_{i}$}, quindi:
 
-\textsf{C1 = will1.semCustomer.'semBarber.getHairCut1.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep1.'wakeUp1.Customer1;}
+\textsf{C$_{i}$ = will$_{i}$.semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep$_{i}$.'wakeUp1.Customer$_{i}$;}
 
 Il sistema diventa:
 
 \textsf{Sys = (Customer1|Customer2|Customer3|Sreset|Count1|Barber) \textbackslash L;}
 
 Quindi il funzionamento è il seguente:
-Il processo \textsf{Customer$_{j}$} una volta terminato il taglio di sincronizza con \textsf{Sreset} attraverso \textsf{sleep$_{j}$} e per continuare poi deve sincronizzarsi anche con il processo \textsf{Wreset} attraverso \textsf{wakeUp$_{j}$}, ma questo è possibile solo se tutti gli altri \textsf{Customer$_{k\in=j}$} si sono sincronizzati con \textsf{Sreset} e quindi hanno ricevuto tutti lo stesso numero di tagli, allora a quel punto tutti i processi potranno ricevere un nuovo tagli sincronizzandosi prima con \textsf{Wreset} e ricominciando l'esecuzione.
+Il processo \textsf{Customer$_{j}$} una volta terminato il taglio di sincronizza con \textsf{Sreset} attraverso \textsf{sleep$_{j}$} e per continuare poi deve sincronizzarsi anche con il processo \textsf{Wreset} attraverso \textsf{wakeUp$_{j}$}, ma questo è possibile solo se tutti gli altri \textsf{Customer$_{k\not=j}$} si sono sincronizzati con \textsf{Sreset} e quindi hanno ricevuto tutti lo stesso numero di tagli, allora a quel punto tutti i processi potranno ricevere un nuovo taglio sincronizzandosi prima con \textsf{Wreset} e ricominciando l'esecuzione.\\
 Si sottolinea perciò che il processo \textsf{Sreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione che i processi \textsf{Customer$_{i}$} fanno dopo aver ricevuto il taglio cosi che una volta completa una sequenza di sincronizzazione si ha la garanzia che tutti hanno ricevuto un taglio ciascuno. Analogamente il processo \textsf{Wreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione per ricominciare l'esecuzione dei processi \textsf{Customer$_{i}$}.
 
-Si può dimostrare che la fairness vale infatti ora,
+Si può dimostrare che una volta che il \textsf{Customer$_{j}$} ha espresso la volta di ricevere un taglio con \textsf{will$_{j}$} ed essersi seduto si garantirà la fairness, infatti ora
 
 \begin{center}
 	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
@@ -315,4 +317,30 @@ Si può dimostrare che la fairness vale infatti ora,
 
 Con \textbf{checkprop(Sys', FairC2)} risulta essere vera.
 
+Purtroppo pero la fairness vale quando i \textsf{Customer$_{i}$} si sono seduti e non prima, infatti può accedere che un \textsf{Customer$_{j}$} voglia ricevere un taglio ma non riuscire mai a sedersi perché i posti sono tutti occupati e quindi eseguire sempre il ramo \textsf{balk} tenendo ferme le altre esecuzioni ad occupare i posti. Infatti spostando il canale \textsf{will$_{i}$} da dove si indicato precedentemente, all'inizio del processo \textsf{Customer$_{i}$}, per indicare la volontà di ricevere un taglio, quindi: 
 
+\textsf{Customer$_{i}$ = will$_{i}$.'enter.('incExit.C$_{i}$ + 'balk.Customer$_{i}$);}\\
+\textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep$_{i}$.'wakeUp$_{i}$.Customer$_{i}$;}
+
+Perciò
+
+\begin{center}
+	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
+\end{center}
+
+Con \textbf{checkprop(Sys', FairC2)} risulta essere falsa.
+
+Quindi una soluzione adottabile per ottenere un fairness per tutto il sistema è quella di bloccare il processo \textsf{Customer$_{j}$} che entra, non trova posto e quindi si sincronizza su \textsf{balk}. Una volta bloccato esso viene sbloccato solo quando un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio. Quindi viene aggiunto il canale ristretto \textsf{balkWakeUp}. Si ha la seguente modifica del processo \textsf{Customer$_{i}$}
+
+\textsf{Customer$_{i}$ = will$_{i}$.'enter.enter$_{i}$.exit$_{i}$.('incExit.C$_{i}$ + 'balk.balkWakeUp.Customer$_{i}$);}\\
+\textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.enter$_{i}$.exit$_{i}$.'decExi$_{i}$.sleep$_{i}$.('balkWakeUp.'wakeUp$_{i}$.Customer$_{i}$ + 'wakeUp$_{i}$.Customer$_{i}$);}
+
+Quindi una volta che un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio, se c'è un processo \textsf{Customer$_{j}$} bloccato, lo sblocca sincronizzandosi con lui su \textsf{balkWakeUp} e successivamente si sincronizza su \textsf{wakeUp$_{k}$}, altrimenti si sincronizza solo su \textsf{wakeUp$_{k}$}.
+
+Con questa modifica ora 
+
+\begin{center}
+	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
+\end{center}
+
+Con \textbf{checkprop(Sys', FairC2)} risulta essere vera, quindi la fairness viene supportata dall'intero sistema.

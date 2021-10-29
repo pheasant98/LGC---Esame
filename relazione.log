@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  29 OCT 2021 01:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  30 OCT 2021 01:01
 entering extended mode
 **./relazione.tex
 (relazione.tex
@@ -2119,18 +2119,18 @@ Overfull \hbox (3.66777pt too wide) in paragraph at lines 141--142
  []
 
 [22]
-Overfull \hbox (34.89476pt too wide) in paragraph at lines 214--215
+Overfull \hbox (34.89476pt too wide) in paragraph at lines 216--217
 []\T1/lmss/m/n/10.95 Barber = sleep.'semCustomer.waked.semBarber.cutHair.'semCu
 stomerDone.semBarberDone.Barber; 
  []
 
 [23] [24]
-Underfull \hbox (badness 10000) in paragraph at lines 281--288
+Underfull \hbox (badness 10000) in paragraph at lines 283--290
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 290--297
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
 
  []
 
@@ -2145,11 +2145,11 @@ Package rerunfilecheck Info: File `relazione.out' has not changed.
 (rerunfilecheck)             Checksum: EBBE1CC4C031AC8B57A2BD4F15039232;2955.
  ) 
 Here is how much of TeX's memory you used:
- 23064 strings out of 492484
- 419808 string characters out of 3121601
+ 23062 strings out of 492484
+ 419782 string characters out of 3121601
  503892 words of memory out of 3000000
- 26769 multiletter control sequences out of 15000+200000
- 60225 words of font info for 47 fonts, out of 3000000 for 9000
+ 26768 multiletter control sequences out of 15000+200000
+ 57200 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,14n,98p,1200b,673s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/feder/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
@@ -2170,14 +2170,13 @@ MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/feder/AppData/Local/Progra
 ms/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/feder/AppData/Local/Prog
 rams/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/feder/AppData/Local/Pr
 ograms/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/feder/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmro10.pfb><C:/Users/feder/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss10.pfb><C:/Users/feder/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/feder/
-AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/fed
-er/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on relazione.pdf (27 pages, 531665 bytes).
+l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss10.pfb><C:/Users/feder/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/feder/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/feder/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
+Output written on relazione.pdf (27 pages, 508181 bytes).
 PDF statistics:
- 434 PDF objects out of 1000 (max. 8388607)
+ 430 PDF objects out of 1000 (max. 8388607)
  72 named destinations out of 1000 (max. 500000)
  316 words of extra memory for PDF output out of 10000 (max. 10000000)
 
