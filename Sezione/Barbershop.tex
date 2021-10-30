@@ -108,8 +108,8 @@ Il barbiere rimane in attesa di un nuovo cliente da servire su \textsf{semCustom
 
 L'intero sistema viene codificato nel seguente modo:
 
-\textsf{Sys = (Customer1|Customer2|Customer3|Count1|Barber) \textbackslash L;}\\
-\textsf{set L = \{ enter, incExit, decExit, balk, semCustomer, semCustomerDone, semBarber, semBarberDone\};}
+\textsf{set L = \{ enter, incExit, decExit, balk, semCustomer, semCustomerDone, semBarber,\\ semBarberDone\};}\\
+\textsf{Sys = (Customer1|Customer2|Customer3|Count1|Barber) \textbackslash L;}
 
 Il sistema viene rappresentato attraverso una composizione parallela dei processi \textsf{Customer, Barber e Count1}. Tutti i canali vengono ristretti per permettere la sincronizzazione dei processi, esclusi \textsf{cutHair, getHairCut$_{i}$, enter$_{i}$, exit$_{i}$} usati per mostrare un comportamento all'esterno.
 
@@ -260,17 +260,18 @@ Una volta espressa la volontà di eseguire un taglio esiste uno stato in cui è 
 
 È sempre vero che dopo aver espresso la volontà di eseguire un taglio attraverso \textsf{will$_{j}$} prima o poi il processo \textsf{Customer$_{j}$} lo riceverà. Ma per\textbf{ checkprop(Sys', FairC2)} risulta essere \textbf{false}, e quindi vale ciò che si è detto precedentemente, non vale la fairness.
 
-Vi è garantita pero che non ci sia la possibilità di attesa infinita per ogni processo \textsf{Customer$_{i}$}, infatti siano:
+
+A dimostrazione di cioè vi è la possibilità che ogni processo \textsf{Customer$_{i}$} non riceva mai il taglio nonostante avesse eseguito il canale \textsf{will$_{i}$} per esprimere la volontà di ottenere un taglio, infatti siano:\\
 \begin{center}
-\textsf{WaitForever1 = max (X. <<getHairCut1>> X);}\\
-\textsf{WaitForever2 = max (X. <<getHairCut2>> X);}\\
-\textsf{WaitForever3 = max (X. <<getHairCut3>> X);}\\\mbox{}
-
-
-\textsf{WaitForeverWill = (Pos(<<will1>> WaitForever1) | (Pos(<<will2>> WaitForever2)) | (Pos(<<will3>> WaitForever3)) );}
+	\textsf{WaitForever1 = max (X. <<-getHairCut1>> X);}\\
+	\textsf{WaitForever2 = max (X. <<-getHairCut2>> X);}\\
+	\textsf{WaitForever3 = max (X. <<-getHairCut3>> X);}\\\mbox{}
+	
+	
+	\textsf{WaitForeverWill = Pos(<<will1>> WaitForever1 \& Pos(<<will2>> WaitForever2) \& Pos(<<will3>> WaitForever3) );}
 \end{center}
 
-Attraverso \textbf{checkprop(Sys, WaitForeverWill)} si ottiene \textbf{false}, quindi non vi è la possibilità di avere attesa infinita nel ricevere il taglio.
+Attraverso \textbf{checkprop(Sys, WaitForeverWill)} si ottiene \textbf{true}, quindi vi è la possibilità di avere attesa infinita nel ricevere il taglio.
 
 Si può ragionare sul fatto che è possibile modificare il sistema in modo che sia garantita la fairness.
 
@@ -299,7 +300,7 @@ Quindi si aggiunge una nuova serie di processi che sono i seguenti:
 
 Mentre vengono aggiunti i canali ristretti \textsf{sleep$_{i}$} e \textsf{wakeUp$_{i}$} ai processi \textsf{Customer$_{i}$}, quindi:
 
-\textsf{C$_{i}$ = will$_{i}$.semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep$_{i}$.'wakeUp1.Customer$_{i}$;}
+\textsf{C$_{i}$ = will$_{i}$.semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep$_{i}$.'wakeUp$_{i}$.Customer$_{i}$;}
 
 Il sistema diventa:
 
@@ -333,7 +334,7 @@ Con \textbf{checkprop(Sys', FairC2)} risulta essere falsa.
 Una soluzione adottabile per ottenere una fairness per tutto il sistema è quella di bloccare il processo \textsf{Customer$_{j}$} che entra, non trova posto e quindi si sincronizza su \textsf{balk}. Una volta bloccato esso viene sbloccato solo quando un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio. Quindi viene aggiunto il canale ristretto \textsf{balkWakeUp}. Si ha la seguente modifica del processo \textsf{Customer$_{i}$}
 
 \textsf{Customer$_{i}$ = will$_{i}$.'enter.enter$_{i}$.exit$_{i}$.('incExit.C$_{i}$ + 'balk.balkWakeUp.Customer$_{i}$);}\\
-\textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.enter$_{i}$.exit$_{i}$.'decExi$_{i}$.sleep$_{i}$.('balkWakeUp.'wakeUp$_{i}$.Customer$_{i}$ + 'wakeUp$_{i}$.Customer$_{i}$);}
+\textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.enter$_{i}$.exit$_{i}$.'decExit$_{i}$.sleep$_{i}$.('balkWakeUp.'wakeUp$_{i}$.Customer$_{i}$ + 'wakeUp$_{i}$.Customer$_{i}$);}
 
 Quindi una volta che un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio, se c'è un processo \textsf{Customer$_{j}$} bloccato, lo sblocca sincronizzandosi con lui su \textsf{balkWakeUp} e successivamente si sincronizza su \textsf{wakeUp$_{k}$}, altrimenti si sincronizza solo su \textsf{wakeUp$_{k}$}.
 
@@ -343,6 +344,6 @@ Con questa modifica ora
 	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
 \end{center}
 
-Con \textbf{checkprop(Sys', FairC2)} risulta essere vera, quindi la fairness viene supportata dall'intero sistema. \\
+Con \textbf{checkprop(Sys', FairC2)} risulta essere vera, e inoltre \textbf{checkprop(Sys, WaitForeverWill)} restituisce \textbf{false}. Quindi la fairness viene supportata dall'intero sistema. \\
 
 \textbf{Nota a margine:} L'utilizzo del canale \textsf{will$_{i}$} per dimostrare che vi è la fairness, risulta essere inutile dopo le ultime modifiche. Viene comunque utilizzato nella dimostrazione per mostrare cosa hanno prodotto le modifiche rispetto a prima.
