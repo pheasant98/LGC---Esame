@@ -241,7 +241,7 @@ Il cliente aspetta, finché il barbiere non invia il segnale di sedersi per il t
 \paragraph{Fairness}\mbox{}
 
 Purtroppo la soluzione data al problema non garantisce una piena fairness, cioè può accadere che un processo \textsf{Customer$_{j}$} prenda per molte volte possesso del \textsf{Barber} lasciando gli altri processi \textsf{Customer$_{k\not=j}$} in attesa di un taglio. Vi è quindi solo garantita la possibilità che si possa ricevere il taglio.
-Per dimostrare ciò si aggiunge ad ogni processo \textsf{Customer$_{i}$} il canale \textsf{will$_{i}$} per esprimere la volontà di effettuare un taglio dopo essersi seduto e per semplicità si tolgono i canali \textsf{enter$_{i}$} e \textsf{exit$_{i}$} (La mutua esclusione rimane garantita),quindi:
+Per dimostrare ciò si aggiunge ad ogni processo \textsf{Customer$_{i}$} il canale \textsf{will$_{i}$} per esprimere la volontà di effettuare un taglio dopo essersi seduto e per semplicità si tolgono i canali \textsf{enter$_{i}$} e \textsf{exit$_{i}$} (La mutua esclusione rimane garantita), quindi:
 
 \textsf{C$_{i}$ = will$_{i}$.semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.}\\
 \textsf{'enter.'decExit.Customer$_{i}$;}
@@ -307,7 +307,7 @@ Il sistema diventa:
 
 Quindi il funzionamento è il seguente:
 Il processo \textsf{Customer$_{j}$} una volta terminato il taglio di sincronizza con \textsf{Sreset} attraverso \textsf{sleep$_{j}$} e per continuare poi deve sincronizzarsi anche con il processo \textsf{Wreset} attraverso \textsf{wakeUp$_{j}$}, ma questo è possibile solo se tutti gli altri \textsf{Customer$_{k\not=j}$} si sono sincronizzati con \textsf{Sreset} e quindi hanno ricevuto tutti lo stesso numero di tagli, allora a quel punto tutti i processi potranno ricevere un nuovo taglio sincronizzandosi prima con \textsf{Wreset} e ricominciando l'esecuzione.\\
-Si sottolinea perciò che il processo \textsf{Sreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione che i processi \textsf{Customer$_{i}$} fanno dopo aver ricevuto il taglio cosi che una volta completa una sequenza di sincronizzazione si ha la garanzia che tutti hanno ricevuto un taglio ciascuno. Analogamente il processo \textsf{Wreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione per ricominciare l'esecuzione dei processi \textsf{Customer$_{i}$}.
+Si sottolinea perciò che il processo \textsf{Sreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione che i processi \textsf{Customer$_{i}$} possono eseguire dopo aver ricevuto il taglio cosi che una volta completa una sequenza di sincronizzazione si ha la garanzia che tutti hanno ricevuto un taglio ciascuno. Analogamente il processo \textsf{Wreset} e tutti i suoi sotto processi contiene tutte le possibili sequenze di sincronizzazione per ricominciare l'esecuzione dei processi \textsf{Customer$_{i}$}.
 
 Si può dimostrare che una volta che il \textsf{Customer$_{j}$} ha espresso la volta di ricevere un taglio con \textsf{will$_{j}$} ed essersi seduto si garantirà la fairness, infatti ora
 
@@ -317,7 +317,7 @@ Si può dimostrare che una volta che il \textsf{Customer$_{j}$} ha espresso la v
 
 Con \textbf{checkprop(Sys', FairC2)} risulta essere vera.
 
-Purtroppo pero la fairness vale quando i \textsf{Customer$_{i}$} si sono seduti e non prima, infatti può accedere che un \textsf{Customer$_{j}$} voglia ricevere un taglio ma non riuscire mai a sedersi perché i posti sono tutti occupati e quindi eseguire sempre il ramo \textsf{balk} tenendo ferme le altre esecuzioni ad occupare i posti. Infatti spostando il canale \textsf{will$_{i}$} da dove si indicato precedentemente, all'inizio del processo \textsf{Customer$_{i}$}, per indicare la volontà di ricevere un taglio, quindi: 
+Purtroppo pero la fairness vale quando i \textsf{Customer$_{i}$} si sono seduti e non prima, infatti può accedere che un \textsf{Customer$_{j}$} voglia ricevere un taglio ma non riuscire mai a sedersi perché i posti sono tutti occupati e quindi eseguire sempre il ramo \textsf{balk} tenendo ferme le altre esecuzioni ad occupare i posti. Infatti spostando il canale \textsf{will$_{i}$} da dove si era indicato precedentemente, all'inizio del processo \textsf{Customer$_{i}$}, per indicare la volontà di ricevere un taglio, quindi: 
 
 \textsf{Customer$_{i}$ = will$_{i}$.'enter.('incExit.C$_{i}$ + 'balk.Customer$_{i}$);}\\
 \textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.'decExit.sleep$_{i}$.'wakeUp$_{i}$.Customer$_{i}$;}
@@ -330,7 +330,7 @@ Perciò
 
 Con \textbf{checkprop(Sys', FairC2)} risulta essere falsa.
 
-Quindi una soluzione adottabile per ottenere un fairness per tutto il sistema è quella di bloccare il processo \textsf{Customer$_{j}$} che entra, non trova posto e quindi si sincronizza su \textsf{balk}. Una volta bloccato esso viene sbloccato solo quando un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio. Quindi viene aggiunto il canale ristretto \textsf{balkWakeUp}. Si ha la seguente modifica del processo \textsf{Customer$_{i}$}
+Una soluzione adottabile per ottenere una fairness per tutto il sistema è quella di bloccare il processo \textsf{Customer$_{j}$} che entra, non trova posto e quindi si sincronizza su \textsf{balk}. Una volta bloccato esso viene sbloccato solo quando un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio. Quindi viene aggiunto il canale ristretto \textsf{balkWakeUp}. Si ha la seguente modifica del processo \textsf{Customer$_{i}$}
 
 \textsf{Customer$_{i}$ = will$_{i}$.'enter.enter$_{i}$.exit$_{i}$.('incExit.C$_{i}$ + 'balk.balkWakeUp.Customer$_{i}$);}\\
 \textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.enter$_{i}$.exit$_{i}$.'decExi$_{i}$.sleep$_{i}$.('balkWakeUp.'wakeUp$_{i}$.Customer$_{i}$ + 'wakeUp$_{i}$.Customer$_{i}$);}
@@ -343,4 +343,6 @@ Con questa modifica ora
 	\textsf{FairC2 = Inv([[will1]]WeakEven(<<getHairCut1>>T) \\\& [[will2]]WeakEven(<<getHairCut2>>T)) \\\& [[will3]]WeakEven(<<getHairCut3>>T)));}
 \end{center}
 
-Con \textbf{checkprop(Sys', FairC2)} risulta essere vera, quindi la fairness viene supportata dall'intero sistema.
+Con \textbf{checkprop(Sys', FairC2)} risulta essere vera, quindi la fairness viene supportata dall'intero sistema. \\
+
+\textbf{Nota a margine:} L'utilizzo del canale \textsf{will$_{i}$} per dimostrare che vi è la fairness, risulta essere inutile dopo le ultime modifiche. Viene comunque utilizzato nella dimostrazione per mostrare cosa hanno prodotto le modifiche rispetto a prima.
