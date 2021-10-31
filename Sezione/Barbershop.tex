@@ -268,7 +268,7 @@ A dimostrazione di cioè vi è la possibilità che ogni processo \textsf{Custome
 	\textsf{WaitForever3 = max (X. <<-getHairCut3>> X);}\\\mbox{}
 	
 	
-	\textsf{WaitForeverWill = Pos(<<will1>> WaitForever1 \& Pos(<<will2>> WaitForever2) \& Pos(<<will3>> WaitForever3) );}
+	\textsf{WaitForeverWill = Pos(<<will1>> WaitForever1) \& Pos(<<will2>> WaitForever2) \& Pos(<<will3>> WaitForever3);}
 \end{center}
 
 Attraverso \textbf{checkprop(Sys, WaitForeverWill)} si ottiene \textbf{true}, quindi vi è la possibilità di avere attesa infinita nel ricevere il taglio.
