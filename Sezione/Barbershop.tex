@@ -331,7 +331,7 @@ Perciò
 
 Con \textbf{checkprop(Sys', FairC2)} risulta essere falsa.
 
-Una soluzione adottabile per ottenere una fairness per tutto il sistema è blo\dfrac{c}{denominatore}care il processo \textsf{Customer$_{j}$} che entra, non trova posto e quindi si sincronizza su \textsf{balk}. Una volta bloccato, esso viene sbloccato solo quando un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio e quindi viene aggiunto il canale ristretto \textsf{balkWakeUp}. Si ha la seguente modifica del processo \textsf{Customer$_{i}$}
+Una soluzione adottabile per ottenere una fairness per tutto il sistema è bloccare il processo \textsf{Customer$_{j}$} che entra, non trova posto e quindi si sincronizza su \textsf{balk}. Una volta bloccato, esso viene sbloccato solo quando un processo \textsf{Customer$_{k\not=j}$} ha terminato il suo taglio e quindi viene aggiunto il canale ristretto \textsf{balkWakeUp}. Si ha la seguente modifica del processo \textsf{Customer$_{i}$}
 
 \textsf{Customer$_{i}$ = will$_{i}$.'enter.enter$_{i}$.exit$_{i}$.('incExit.C$_{i}$ + 'balk.balkWakeUp.Customer$_{i}$);}\\
 \textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.\\'enter.enter$_{i}$.exit$_{i}$.'decExit$_{i}$.sleep$_{i}$.('balkWakeUp.'wakeUp$_{i}$.Customer$_{i}$ + 'wakeUp$_{i}$.Customer$_{i}$);}

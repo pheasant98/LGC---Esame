@@ -45,9 +45,10 @@ Per induzione su |t|:
 Allora t = $\varepsilon \in$ $ \alpha$.\tr{P}
 \\
 
+\pagebreak
 \textbf{Caso Induttivo |t| = n + 1}
 
-t ha una prima interazione seguita poi dalla traccia t'. Sappiamo che $\alpha.$ P $\overset{\alpha}\rightarrow $ P $\overset{t'}\rightarrow$, ovvero $\alpha$.P sa fare $\alpha$ grazie alla regola del prefisso che ne permette la transizione.
+t ha una prima interazione seguita poi dalla traccia t'. Sappiamo che $\alpha.$P $\overset{\alpha}\rightarrow $ P $\overset{t'}\rightarrow$, ovvero $\alpha$.P sa fare $\alpha$ grazie alla regola del prefisso che ne permette la transizione.
 
 	$\dfrac{}{\alpha.P \overset{\alpha}\rightarrow P\overset{t'}\rightarrow}$ \textit{ACT} \\
 	
@@ -149,7 +150,7 @@ Quindi si definisce la seguente funzione $C$ che date due traccie ne esegue la l
 	\begin{cases}
 	max(x,y) &  $ se $ a = \varepsilon $ OR $ b = \varepsilon\\
 	\alpha_{1}C(a', \alpha_{2}b')\bigcup\alpha_{2}C(\alpha_{1}a', b') & $ se $ a = \alpha_{1}a' $ AND $ b = \alpha_{2}b'\\
-	\tau C(x',y') & $ se $ a = \alpha a' $ AND $ b = \Overline[1pt]{\alpha} b'\\
+	\tau C(a',b') & $ se $ a = \alpha a' $ AND $ b = \Overline[1pt]{\alpha} b'\\
 	\end{cases}
 \]
 
@@ -160,7 +161,7 @@ Si procede con la dimostrazione \tr{P|R} = \tr{P,R}.\\
 $(\subseteq)$ 
 \\
 
-Sia t $\in$ \tr{P|R}  $\Rightarrow$  t $\in$ (P,R).\\
+Sia t $\in$ \tr{P|R}  $\Rightarrow$  t $\in$ \tr{P,R}.\\
 Ovvero la funzione $C$ sa eseguire la traccia t.
 Per induzione su |t|:\\
 
@@ -233,19 +234,19 @@ t = $\varepsilon$, allora $\varepsilon \in$ \tr{P | R} per definizione.\\
 t ha una prima interazione $\alpha_{1}$ seguita poi dalla traccia t', ovvero t = $\alpha_{1}$t'. Si ricorda inoltre che esiste una a $\in$ \tr{P}, b $\in$ \tr{R}, tale che t $\in$ $C$(a,b). Ci sono perciò tre possibili $\alpha_{1}$:
 
 \begin{itemize}
-	\item $\alpha_{1}$ $\in$ \tr{P}, si ha quindi una sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{a'}\rightarrow$ con a = $\alpha_{1}$a' con a'$\in$ \tr{P}. Posso perciò applicare PAR-L:\\
+	\item $\alpha_{1}$ $\in$ \tr{P}, si ha quindi una sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{a'}\rightarrow$ con a = $\alpha_{1}$a' con a'$\in$ \tr{P'}. Posso perciò applicare PAR-L:\\
 	
 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P'}{P|R \overset{\alpha_{1}}\rightarrow P'|R\overset{a'}\rightarrow}$ \textit{PAR-L} \\
 	
 	Dall'applicazione della regola PAR-L si ottiene che P|R $\overset{\alpha_{1}}\rightarrow $ P'|R $\overset{a'}\rightarrow$. Si deduce che $\alpha_{1}$ $\in$ \tr{P|R}, |t'| = n  per ipotesi induttiva t' $\in$ \tr{P'|R}, allora (P|R) sa fare t quindi t = $\alpha_{1}$t' $\in$ \tr{P|R}.  \\
 	
-	\item $\alpha_{1}$ $\in$ \tr{R}, si ha quindi una sequenza di transizione R $\overset{\alpha_{1}}\rightarrow$ R' $\overset{b'}\rightarrow$ con b = $\alpha_{1}$b' con b'$\in$ \tr{R}. Posso perciò applicare PAR-R:\\
+	\item $\alpha_{1}$ $\in$ \tr{R}, si ha quindi una sequenza di transizione R $\overset{\alpha_{1}}\rightarrow$ R' $\overset{b'}\rightarrow$ con b = $\alpha_{1}$b' con b'$\in$ \tr{R'}. Posso perciò applicare PAR-R:\\
 	
 	$\dfrac{R \overset{\alpha_{1}}\rightarrow R'}{P|R \overset{\alpha_{1}}\rightarrow P|R'\overset{b'}\rightarrow}$ \textit{PAR-R} \\
 	
 	Dall'applicazione della regola PAR-R si ottiene che P|R $\overset{\alpha_{1}}\rightarrow $ P|R' $\overset{b'}\rightarrow$. Si deduce che $\alpha_{1}$ $\in$ \tr{P|R}, |t'| = n per ipotesi induttiva t' $\in$ \tr{P|R'}, allora (P|R) sa fare t quindi t = $\alpha_{1}$t' $\in$ \tr{P|R}.\\
 	
-	\item $\alpha_{1}$ $\in$ \tr{P} AND $\alpha_{1}$ $\in$ \tr{R}, si ha quindi una sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{a'}\rightarrow$ con a = $\alpha_{1}$.a' con a'$\in$ \tr{P}, e un altra sequenza di transizioni R $\overset{\Overline[0.1pt]\alpha_{1}}\rightarrow$ R' $\overset{b'}\rightarrow$ con b = $ \Overline[0.1pt]\alpha_{1}.b'$ con b'$\in$ \tr{R}. Posso perciò applicare PAR-$\tau$:\\
+	\item $\alpha_{1}$ $\in$ \tr{P} AND $\alpha_{1}$ $\in$ \tr{R}, si ha quindi una sequenza di transizione P $\overset{\alpha_{1}}\rightarrow$ P' $\overset{a'}\rightarrow$ con a = $\alpha_{1}$.a' con a'$\in$ \tr{P'}, e un altra sequenza di transizioni R $\overset{\Overline[0.1pt]\alpha_{1}}\rightarrow$ R' $\overset{b'}\rightarrow$ con b = $ \Overline[0.1pt]\alpha_{1}.b'$ con b'$\in$ \tr{R'}. Posso perciò applicare PAR-$\tau$:\\
 	
 	$\dfrac{P \overset{\alpha_{1}}\rightarrow P' \hspace{1cm} R \overset{\Overline[0.1pt]{\alpha_{1}}}\rightarrow R'}{P|R \overset{\tau_{1}}\rightarrow P'|R'\overset{t'}\rightarrow}$ \textit{PAR-$\tau$}\\
 	
@@ -286,7 +287,7 @@ t ha una prima interazione seguita poi dalla traccia t', quindi P\textbackslash 
 
 $(\supseteq)$\\
 
-Sia  t $\in$\tr{P}\textbackslash\{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} $\Rightarrow$ t $\in$\tr{P\textbackslash L}.   \\
+Sia  t $\in$ \tr{P}\textbackslash\{$\alpha_{1}$...$\alpha_{n}$|$\alpha_{i}\in$L\} $\Rightarrow$ t $\in$ \tr{P\textbackslash L}.   \\
 Per induzione su |t|:
 \\
 

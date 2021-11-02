@@ -37,7 +37,7 @@ La dimostrazione prevede i seguenti punti:
 
 Dato che non esistono costanti $\mathcal{K}$, non è possibile rigenerare passi eseguiti in precedenza; perciò, dopo un certo numero finito di passi, ogni processo P in CCS finito terminerà perché non avrà più passi da eseguire. Si deduce quindi che il numero di passi di ogni processo ha un limite superiore e di conseguenza tale numero è finito.
 
-Per dimostrare quanto scritto, si procede attraverso una dimostrazione induttiva sull'altezza di derivazione di un processo P, con ipotesi induttiva: \(P \overset{\alpha}\rightarrow P'\) $\Rightarrow$ $Size_{p}(P')$ < $Size_{p}(P)$, dove $Size_{p}(P')$ si intende il numero di passi del processo P dopo aver fatto l'azione $\alpha$.
+Per dimostrare quanto scritto, si procede attraverso una dimostrazione induttiva sull'altezza di derivazione di un processo P, con ipotesi induttiva: \(P \overset{\alpha}\rightarrow P'\) $\Rightarrow$ $Size_{p}(P')$ < $Size_{p}(P)$, dove $Size_{p}(P')$ si intende il numero di passi del processo P'.
 
 Definiamo \sip{P}:
 
@@ -160,7 +160,7 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		\\
 	\item[] \textbf{Caso Induttivo:} \mbox{}
 	
-	In un passo si raggiunge un sotto processo dal quale. in \textit{n} passi finiti, si raggiungerà uno stato terminante. Si può quindi utilizzare la seguente ipotesi induttiva: \\
+	In un passo si raggiunge un sotto processo dal quale, in \textit{n} passi finiti, si raggiungerà uno stato terminante. Si può quindi utilizzare la seguente ipotesi induttiva: \\
 	Un processo composto da sotto processi con un limite superiore di stati di esecuzione ha anch'esso un limite superiore di stati di esecuzione.\\
 	Tale ipotesi verrà utilizzata per dimostrare che il sotto processo raggiunto, da lui allo stato terminante, ci saranno un numero finito di stati perché limitati da un limite superiore. Si ricorda inoltre che il numero di stati raggiunti è finito se gli \textit{n} passi sono finiti. Grazie alla dimostrazione del punto 1 si sa che \textit{n} è finito. 
 	\\
@@ -215,7 +215,7 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		
 	\end{itemize}
 \end{itemize}
-
+\pagebreak
 \paragraph{Conclusione prima parte} \mbox{}
 
 Si è dimostrato nei punti precedenti che i processi definiti attraverso il CCS finito hanno sempre un limite superiore sia per il numero di passi, sia per il numero di stati d'esecuzione. Di conseguenza il numero di passi ed il numero di stati sono finiti.
