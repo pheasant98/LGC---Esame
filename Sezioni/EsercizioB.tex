@@ -35,9 +35,9 @@ La dimostrazione prevede i seguenti punti:
 
 \paragraph{Punto 1} \mbox{}
 
-Dato che non esistono costanti $\mathcal{K}$, non è possibile rigenerare passi eseguiti in precedenza, perciò dopo un certo numero finito di passi ogni processo P in CCS finito terminerà perché non avrà più passi da eseguire. Si deduce perciò che ogni processo ha un numero di passi limitato da un limite superiore è quindi tale numero è finito.
+Dato che non esistono costanti $\mathcal{K}$, non è possibile rigenerare passi eseguiti in precedenza; perciò, dopo un certo numero finito di passi, ogni processo P in CCS finito terminerà perché non avrà più passi da eseguire. Si deduce quindi che il numero di passi di ogni processo ha un limite superiore e di conseguenza tale numero è finito.
 
-Per dimostrare quanto scritto si procede attraverso una dimostrazione induttiva sull'altezza di derivazione di un processo P, con ipotesi induttiva: \(P \overset{\alpha}\rightarrow P'\) $\Rightarrow$ $Size_{p}(P')$ < $Size_{p}(P)$, dove $Size_{p}(P')$ si intende il numero di passi del processo P dopo aver fatto l'azione $\alpha$.
+Per dimostrare quanto scritto, si procede attraverso una dimostrazione induttiva sull'altezza di derivazione di un processo P, con ipotesi induttiva: \(P \overset{\alpha}\rightarrow P'\) $\Rightarrow$ $Size_{p}(P')$ < $Size_{p}(P)$, dove $Size_{p}(P')$ si intende il numero di passi del processo P dopo aver fatto l'azione $\alpha$.
 
 Definiamo \sip{P}:
 
@@ -104,9 +104,9 @@ Si dimostrerà che \sip{P} indica il limite superiore del numero di passi esegui
 			
 			Dato che P $\textbackslash L \overset{\alpha}\rightarrow $ P' \textbackslash L ha un livello in più rispetto a P $\overset{\alpha}\rightarrow$ P', allora nell'esecuzione di un passo $\alpha$, per ipotesi induttiva vale che \sip{P} > \sip{P'}  \\
 			\\
-			Applicare una restrizione ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma invece si potrebbe ottenere una variazione delle possibili interazioni con altri processi in parallelo, vale che:\\ \sip{P \textbackslash L} = \sip{P} mentre \sip{P'\textbackslash L} = \sip{P'}, si deduce che \sip{P \textbackslash L} > \sip{P' \textbackslash L}\\
+			Applicare una restrizione ad un processo non fa aumentare il numero massimo di passi di esecuzione, ma potrebbe far ottenere una variazione delle possibili interazioni con altri processi in parallelo:\\ \sip{P \textbackslash L} = \sip{P} mentre \sip{P'\textbackslash L} = \sip{P'}, si deduce che \sip{P \textbackslash L} > \sip{P' \textbackslash L}\\
 			\\
-		Perciò si è dimostrato che il limite superiore \sip{P \textbackslash L} = \sip{P} passi, risulta essere corretto.
+		Perciò si è dimostrato che il limite superiore \sip{P \textbackslash L} = \sip{P} passi risulta essere corretto.
 		\\
 	%	\item[*]
 	%		$\dfrac{P \overset{\alpha}\rightarrow P'}{P \textbackslash L \overset{\not\alpha}\rightarrow }$ \textit{RES} se $\alpha, \Overline[1pt]{\alpha} \in$ L
@@ -160,19 +160,19 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		\\
 	\item[] \textbf{Caso Induttivo:} \mbox{}
 	
-	In un passo si raggiunge uno sotto processo dal quale poi in \textit{n} passi finiti si raggiungerà un stato terminante. Si puo quindi utilizzare la seguente ipotesi induttiva: \\
-	Un processo composto da sotto processi con un limite superiore ai stati di esecuzione ha anch'esso un limite superiore di stati di esecuzione.\\
-	Tale ipotesi scritta verrà utilizzata per dimostrare che il sotto processo raggiunto, da lui allo stato terminante, ci saranno un numero finito di stati perché limitati da un limite superiore. Si ricorda inoltre che il numero di stati raggiunti è finito se gli \textit{n} passi sono finiti. Grazie alla dimostrazione del punto 1 si sa che \textit{n} è finito. 
+	In un passo si raggiunge un sotto processo dal quale. in \textit{n} passi finiti, si raggiungerà uno stato terminante. Si può quindi utilizzare la seguente ipotesi induttiva: \\
+	Un processo composto da sotto processi con un limite superiore di stati di esecuzione ha anch'esso un limite superiore di stati di esecuzione.\\
+	Tale ipotesi verrà utilizzata per dimostrare che il sotto processo raggiunto, da lui allo stato terminante, ci saranno un numero finito di stati perché limitati da un limite superiore. Si ricorda inoltre che il numero di stati raggiunti è finito se gli \textit{n} passi sono finiti. Grazie alla dimostrazione del punto 1 si sa che \textit{n} è finito. 
 	\\
 	\begin{itemize}
 		
 		\item[*] \textbf{ACT}
 		\\
-		Con l'azione $\alpha$ concatenata al processo P viene aggiunto a P uno stato in più, infatti $\alpha.P \overset{\alpha}\rightarrow P$. P per ipotesi induttiva ha al più \sis{P} stati, quindi $\alpha.P$ avrà al più \sis{\alpha.P} = 1 + \sis{P} stati. Risulta perciò corretto il limite scelto.
+		Con l'azione $\alpha$ concatenata al processo P, ad esso viene aggiunto uno stato in più: $\alpha.P \overset{\alpha}\rightarrow P$. Per ipotesi induttiva, P ha al più \sis{P} stati, quindi $\alpha.P$ avrà al più \sis{\alpha.P} = 1 + \sis{P} stati. Risulta perciò corretto il limite scelto.
 		\\
 		\item[*] \textbf{SUM}
 		\\
-		Si ha la seguente esecuzione: $\displaystyle\sum_{i\in I}^{}P_{i} \overset{\alpha}\rightarrow$ P', dove qualunque $P_{i}$ sia scelto per ipotesi induttiva ha un numero finito di stati d'esecuzione. Quindi tutti i processi che compongono la somma non deterministica hanno un numero finito di stati.
+		Si ha la seguente esecuzione: $\displaystyle\sum_{i\in I}^{}P_{i} \overset{\alpha}\rightarrow$ P', dove qualunque $P_{i}$ sia scelto, per ipotesi induttiva ha un numero finito di stati d'esecuzione. Quindi tutti i processi che compongono la somma non deterministica hanno un numero finito di stati.
 		Perciò $\displaystyle\sum_{i\in I}^{}P_{i}$ ha al più \sis{\displaystyle\sum_{i\in I}^{}P_{i}} = $\displaystyle\sum_{i\in I}^{}Size_{s}{P_{i}}$ stati inoltre, dato che il numero di processi $P_{i}$ è finito, anche la somma dei stati lo sarà.
 		
 		È corretto il limite superiore presentato precedentemente perché potrebbero esserci stati non condivisi tra i vari processi $P_{i}$. Quindi può esserci il caso in cui tutti i stati raggiunti sono diversi tra loro.
@@ -181,19 +181,19 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		\\
 		Si ha la seguente esecuzione: $P|Q \overset{\alpha}\rightarrow P'|Q$, dove P|Q raggiunge lo stato P'|Q.
 		
-		Per ipotesi induttiva P'|Q ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P'|Q} = \sis{P'} * \sis{Q} stati, quindi P|Q ha al più \sis{P|Q} = (\sis{P'} + 1) * \sis{Q} stati. Dato che è possibile che non ci sia alcun stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al totale delle combinazioni possibili tra gli stati dei due singoli processi.	
+		Per ipotesi induttiva P'|Q ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P'|Q} = \sis{P'} * \sis{Q} stati, quindi P|Q ha al più \sis{P|Q} = (\sis{P'} + 1) * \sis{Q} stati. Dato che è possibile che non ci sia alcuno stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al numero totale di combinazioni possibili tra gli stati dei due singoli processi.	
 		\\
 		\item[*] \textbf{PAR-R}
 		\\
 		Si ha la seguente esecuzione: $P|Q \overset{\alpha}\rightarrow P|Q'$, dove P|Q raggiunge lo stato P|Q'.
 		
-		Per ipotesi induttiva P|Q' ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P|Q'} = \sis{P} * \sis{Q'} stati, quindi P|Q ha al più \sis{P|Q} = \sis{P} * (\sis{Q'} + 1) stati. Dato che è possibile che non ci sia alcun stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al totale delle combinazioni possibili tra gli stati dei due singoli processi.
+		Per ipotesi induttiva P|Q' ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P|Q'} = \sis{P} * \sis{Q'} stati, quindi P|Q ha al più \sis{P|Q} = \sis{P} * (\sis{Q'} + 1) stati. Dato che è possibile che non ci sia alcuno stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al numero totale di combinazioni possibili tra gli stati dei due singoli processi.
 		\\
 		\item[*] \textbf{PAR-$\tau$}
 		\\
 		Si ha la seguente esecuzione: $P|Q \overset{\tau}\rightarrow P'|Q'$, dove P|Q raggiunge lo stato P'|Q'.
 		
-		Per ipotesi induttiva P'|Q' ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P'|Q'} = \sis{P'} * \sis{Q'} stati, quindi P|Q ha al più \sis{P|Q} = \sis{P'} * \sis{Q'} + 1 stati. Dato che è possibile che non ci sia alcun stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al totale delle combinazioni possibili tra gli stati dei due singoli processi.
+		Per ipotesi induttiva P'|Q' ha un numero finito di stati d'esecuzione, cioè ha al più \sis{P'|Q'} = \sis{P'} * \sis{Q'} stati, quindi P|Q ha al più \sis{P|Q} = \sis{P'} * \sis{Q'} + 1 stati. Dato che è possibile che non ci sia alcuno stato condiviso durante l'esecuzione dei due processi, il limite superiore ad essi è uguale al numero totale di combinazioni possibili tra gli stati dei due singoli processi.
 		
 		Dunque \sis{P|Q} = \sis{P} * \sis{Q} stati, risulta essere corretto.
 		\\
@@ -203,7 +203,7 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		
 		Per ipotesi induttiva  P' \textbackslash L ha al più \sis{P' \textbackslash L} = \sis{P'} stati. \\
 		Dato che \sis{P' \textbackslash L} è finito, allora P \textbackslash L avrà al più: \\
-		\sis{P \textbackslash L} = 1 + \sis{P' \textbackslash L} = 1 + \sis{P'} = \sis{P} stati, perché applicando una funzione di restrizione non si aumentano il numero massimo di stati d'esecuzione, vale quindi il limite superiore \sis{P \textbackslash L} = \sis{P}.
+		\sis{P \textbackslash L} = 1 + \sis{P' \textbackslash L} = 1 + \sis{P'} = \sis{P} stati, perché applicando una funzione di restrizione non aumenta il numero massimo di stati d'esecuzione, vale quindi il limite superiore \sis{P \textbackslash L} = \sis{P}.
 			\\
 		\item[*] \textbf{REL}
 		\\
@@ -211,21 +211,21 @@ Tramite dimostrazione per induzione sull'esecuzione di un processo P si dimostra
 		
 		Per ipotesi induttiva  $P'\mathbf{[f]}$ ha al più \sis{P'\mathbf{[f]}} = \sis{P'} stati. \\
 		Dato che \sis{P'\mathbf{[f]}} è finito, allora $P \mathbf{[f]}$ avrà al più: \\
-		\sis{P\mathbf{[f]}} = 1 + \sis{P'\mathbf{[f]}} = 1 + \sis{P'} = \sis{P} stati, perché applicando una funzione di relabelling non si aumentano il numero massimo di stati d'esecuzione ma si cambiano solo le possibili interazioni con altri processi in parallelo, vale quindi il limite superiore \sis{P \mathbf{[f]}} = \sis{P}.
+		\sis{P\mathbf{[f]}} = 1 + \sis{P'\mathbf{[f]}} = 1 + \sis{P'} = \sis{P} stati, perché applicando una funzione di relabelling non aumenta il numero massimo di stati d'esecuzione ma cambiano solo le possibili interazioni con altri processi in parallelo, vale quindi il limite superiore \sis{P \mathbf{[f]}} = \sis{P}.
 		
 	\end{itemize}
 \end{itemize}
 
 \paragraph{Conclusione prima parte} \mbox{}
 
-Si è dimostrato nei punti precedenti che i processi definiti attraverso il CCS finito hanno sempre un limite superiore sia per il numero di passi e sia per il numero di stati d'esecuzione, di conseguenza il numero di passi e stati sono entrambi finiti.
+Si è dimostrato nei punti precedenti che i processi definiti attraverso il CCS finito hanno sempre un limite superiore sia per il numero di passi, sia per il numero di stati d'esecuzione. Di conseguenza il numero di passi ed il numero di stati sono finiti.
 
 \subsubsection{Dimostrazione per somme infinite}
-Ora per quanto riguarda la somma non deterministica $\displaystyle\sum_{i\in I}^{}P_{i}$, l'insieme \textit{I} sarà infinito. Infatti i processi CCS che fanno parte della somma non deterministica, saranno infiniti e quindi hanno un numero infinito di stati ma hanno tutti una derivazione finita.
+Per quanto riguarda la somma non deterministica $\displaystyle\sum_{i\in I}^{}P_{i}$, l'insieme \textit{I} sarà infinito. Infatti i processi CCS che fanno parte della somma non deterministica saranno infiniti e quindi hanno un numero infinito di stati ma tutti con una derivazione finita.
 
-La dimostrazione sarà simile alla precedente per tutti i vari punti, tranne per il punto riguardante la somma non deterministica, infatti per dimostrare la finitezza dell'esecuzione si utilizzerà un'astrazione basata sulle generazioni della grammatica di CCS.
+La dimostrazione sarà simile alla precedente in tutti i vari punti, tranne per quello riguardante la somma non deterministica. Infatti, per dimostrare la finitezza dell'esecuzione, si utilizzerà un'astrazione basata sulle generazioni della grammatica di CCS.
 
-Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni processo CCS termina in numero finito di passi.
+Si dimostra quindi che ogni processo CCS termina in numero finito di passi, per induzione sulla lunghezza di derivazione.
 
 \begin{itemize}
 	\item[] \textbf{Caso Base:} \mbox{}
@@ -241,11 +241,11 @@ Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni proces
 		
 		\item[*] \textbf{ACT}
 		\\
-		Con l'azione $\alpha$ concatenata al processo P si ha che, la derivazione produrrà un processo del tipo, \(\alpha^{n+1}.P\) con \(n \geq 0\), dove esiste un nuovo passo e uno nuovo stato nell'esecuzione di P. Perciò il numero di stati e di passi d'esecuzione rimangono finiti.
+		Con l'azione $\alpha$ concatenata al processo P si ha che la derivazione produrrà un processo del tipo \(\alpha^{n+1}.P\) con \(n \geq 0\), dove esiste un nuovo passo ed uno nuovo stato nell'esecuzione di P. Perciò il numero di stati e di passi d'esecuzione rimangono finiti.
 		\\
 		\item[*] \textbf{PAR-L, PAR-R, PAR-$\tau$}
 		\\
-		Come dimostrato per il caso del CCS finito con somme finite, nell'esecuzione parallela la derivazione produrrà dei sotto processi che per ipotesi induttiva sono finiti e quindi il processo di cui fanno parte sarà anch'esso finito.
+		Come dimostrato per il caso del CCS finito con somme finite, nell'esecuzione parallela la derivazione produrrà dei sotto processi che, per ipotesi induttiva, sono finiti e quindi il processo di cui fanno parte sarà anch'esso finito.
 		\\
 		\item[*] \textbf{RES}
 		\\
@@ -256,7 +256,7 @@ Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni proces
 		Con \textbf{REL} si avrà che la derivazione produrrà un certo numero finito di relabelling. Perciò si avranno sempre passi e stati in numero finito e quindi vale quanto dimostrato nel CCS finito con somme finite.
 		\\
 		\item[*] \textbf{SUM}
-		In questo caso il processo derivato sarà del tipo \(P_1+P_2+\ldots\). Per ipotesi induttiva ogni \(P_i\) ha una derivazione di lunghezza finita, perciò si può dimostrare che la derivazione del processo P è finita per induzione sul numero di sotto processi che vengono usati nella somma. \\
+		In questo caso il processo derivato sarà del tipo \(P_1+P_2+\ldots\). Per ipotesi induttiva ogni \(P_i\) ha una derivazione di lunghezza finita. Perciò si può dimostrare che la derivazione del processo P è finita, per induzione sul numero di sotto processi che vengono usati nella somma. \\
 		\begin{itemize}
 			\item[] \textbf{Caso Base:} \mbox{}
 			
@@ -264,11 +264,11 @@ Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni proces
 			\\
 			\item[] \textbf{Caso Induttivo:} \mbox{}
 			
-			L'ipotesi induttiva afferma che la scelta non deterministica tra i processi ha una derivazione di lunghezza finita. Inoltre si deve tener conto che nella scelta non deterministica, viene scelto un solo processo da eseguire tra tutti quelli presenti.
+			L'ipotesi induttiva afferma che la scelta non deterministica tra i processi ha una derivazione di lunghezza finita. Inoltre si deve tener conto che, nella scelta non deterministica, viene scelto un solo processo da eseguire tra tutti quelli presenti.
 			
-			Quindi aggiungendo il processo \(P_{n+1}\)alla scelta, che per ipotesi induttiva anch'esso ha derivazione finita; la scelta diventerà tra l'esecuzione di uno dei processi già presenti e il processo appena aggiunto \(P_{n+1}\). Solo uno dei processi verrà eseguito e quindi la derivazione avrà una lunghezza superiormente limitata dalla massima lunghezza di derivazione dei sotto processi. Si è perciò dimostrato che l'insieme dei processi della scelta non deterministica può essere illimitato ma finito senza perdere la finitezza di esecuzione. Questo perché la derivazione esegue solo uno dei processi della scelta come scritto in precedenza e in più si sa che l'altezza della derivazione di P è limitata superiormente dall'altezza della derivazione del processo con l'altezza maggiore + 1, ovvero \(max_h(P_i) + 1\). 
+			Quindi, aggiungendo il processo \(P_{n+1}\) alla scelta, che per ipotesi induttiva anch'esso ha derivazione finita, la scelta verterà tra l'esecuzione di uno dei processi già presenti ed il processo appena aggiunto \(P_{n+1}\). Solo uno dei processi verrà eseguito e quindi la derivazione avrà una lunghezza superiormente limitata dalla massima lunghezza di derivazione dei sotto processi. Si è perciò dimostrato che l'insieme dei processi della scelta non deterministica può essere illimitato ma finito, senza perdere la finitezza di esecuzione. Questo perché la derivazione esegue solo uno dei processi della scelta, come scritto in precedenza, ed inoltre si sa che l'altezza della derivazione di P è limitata superiormente dall'altezza della derivazione del processo con l'altezza maggiore + 1, ovvero \(max_h(P_i) + 1\). 
 			
-			Purtroppo pero il numero di stati che si ha durante l'esecuzione non è più limitato superiormente, perché essendo il limite superiore dato dalla  $\displaystyle\sum_{i\in I}^{}P_{i}$ con \textit{I} infinito, il numero di processi CCS risulta essere infinito, e quindi la somma dei stati d'esecuzione sarà anch'essa infinita. Perciò il numero di stati non é limitato superiormente.
+			Purtroppo, il numero di stati che si ha durante l'esecuzione non è più limitato superiormente, perché essendo il limite superiore dato dalla  $\displaystyle\sum_{i\in I}^{}P_{i}$ con \textit{I} infinito, il numero di processi CCS risulta essere infinito e quindi la somma degli stati d'esecuzione sarà anch'essa infinita. Dunque il numero di stati non é limitato superiormente.
 			
 			 
 		\end{itemize}
@@ -278,4 +278,4 @@ Si dimostra perciò per induzione sulla lunghezza di derivazione che ogni proces
 \end{itemize}
 
 \subsubsection{Conclusione}
-È stato dimostrato che ogni processo CCS finito termina in un numero finito di passi, indipendente dal fatto si utilizzi una grammatica che permette scelte non deterministiche in un insieme o infinito o finito. Si sottolinea che scelta di un insieme infinito o finito determinerà, se il numero di stati d'esecuzione raggiungibili sarà finito o infinito.
+È stato dimostrato che ogni processo CCS finito termina in un numero finito di passi, indipendente dal fatto si utilizzi una grammatica che permetta scelte non deterministiche in un insieme infinito o finito. Si sottolinea che la scelta di un insieme infinito o finito determinerà se il numero di stati d'esecuzione raggiungibili sarà finito o infinito.
