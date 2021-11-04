@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  4 NOV 2021 00:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.5)  5 NOV 2021 00:34
 entering extended mode
 **./relazione.tex
 (relazione.tex
@@ -2092,61 +2092,61 @@ File: Figure/3.png Graphic file (type png)
 Package pdftex.def Info: Figure/3.png  used on input line 38.
 (pdftex.def)             Requested size: 250.95476pt x 65.3543pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--57
+Underfull \hbox (badness 10000) in paragraph at lines 55--58
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--60
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--63
+Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--66
+Underfull \hbox (badness 10000) in paragraph at lines 65--67
 
  []
 
 [19 <./Figure/2.png> <./Figure/3.png>] [20] [21]
-Overfull \hbox (3.66777pt too wide) in paragraph at lines 141--142
+Overfull \hbox (3.66777pt too wide) in paragraph at lines 142--143
 \T1/lmr/m/n/10.95 Passiamo ora a di-mo-stra-re al-cu-ne pro-prie-tà chia-ve del
  \T1/lmss/m/n/10.95 Sys \T1/lmr/m/n/10.95 at-tra-ver-so la lo-gi-ca di Hennessy
 -
  []
 
 [22]
-Overfull \hbox (34.89476pt too wide) in paragraph at lines 216--217
+Overfull \hbox (34.89476pt too wide) in paragraph at lines 217--218
 []\T1/lmss/m/n/10.95 Barber = sleep.'semCustomer.waked.semBarber.cutHair.'semCu
 stomerDone.semBarberDone.Barber; 
  []
 
 [23]
-Underfull \hbox (badness 10000) in paragraph at lines 264--265
+Underfull \hbox (badness 10000) in paragraph at lines 265--266
 
  []
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 284--291
+Underfull \hbox (badness 10000) in paragraph at lines 285--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 293--300
+Underfull \hbox (badness 10000) in paragraph at lines 294--301
 
  []
 
 [25]
-Overfull \hbox (3.3861pt too wide) in paragraph at lines 336--338
+Overfull \hbox (3.3861pt too wide) in paragraph at lines 337--339
 \T1/lmss/m/n/10.95 'enter.enter$[]$.exit$[]$.'decExit$[]$.sleep$[]$.('balkWakeU
 p.'wakeUp$[]$.Customer$[]$ + 'wakeUp$[]$.Customer$[]$); 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--348
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
@@ -2190,7 +2190,7 @@ l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss10.pfb><C:/Users/feder/AppData/
 Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/feder/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/feder/A
 ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on relazione.pdf (28 pages, 509399 bytes).
+Output written on relazione.pdf (28 pages, 509552 bytes).
 PDF statistics:
  437 PDF objects out of 1000 (max. 8388607)
  73 named destinations out of 1000 (max. 500000)
