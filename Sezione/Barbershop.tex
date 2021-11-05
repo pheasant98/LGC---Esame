@@ -229,15 +229,15 @@ Non sarebbe andata bene la versione con lo strong until perché non è sempre ve
 \end{center}
 
 Allora \textbf{checkprop(Sys', UntilB)} ritorna \textbf{false}.
-\pagebreak
-\paragraph{Verifica comportamento del cliente nell'attesa di essere servito }\mbox{}
 
-Il cliente aspetta, finché il barbiere non invia il segnale di sedersi per il taglio. Quindi a livello di codice CCS il processo \textsf{Customer$_{i}$} rimane fermo in \textsf{'semBarber} finché non si sincronizza con un processo \textsf{Barber} attraverso l'azione \textsf{semBarber}, dopo di che \textsf{Customer$_{i}$} può proseguire la sua esecuzione.
-\begin{center}
-	\textsf{UntilC = Inv(WUntil([[getHairCut1]]F, <<cutHair>>T) \\| WUntil([[getHairCut2]]F, <<cutHair>>T) \\| WUntil([[getHairCut3]]F, <<cutHair>>T));}
-\end{center}
+%\paragraph{Verifica comportamento del cliente nell'attesa di essere servito }\mbox{}
 
-È sempre vero che il processo \textsf{Customer$_{i}$} non sa fare \textsf{getHairCut$_{i}$} finché non diventa vero che il processo \textsf{Barber} può fare \textsf{cutHair}. La possibilità di fare \textsf{cutHair} si ha solo se c'è stata una sincronizzazione. Si è aggiunta la clausola OR perché può accadere che, nonostante si abbia la possibilità di fare \textsf{cutHair}, non è detto che il processo \textsf{Customer$_{i}$} sappia fare \textsf{getHairCut$_{i}$} perché, a causa della mutua esclusione dopo la sincronizzazione, al più solo uno sa fare l'azione. Quindi eseguendo \textbf{checkprop(Sys', UntilC)} si ottiene \textbf{true} e vale perciò la proprietà.
+%Il cliente aspetta, finché il barbiere non invia il segnale di sedersi per il taglio. Quindi a livello di codice CCS il processo \textsf{Customer$_{i}$} rimane fermo in \textsf{'semBarber} finché non si sincronizza con un processo \textsf{Barber} attraverso l'azione \textsf{semBarber}, dopo di che \textsf{Customer$_{i}$} può proseguire la sua esecuzione.
+%\begin{center}
+%	\textsf{UntilC = Inv(WUntil([[getHairCut1]]F, <<cutHair>>T) \\| WUntil([[getHairCut2]]F, <<cutHair>>T) \\| WUntil([[getHairCut3]]F, <<cutHair>>T));}
+%\end{center}
+
+%È sempre vero che il processo \textsf{Customer$_{i}$} non sa fare \textsf{getHairCut$_{i}$} finché non diventa vero che il processo \textsf{Barber} può fare \textsf{cutHair}. La possibilità di fare \textsf{cutHair} si ha solo se c'è stata una sincronizzazione. Si è aggiunta la clausola OR perché può accadere che, nonostante si abbia la possibilità di fare \textsf{cutHair}, non è detto che il processo \textsf{Customer$_{i}$} sappia fare \textsf{getHairCut$_{i}$} perché, a causa della mutua esclusione dopo la sincronizzazione, al più solo uno sa fare l'azione. Quindi eseguendo \textbf{checkprop(Sys', UntilC)} si ottiene \textbf{true} e vale perciò la proprietà.
 
 \paragraph{Fairness}\mbox{}
 

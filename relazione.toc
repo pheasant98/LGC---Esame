@@ -34,5 +34,4 @@
 \contentsline {paragraph}{\numberline {2.3.2.3}Mutua esclusione contatore}{23}{paragraph.2.3.2.3}%
 \contentsline {paragraph}{\numberline {2.3.2.4}Mutua esclusione nell'esecuzione del taglio}{23}{paragraph.2.3.2.4}%
 \contentsline {paragraph}{\numberline {2.3.2.5}Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{23}{paragraph.2.3.2.5}%
-\contentsline {paragraph}{\numberline {2.3.2.6}Verifica comportamento del cliente nell'attesa di essere servito }{24}{paragraph.2.3.2.6}%
-\contentsline {paragraph}{\numberline {2.3.2.7}Fairness}{24}{paragraph.2.3.2.7}%
+\contentsline {paragraph}{\numberline {2.3.2.6}Fairness}{24}{paragraph.2.3.2.6}%
