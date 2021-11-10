@@ -23,15 +23,15 @@
 \contentsline {subsection}{\numberline {2.1}Una possibile soluzione}{18}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Modellazione in CCS}{19}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Codifica Mutex e contatore clienti}{20}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Codifica Customer}{20}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Codifica Barber}{21}{subsubsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.4}Codifica del sistema}{21}{subsubsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.3}Verifica della correttezza attraverso CWB}{21}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Trace Equivalence}{21}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Verifica tramite HML}{22}{subsubsection.2.3.2}%
-\contentsline {paragraph}{\numberline {2.3.2.1}Assenza di deadlock}{22}{paragraph.2.3.2.1}%
-\contentsline {paragraph}{\numberline {2.3.2.2}Presenza di Livelock}{22}{paragraph.2.3.2.2}%
-\contentsline {paragraph}{\numberline {2.3.2.3}Mutua esclusione contatore}{23}{paragraph.2.3.2.3}%
-\contentsline {paragraph}{\numberline {2.3.2.4}Mutua esclusione nell'esecuzione del taglio}{23}{paragraph.2.3.2.4}%
-\contentsline {paragraph}{\numberline {2.3.2.5}Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{23}{paragraph.2.3.2.5}%
-\contentsline {paragraph}{\numberline {2.3.2.6}Fairness}{24}{paragraph.2.3.2.6}%
+\contentsline {subsubsection}{\numberline {2.2.2}Codifica Customer}{21}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Codifica Barber}{22}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Codifica del sistema}{22}{subsubsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.3}Verifica della correttezza attraverso CWB}{22}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Trace Equivalence}{22}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Verifica tramite HML}{23}{subsubsection.2.3.2}%
+\contentsline {paragraph}{\numberline {2.3.2.1}Assenza di deadlock}{23}{paragraph.2.3.2.1}%
+\contentsline {paragraph}{\numberline {2.3.2.2}Presenza di Livelock}{24}{paragraph.2.3.2.2}%
+\contentsline {paragraph}{\numberline {2.3.2.3}Mutua esclusione contatore}{24}{paragraph.2.3.2.3}%
+\contentsline {paragraph}{\numberline {2.3.2.4}Mutua esclusione nell'esecuzione del taglio}{24}{paragraph.2.3.2.4}%
+\contentsline {paragraph}{\numberline {2.3.2.5}Verifica comportamento del barbiere nell'attesa dell'arrivo di un nuovo cliente }{24}{paragraph.2.3.2.5}%
+\contentsline {paragraph}{\numberline {2.3.2.6}Fairness}{25}{paragraph.2.3.2.6}%

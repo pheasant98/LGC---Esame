@@ -87,6 +87,22 @@ Codifica il contatore che passa da uno a due e/o da uno a zero, gestendo il tutt
 
 Codifica il contatore che non può essere più incrementato perché uguale a n e l'azione di decremento. Il funzionamento è uguale a \textsf{Count2} tranne per il fatto che \textsf{incExit} non esiste ma c'è \textsf{balk}(canale ristretto) usato per simulare l'uscita dal locale del cliente nel caso in cui voglia ricevere un taglio ma non ci sono sedie disponibili.
 
+\textbf{Versione alternativa}
+
+Come detto precedentemente, si è deciso di modellare il programma in CCS in modo tale che sia il più possibile simile al pseudo-codice presentato. Questo comporta ad avere dei passi che non servono ai fini del funzionamento ma solo a esplicitare, mostrare, l'uguaglianza tra il programma prodotto e il pseudo-codice. Perciò un modellazione alternativa del \textsf{mutex} e del contatore può essere la seguente:
+
+\textsf{Chair = incExit.decExit.Chair;}
+
+Dove ogni processo \textsf{Chair} rappresenta una sedia all'interno del negozio. Viene presa in possesso da un cliente sincronizzandosi su \textsf{incExit} e rilasciandola dopo il taglio sincronizzandosi su \textsf{decExit}. Per funzionare correttamente occorre mettere nel sistema \textsf{Sys} un numero di processi \textsf{Chair} in parallelo pari a quante sono le sedie che si vogliono usare cioè n. 
+
+Si è deciso di non adottare questa modellazione per i seguenti motivi 
+\begin{enumerate}
+	\item Non viene mostrata l'azione di \textsf{balk} in modo esplicito, cioè non viene simulata l'azione dell'entrata del cliente e la immediata uscita dal negozio dovuta alla mancanza di sedie, ma il cliente non trovando sedie libere non riesce nemmeno ad entrare nel negozio. Resta quindi in attesa di sincronizzarsi con una sedia.
+	\item Non viene simulata una sorta di sezione critica dove un processo entra (esegue la sincronizzazione su \textsf{enter}) esegue le sue azioni nella sezione critica e poi esce (sincronizzazione su \textsf{incExit} o \textsf{decExit}). Ciononostante vi è comunque la mutua esclusione, ma senza il canale \textsf{enter} non si può simulare quanto detto.
+	\item Non viene simulato un contatore ma in alternativa, vengono presi in possesso dei processi \textsf{Chair} dai \textsf{Customer$_{i}$} che li tengono con se fino alla fine del taglio, mentre chi non riesce a prendere un processo \textsf{Chair} perchè non c'è ne sono più di disponibili, rimane in attesa di riceverne uno.
+\end{enumerate}
+
+
 \subsubsection{Codifica Customer}
 
 La codifica dei clienti avviene nel seguente modo:
@@ -95,7 +111,19 @@ La codifica dei clienti avviene nel seguente modo:
 \textsf{C$_{i}$ = semCustomer.'semBarber.getHairCut$_{i}$.semCustomerDone.'semBarberDone.}\\
 \textsf{'enter.enter$_{i}$.exit$_{i}$.'decExit.Customer$_{i}$;}
 
-Il cliente, per poter verificare la possibilità di entrare, si sincronizza sul canale \textsf{enter} rimanendo in attesa della possibilità di entrare nella sezione critica. Una volta entrato, controlla se può incrementare o meno il contatore, quindi sceglie se eseguire \textsf{incExit} o \textsf{back}. Tale scelta dipende da cosa offre il processo \textsf{count}: nel caso sia \textsf{CountB}, l'unica azione possibile per il cliente è eseguire \textsf{balk} che lo fa uscire dalla sezione critica e non lo fa entrare nel negozio mentre nel caso sia \textsf{Count1} o \textsf{Count2}, il cliente esegue \textsf{incExit} così che incrementi il contatore e esca dalla sezione critica. Successivamente si sincronizza con il barbiere, che nel caso in cui il barbiere sia libero passa a ricevere il taglio. Finito il taglio si sincronizza subito con il barbiere per poi entrare nella sezione critica in mutua esclusione e decrementare il contatore per simulare la sua uscita dal negozio.
+Il cliente, per poter verificare la possibilità di entrare, si sincronizza sul canale \textsf{enter} rimanendo in attesa della possibilità di entrare nella sezione critica. Una volta entrato, controlla se può incrementare (esegue \textsf{incExit}) oppure no (esegue \textsf{back}) il contatore. Tale scelta dipende da cosa offre il processo \textsf{count}: nel caso sia \textsf{CountB}, l'unica azione possibile per il cliente è eseguire \textsf{balk} che lo fa uscire dalla sezione critica e non lo fa entrare nel negozio mentre nel caso sia \textsf{Count1} o \textsf{Count2}, il cliente esegue \textsf{incExit} così che incrementi il contatore e esca dalla sezione critica. Successivamente si sincronizza con il barbiere, che nel caso in cui il barbiere sia libero passa a ricevere il taglio. Finito il taglio si sincronizza subito con il barbiere per poi entrare nella sezione critica in mutua esclusione e decrementare il contatore per simulare la sua uscita dal negozio.
+
+\textbf{Versione alternativa}
+
+Come detto precedentemente, si è deciso di modellare il programma in CCS in modo tale che sia il più possibile simile al pseudo-codice presentato. Questo comporta ad avere dei passi che non servono ai fini del funzionamento ma solo a esplicitare, mostrare, l'uguaglianza tra il programma prodotto e il pseudo-codice.
+Perciò un modellazione alternativa del \textsf{Custumer$_{i}$} può essere la seguente:
+
+\textsf{Customer$_{i}$ = 'incExit.C$_{i}$;}\\
+\textsf{agent C$_{i}$ = semCustomer.getHairCut$_{i}$.semCustomerDone.'decExit.Customer$_{i}$;}
+
+In accordo con la versione alternativa del \textsf{mutex} e del contatore non sono più necessari \textsf{enter} e il ramo \textsf{balk}, oltre a ciò uno dei due semafori prima e dopo getHairCut$_{i}$ sono stati tolti perché ne basta uno per parte per la sincronizzazione.
+
+Per gli stessi motivi esplicitati nella versione alternativa del \textsf{mutex} e del contatore si è deciso di non adottare questa modellazione. In più l'uso di un solo semaforo per parte non rende simile il programma al pseudo-codice, dove ne vengono usati due.
 
 \subsubsection{Codifica Barber}
 
@@ -104,6 +132,17 @@ La codifica del Barbiere avviene nel seguente modo:
 \textsf{Barber = 'semCustomer.semBarber.cutHair.'semCustomerDone.semBarberDone.Barber;}
 
 Il barbiere rimane in attesa di un nuovo cliente da servire su \textsf{semCustomer} se non ci sono cliente in attesa. Una volta arrivato un cliente, si sincronizza con esso ed esegue il taglio e successivamente si sincronizza con il cliente appena servito per garantire che sia avvenuto il taglio, per poi tornare all'inizio della sua esecuzione e poter eseguire un nuovo taglio.
+
+\textbf{Versione alternativa}
+
+Come detto precedentemente, si è deciso di modellare il programma in CCS in modo tale che sia il più possibile simile al pseudo-codice presentato. Questo comporta ad avere dei passi che non servono ai fini del funzionamento ma solo a esplicitare, mostrare, l'uguaglianza tra il programma prodotto e il pseudo-codice.
+Perciò un modellazione alternativa del \textsf{Barber} può essere la seguente:
+
+\textsf{Barber = 'semCustomer.cutHair.'semCustomerDone.Barber;}
+
+In accordo con la versione alternativa del \textsf{Custumer$_{i}$}, del \textsf{mutex} e del contatore, non sono più necessari due semafori prima e dopo getHairCut$_{i}$ ma ne basta uno per parte per la sincronizzazione.
+
+Per gli stessi motivi esplicitati nella versione alternativa del \textsf{Custumer$_{i}$}, \textsf{mutex} e del contatore, si è deciso di non adottare questa modellazione. 
 
 \subsubsection{Codifica del sistema}
 
@@ -148,7 +187,7 @@ Nelle verifiche verranno usate le seguenti formule:
 	\item \textbf{Pos(P)} = \textsf{min(X. (P | <-> X));}\\
 	Esiste un stato in cui vale la proprietà P.
 	\item \textbf{WeakEven(P)} = \textsf{min(X. (P | <<eps>><-tau><<eps>>T \& [[eps]][-tau][[eps]] X )));}\\
-	Prima o poi l'esecuzione eseguirà un stato in cui vale P oppure P vale subito.
+	P vale subito oppure in qualsiasi modo si avanzi poi P è vero. Quindi è possibile fare un passo non intero e comunque lo si faccia poi ad un certo punto P è vero.
 	\item \textbf{WUntil(P,Q)} = \textsf{max(X. Q | (P \& [-]X));}\\
 	Until in versione weak. Vale la proprietà P finché non diventa vera Q cioè l'esecuzione arriva un stato dove è possibile eseguire ciò che indica Q.
 	\item \textbf{SUntil(P,Q)} = \textsf{min(X. Q | (P \& <->T \& [-]X));}\\
